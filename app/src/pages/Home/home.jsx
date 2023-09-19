@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, ImageBackground, TouchableOpacity } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import Buttons from '../../components/Button';
+import Buttons from '../components/Button';
 
 export default function Home() {
   return (

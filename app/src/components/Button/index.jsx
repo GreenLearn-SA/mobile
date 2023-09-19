@@ -10,11 +10,9 @@ import {
 export default function Buttons(  props ) {
   return (
     <TouchableOpacity style={styles.btn}>
-      <Button 
-      title={props.text}
-      onPress={() => navigation.navigate({props.nav})}
-      />
-
+      <Button onPress={() => navigation.navigate('')}>
+        <Text style={styles.title}>{props.text}</Text>
+      </Button>
     </TouchableOpacity>
   );
 }
