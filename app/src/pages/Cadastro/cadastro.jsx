@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View, ImageBackground, TouchableOpacity } from 'react-native';
 
-export default function Login(){
+export default function Cadastro() {
   return (
     <View>
       <Text>
-        login
+        cadastro page
       </Text>
     </View>
   )

@@ -4,12 +4,18 @@ import {
   View,
   ImageBackground,
   TouchableOpacity,
+  Button,
 } from "react-native";
+import Login from "../../pages/login";
+import { NavigationContainer } from '@react-navigation/native';
 
-export default function Buttons(  props ) {
+
+export default function Buttons( props ) {
   return (
     <TouchableOpacity style={styles.btn}>
-      <Text style={styles.title}>{props.text}</Text>
+      <Button 
+        title={props.txt}
+        onPress={() => navigation.navigate(Login)}/>
     </TouchableOpacity>
   );
 }
