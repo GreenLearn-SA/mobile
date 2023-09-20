@@ -1,33 +1,46 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  ImageBackground,
-  TouchableOpacity,
-  Button,
-} from "react-native";
+import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import { FontAwesome } from "@expo/vector-icons";
 
-
-
-export default function Buttons( {navigation ,txt, nav} ) {
+export default function Buttons({
+  navigation,
+  txt,
+  nav,
+  bgColor,
+  showIcon,
+  iconName,
+  iconSize,
+  iconColor,
+}) {
+  const buttonStyles = {
+    ...styles.btn,
+    backgroundColor: bgColor || styles.btn.backgroundColor,
+  };
   return (
-    <TouchableOpacity style={styles.btn}>
-      <Button 
-        title={txt}
-        onPress={() => navigation.navigate(nav)}/>
+    <TouchableOpacity
+      style={buttonStyles}
+      onPress={() => navigation.navigate(nav)}
+    >
+      <Text style={styles.title}>{txt}</Text>
+      {showIcon && (
+        <FontAwesome
+          name={iconName || 'chevron-up'}
+          size={iconSize || 20}
+          color={iconColor || '#fff'}
+        />
+      )}
     </TouchableOpacity>
   );
 }
 const styles = StyleSheet.create({
   btn: {
+    flexDirection: "row",
     borderRadius: 15,
     paddingBottom: 15,
     paddingTop: 15,
     paddingLeft: 35,
     paddingRight: 35,
-    justifyContent: "center",
+    justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: "#71a42a",
     alignSelf: "center",
     marginTop: 20,
     shadowColor: "#71a42a",
@@ -39,9 +52,10 @@ const styles = StyleSheet.create({
     shadowRadius: 11.27,
     elevation: 14,
   },
-  
+
   title: {
     color: "#fff",
     fontSize: 19,
+    marginRight: 20,
   },
 });

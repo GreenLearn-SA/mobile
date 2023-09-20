@@ -7,16 +7,21 @@ import Cadastro from "../pages/Cadastro/cadastro";
 
 const Stack = createNativeStackNavigator();
 
-  export default function Routes() {
+export default function Routes() {
   return (
     // definindo as telas
     <NavigationContainer>
       {/* Pagina home é definida como a padrão */}
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator
+        initialRouteName="Home"
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Cadastro" component={Cadastro} />
       </Stack.Navigator>
     </NavigationContainer>
   );
-};
+}
