@@ -6,16 +6,15 @@ import {
   TouchableOpacity,
   Button,
 } from "react-native";
-import Login from "../../pages/login";
-import { NavigationContainer } from '@react-navigation/native';
 
 
-export default function Buttons( props ) {
+
+export default function Buttons( {navigation ,txt, nav} ) {
   return (
     <TouchableOpacity style={styles.btn}>
       <Button 
-        title={props.txt}
-        onPress={() => navigation.navigate(Login)}/>
+        title={txt}
+        onPress={() => navigation.navigate(nav)}/>
     </TouchableOpacity>
   );
 }

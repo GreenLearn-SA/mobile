@@ -1,8 +1,9 @@
 import { StyleSheet, Text, View, ImageBackground, TouchableOpacity } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import Buttons from '../../components/Button';
+import Buttons from '../../components/Button/index.jsx';
 
-export default function Home() {
+
+export default function Home({navigation}) {
   return (
     <View style={styles.container}>
       <StatusBar style="auto" /> 
@@ -14,8 +15,10 @@ export default function Home() {
           <Text style={styles.nt}>
             Uma maneira prática e organizada de guiar e somar aos seus objetivos acadêmicos.
           </Text>
-          <Buttons 
-            txt = 'Começar'
+          <Buttons
+          txt='começar'
+          navigation={navigation}
+          nav='Login'
           />
       </View>
       <View style={styles.containerText}>
