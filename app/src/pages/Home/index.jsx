@@ -1,10 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
-<<<<<<< HEAD:app/src/pages/Home/home.jsx
-import Buttons from '../components/Button';
-=======
 import { Button, StyleSheet, Text, View, ImageBackground } from 'react-native';
 import Buttons from '../../components/Buttons';
->>>>>>> 8dc9eabc7a5bff3f4b213713e03ecc98fb63bd29:app/src/pages/Home/index.jsx
 
 export default function Home({ navigation }) {
   return (
