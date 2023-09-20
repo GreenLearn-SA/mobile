@@ -1,12 +1,16 @@
-import { StyleSheet, Text, View, ImageBackground, TouchableOpacity } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
+<<<<<<< HEAD:app/src/pages/Home/home.jsx
 import Buttons from '../components/Button';
+=======
+import { Button, StyleSheet, Text, View, ImageBackground } from 'react-native';
+import Buttons from '../../components/Buttons';
+>>>>>>> 8dc9eabc7a5bff3f4b213713e03ecc98fb63bd29:app/src/pages/Home/index.jsx
 
-export default function Home() {
+export default function Home({ navigation }) {
   return (
     <View style={styles.container}>
       <StatusBar style="auto" /> 
-      <ImageBackground source={require('./assets/bg-gl.png')} resizeMode="cover" style={styles.image}>
+      <ImageBackground source={require('../../../assets/bg-gl.svg')} resizeMode="cover" style={styles.image}>
         <View style={styles.containerBtn}>
           <Text style={styles.title}>
             Mais que um Aplicativo
@@ -15,8 +19,7 @@ export default function Home() {
             Uma maneira prática e organizada de guiar e somar aos seus objetivos acadêmicos.
           </Text>
           <Buttons 
-            text = 'Começar'
-            bgColor = 'blue'
+            txt='Começar'
           />
       </View>
       <View style={styles.containerText}>
