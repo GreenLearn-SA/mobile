@@ -7,13 +7,13 @@ export default function Login() {
     <View style={styles.container}>
       <Text>Login</Text>
       <Inputs
-      plHolder='Nome'
-      type='pass'
-      showIcon={true}
-      iconName='trash'
-      iconSize={20}
-      iconColor='black'
-      />
+        plHolder='Nome'
+        type='pass'
+        showIcon={true}
+        iconName="chevron-up"
+        iconSize={20}
+        iconColor="#71a42a"
+        />
     </View>
   )
 }
