@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     display: "flex",
     flexDirection: "column-reverse",
+    top: 105,
   },
   text: {
     color: "white",
@@ -77,11 +78,13 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     justifyContent: "center",
     padding: 30,
+    bottom: 120
   },
   containerText: {
     marginBottom: 200,
     display: "flex",
     alignSelf: "center",
+    bottom: 100,
   },
   title: {
     color: "#71A42A",

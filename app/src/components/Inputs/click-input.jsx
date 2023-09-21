@@ -7,8 +7,7 @@ import {
 } from "react-native";
 import React from "react";
 import { FontAwesome } from "@expo/vector-icons";
-
-export default function Inputs({
+export default function ClickInput({
   label,
   type,
   plHolder,
@@ -16,6 +15,8 @@ export default function Inputs({
   iconColor,
   iconName,
   iconSize,
+  navigation,
+  nav,
 }) {
   return (
     <View style={styles.container}>
@@ -26,15 +27,16 @@ export default function Inputs({
           placeholder={plHolder}
           keyboardType={type} // se o type for pass ele troca o keyboard para numeric e adiciona uma propriedade
         />
-        <TouchableOpacity style={styles.icon}>
+        <TouchableOpacity style={styles.icon} onPress={() => navigation.navigate(nav)}>
           {showIcon && (
             <FontAwesome name={iconName} size={iconSize} color={iconColor} />
           )}
         </TouchableOpacity>
       </View>
     </View>
-  );
+  )
 }
+
 const styles = StyleSheet.create({
   container: {
     display: "flex",
@@ -48,11 +50,11 @@ const styles = StyleSheet.create({
     width:'100%',
     flexDirection: 'row',
     paddingVertical: 11,
-    paddingHorizontal: 10,
+    paddingHorizontal: 15,
     borderWidth: 2,
     borderColor: "#71a42a",
     borderRadius: 5,
-    justifyContent: 'flex-start'
+    justifyContent: 'space-between'
   },
   icon:{
     display:"flex" ,

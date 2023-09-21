@@ -1,14 +1,13 @@
 import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
-import Inputs from '../../components/Inputs/input'
+import InputStatic from '../../components/Inputs/static-input'
 
 export default function Login() {
   return (
     <View style={styles.container}>
       <Text>Login</Text>
-      <Inputs
+      <InputStatic
         plHolder='Nome'
-        type='pass'
         showIcon={true}
         iconName="chevron-up"
         iconSize={20}
