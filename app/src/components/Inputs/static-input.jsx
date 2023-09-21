@@ -16,11 +16,20 @@ export default function InputStatic({
   iconColor,
   iconName,
   iconSize,
+  geralColor,
 }) {
+  const dynamicStyles = {
+    containerInput: {
+      borderColor: geralColor || "#71a42a",
+    },
+    label: {
+      color: geralColor || "#71a42a",
+    },
+  };
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>{label || plHolder}:</Text>
-      <View style={styles.containerInput}>
+      <Text style={[styles.label , dynamicStyles.label]}>{label || plHolder}:</Text>
+      <View style={[styles.containerInput , dynamicStyles.containerInput]}>
         <TextInput
           style={styles.input}
           placeholder={plHolder}
@@ -28,7 +37,7 @@ export default function InputStatic({
         />
         <TouchableWithoutFeedback style={styles.icon}>
           {showIcon && (
-            <FontAwesome name={iconName} size={iconSize} color={iconColor} />
+            <FontAwesome name={iconName} size={iconSize} color={geralColor} />
           )}
         </TouchableWithoutFeedback>
       </View>

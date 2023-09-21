@@ -25,7 +25,7 @@ export default function ClickInput({
         <TextInput
           style={styles.input}
           placeholder={plHolder}
-          keyboardType={type} // se o type for pass ele troca o keyboard para numeric e adiciona uma propriedade
+          keyboardType={type}
         />
         <TouchableOpacity style={styles.icon} onPress={() => navigation.navigate(nav)}>
           {showIcon && (

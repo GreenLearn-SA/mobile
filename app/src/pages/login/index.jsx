@@ -11,7 +11,7 @@ export default function Login() {
         showIcon={true}
         iconName="chevron-up"
         iconSize={20}
-        iconColor="#71a42a"
+        geralColor='#71a42a'
         />
     </View>
   )
