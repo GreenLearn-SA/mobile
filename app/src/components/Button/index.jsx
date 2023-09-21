@@ -16,16 +16,17 @@ export default function Buttons({
     backgroundColor: bgColor || styles.btn.backgroundColor,
   };
   return (
-    <TouchableOpacity
+
+    <TouchableOpacity 
       style={buttonStyles}
-      onPress={() => navigation.navigate(nav)}
+      onPress={() => navigation.navigate(nav)} 
     >
       <Text style={styles.title}>{txt}</Text>
       {showIcon && (
         <FontAwesome
-          name={iconName || 'chevron-up'}
-          size={iconSize || 20}
-          color={iconColor || '#fff'}
+          name={iconName}
+          size={iconSize}
+          color={iconColor}
         />
       )}
     </TouchableOpacity>
