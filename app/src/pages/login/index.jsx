@@ -7,7 +7,7 @@ export default function Login() {
     <View style={styles.container}>
       <Text>Login</Text>
       <InputStatic
-        plHolder='Nome'
+        plHolder='login'
         showIcon={true}
         iconName="chevron-up"
         iconSize={20}
