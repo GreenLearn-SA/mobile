@@ -1,18 +1,31 @@
 import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
 import InputStatic from '../../components/Inputs/static-input'
+import Icons from '../../components/Icons/icons'
 
 export default function Login() {
   return (
     <View style={styles.container}>
-      <Text>Login</Text>
-      <InputStatic
-        plHolder='login'
-        showIcon={true}
-        iconName="chevron-up"
-        iconSize={20}
-        geralColor='#71a42a'
-        />
+     <View style={styles.containerImage}>
+
+     </View>
+      <View style={styles.inputContainer}>
+        <InputStatic
+          plHolder='Login'
+          showIcon={true}
+          iconName="user"
+          iconSize={20}
+          geralColor='#71a42a'
+          />
+        <InputStatic
+          plHolder='Senha'
+          showIcon={true}
+          iconName="lock"
+          iconSize={20}
+          geralColor='#71a42a'
+          type='pass'
+          />
+      </View>
     </View>
   )
 }
@@ -20,7 +33,14 @@ export default function Login() {
 const styles = StyleSheet.create({
   container:{
     flex: 1,
-    justifyContent:'center', 
+    justifyContent:'space-evenly', 
     alignItems:"center"
+  },
+  inputContainer:{
+    display: 'flex',
+    justifyContent: "center",
+    alignItems: 'center',
+    width: '100%',
+    marginBottom: 180
   }
 })

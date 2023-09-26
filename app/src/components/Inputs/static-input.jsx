@@ -13,7 +13,6 @@ export default function InputStatic({
   type,
   plHolder,
   showIcon = false,
-  iconColor,
   iconName,
   iconSize,
   geralColor,
@@ -33,7 +32,7 @@ export default function InputStatic({
         <TextInput
           style={styles.input}
           placeholder={plHolder}
-          keyboardType={type} // se o type for pass ele troca o keyboard para numeric e adiciona uma propriedade
+          keyboardType={type} 
         />
         <TouchableWithoutFeedback style={styles.icon}>
           {showIcon && (
@@ -70,16 +69,17 @@ const styles = StyleSheet.create({
     width: '20%'
   },
   label: {
-    fontSize: 16,
+    fontSize: 20,
     color: "#71a42a",
     fontWeight: "700",
     position: "relative",
     marginLeft: 7,
     padding: "0 3px",
     width: "fit-content",
+    marginBottom: 8,
   },
   input: {
-    fontSize: 12,
+    fontSize: 14,
     width: '80%'
   },
 });
