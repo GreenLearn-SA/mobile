@@ -23,8 +23,11 @@ export default function Login() {
           iconName="lock"
           iconSize={20}
           geralColor='#71a42a'
-          type='pass'
+          senha
           />
+      </View>
+      <View>
+        <Text>Não possui cadastro ? Clique aqui e faça</Text>
       </View>
     </View>
   )

@@ -16,6 +16,7 @@ export default function InputStatic({
   iconName,
   iconSize,
   geralColor,
+  senha = false,
 }) {
   const dynamicStyles = {
     containerInput: {
@@ -32,7 +33,8 @@ export default function InputStatic({
         <TextInput
           style={styles.input}
           placeholder={plHolder}
-          keyboardType={type} 
+          keyboardType={type}
+          secureTextEntry={senha}
         />
         <TouchableWithoutFeedback style={styles.icon}>
           {showIcon && (
