@@ -1,49 +1,59 @@
-import { View, Text, StyleSheet } from 'react-native'
-import React from 'react'
-import InputStatic from '../../components/Inputs/static-input'
-import Icons from '../../components/Icons/icons'
+import { View, Text, StyleSheet, Pressable } from "react-native";
+import React from "react";
+import { Button , TextInput } from "react-native-paper";
 
-export default function Login() {
+export default function Login({navigation}) {
+  const [text, setText] = React.useState("");
   return (
     <View style={styles.container}>
-     <View style={styles.containerImage}>
-
-     </View>
+      <View style={styles.containerImage}></View>
       <View style={styles.inputContainer}>
-        <InputStatic
-          plHolder='Login'
-          showIcon={true}
-          iconName="user"
-          iconSize={20}
-          geralColor='#71a42a'
-          />
-        <InputStatic
-          plHolder='Senha'
-          showIcon={true}
-          iconName="lock"
-          iconSize={20}
-          geralColor='#71a42a'
-          senha
-          />
+        <TextInput
+          mode="outlined"
+          label="Nome"
+          value={text}
+          onChangeText={text => setText(text)}
+        />
+        <TextInput
+          style={styles.inputs}
+          mode="outlined"
+          label="Senha"
+          value={text}
+          onChangeText={text => setText(text)}
+        />
+        <Button
+          mode="outlined"
+          textColor="#71a42a"
+          style={styles.btn}
+          onPress={() => navigation.navigate('Home')}
+          >
+          Logar
+        </Button>
       </View>
-      <View>
-        <Text>Não possui cadastro ? Clique aqui e faça</Text>
+      <View style={styles.cadastro}>
+        <Pressable onPress={() => navigation.navigate('Cadastro')}>
+          <Text>Não possui cadastro ? Clique aqui e faça</Text>
+        </Pressable>
       </View>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
-  container:{
+  container: {
     flex: 1,
-    justifyContent:'space-evenly', 
-    alignItems:"center"
-  },
-  inputContainer:{
-    display: 'flex',
     justifyContent: "center",
-    alignItems: 'center',
-    width: '100%',
-    marginBottom: 180
-  }
+    alignItems: "center",
+  },
+  inputContainer: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    marginBottom: 50,
+  },
+  btn:{
+    borderColor: '#71a42a',
+    paddingHorizontal:30,
+  },
 })
