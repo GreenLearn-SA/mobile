@@ -17,7 +17,7 @@ export default function Login({ navigation }) {
     <PaperProvider theme={theme}>
       <View style={styles.container}>
         <Text style={styles.title}>Login</Text>
-
+    
         <TextInput
           mode='outlined'
           cancelable='true'
@@ -65,7 +65,7 @@ export default function Login({ navigation }) {
           dark='true'
           icon="login"
           mode="contained-tonal"
-          onPress={() => navigation.navigate('Home')}>
+          onPress={() => navigation.navigate('Main')}>
           Entrar
         </Button>
       </View >
@@ -104,3 +104,11 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   }
 });
+
+
+
+
+
+
+
+
