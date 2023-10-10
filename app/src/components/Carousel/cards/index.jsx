@@ -2,12 +2,11 @@ import * as React from 'react';
 import { StyleSheet } from 'react-native';
 import { Avatar, Button, Card, Text } from 'react-native-paper';
 
-
-export default function CardC({titulo , geralColor }) {
+export default function CardC({ titulo, geralColor }) {
   const LeftContent = props => (
     <Avatar.Icon {...props} icon="trello" style={{ backgroundColor: geralColor }} />
   );
-return (
+  return (
     <Card style={styles.containerCard}>
       <Card.Title
         left={LeftContent}
@@ -15,8 +14,8 @@ return (
       <Card.Content>
         <Text variant="titleLarge">{titulo}</Text>
       </Card.Content>
-      <Card.Actions>
-        <Text>
+      <Card.Actions style={styles.progressText}>
+        <Text style={styles.progressText}>
           Progresso: 62%
         </Text>
       </Card.Actions>
@@ -25,9 +24,12 @@ return (
 }
 
 const styles = StyleSheet.create({
-  containerCard:{
-    width:'40%',
+  containerCard: {
+    width: '20%',
     height: 200,
-    
+  },
+  progressText: {
+    width: 150,
+    marginLeft: 25
   },
 })
