@@ -4,8 +4,8 @@ import React from 'react';
 import Carousel from "../../components/Carousel/carousel";
 
 export default function Main({ navigation }) {
-  const firstName = "Vitor";
-  const lastName = "Pires";
+  const firstName = "Ana";
+  const lastName = "Negri";
 
   return (
     <View style={styles.container}>
@@ -38,6 +38,8 @@ const styles = StyleSheet.create({
     right: 0,
     top: 0,
     elevation: 0,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
   },
   header: {
     marginTop: 80,

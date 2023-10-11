@@ -5,7 +5,7 @@ import React from 'react';
 export default function User({ navigation, route }) {
     const { firstName, lastName } = route.params;
 
-    let avatarLabel = firstName.charAt(0) + lastName.charAt(0);
+    const avatarLabel = firstName.charAt(0) + lastName.charAt(0);
 
     return (
         <View style={styles.container}>
