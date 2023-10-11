@@ -4,6 +4,10 @@ import React from 'react';
 import Carousel from "../../components/Carousel/carousel";
 
 export default function Main({ navigation }) {
+  const navigateToPage = (pageName) => {
+    navigation.navigate(pageName);
+  };
+
   return (
     <View style={styles.container}>
       <Appbar.Header style={styles.topBar}>
@@ -17,8 +21,7 @@ export default function Main({ navigation }) {
 
       <View style={styles.grades}>
         <Text style={styles.gradesTitle}>Minhas Matérias</Text>
-
-        <Carousel />
+        <Carousel navigation={navigation} navigateToPage={navigateToPage} />
       </View>
     </View>
   );

@@ -1,26 +1,30 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
-import { Avatar, Card, ProgressBar, Text } from 'react-native-paper';
+import { StyleSheet, TouchableOpacity } from 'react-native';
+import { Avatar, Button, Card, ProgressBar, Text } from 'react-native-paper';
 
-export default function CardC({ titulo, geralColor, progressPercentage }) {
+export default function CardC({ titulo, geralColor, progressPercentage, navigation, onPress }) {
   const LeftContent = props => (
     <Avatar.Icon {...props} icon="book" style={{ backgroundColor: geralColor }} />
   );
   return (
     <Card style={styles.containerCard}>
-      <Card.Title
-        left={LeftContent}
-      />
-      <Card.Content>
-        <Text variant="titleLarge">{titulo}</Text>
-      </Card.Content>
-      <Card.Actions style={styles.progressView}>
-        <Text style={styles.progressText}>
-          Progresso: {Math.round(progressPercentage * 100)}%
-        </Text>
-        <ProgressBar progress={progressPercentage} color={geralColor} style={styles.progressBar} />
-      </Card.Actions>
+      <TouchableOpacity onPress={onPress}>
+        <Card.Title
+          left={LeftContent}
+        />
+        <Card.Content>
+          <Text variant="titleLarge">{titulo}</Text>
+        </Card.Content>
+
+        <Card.Actions style={styles.progressView}>
+          <Text style={styles.progressText}>
+            Progresso: {Math.round(progressPercentage * 100)}%
+          </Text>
+          <ProgressBar progress={progressPercentage} color={geralColor} style={styles.progressBar} />
+        </Card.Actions>
+      </TouchableOpacity >
     </Card>
+
   );
 }
 

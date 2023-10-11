@@ -14,24 +14,28 @@ export default function Carousel({ navigation }) {
           titulo={'Matemática'}
           geralColor={'#ff5454'}
           progressPercentage={0.67}
+          onPress={() => navigation.navigate('Math')}
         />
 
         <CardC
           titulo={'Humanas'}
           geralColor={'#FF8C00'}
           progressPercentage={0.32}
+          onPress={() => navigation.navigate('Humans')}
         />
 
         <CardC
           titulo={'Natureza'}
           geralColor={'#9370DB'}
           progressPercentage={0.29}
+          onPress={() => navigation.navigate('Nature')}
         />
 
         <CardC
           titulo={'Linguagens'}
           geralColor={'#ffef61'}
           progressPercentage={0.6}
+          onPress={() => navigation.navigate('Login')}
         />
       </ScrollView>
     </View >
