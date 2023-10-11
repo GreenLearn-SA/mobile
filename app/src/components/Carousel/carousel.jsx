@@ -8,27 +8,30 @@ export default function Carousel({ navigation }) {
       <ScrollView
         horizontal={true}
         contentContainerStyle={styles.flexContainer}
-        showsHorizontalScrollIndicator={true}
+        showsHorizontalScrollIndicator={false}
       >
         <CardC
           titulo={'Matemática'}
-          geralColor={'red'}
-          onPress={() => navigation.navigate('Home')}
+          geralColor={'#ff5454'}
+          progressPercentage={0.67}
         />
 
         <CardC
-          titulo={'Ciências Humanas'}
-          geralColor={'orange'}
+          titulo={'Humanas'}
+          geralColor={'#FF8C00'}
+          progressPercentage={0.32}
         />
 
         <CardC
-          titulo={'Ciências da Natureza'}
-          geralColor={'purple'}
+          titulo={'Natureza'}
+          geralColor={'#9370DB'}
+          progressPercentage={0.29}
         />
 
         <CardC
           titulo={'Linguagens'}
-          geralColor={'yellow'}
+          geralColor={'#ffef61'}
+          progressPercentage={0.6}
         />
       </ScrollView>
     </View >
@@ -41,6 +44,7 @@ const styles = StyleSheet.create({
   flexContainer: {
     flexDirection: 'row',
     gap: 20,
-    marginLeft: 10,
+    marginVertical: 20,
+    height: 250
   },
 })
