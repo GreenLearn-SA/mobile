@@ -38,9 +38,9 @@ export default function Nature({ navigation }) {
                             </View>
                             <TouchableOpacity onPress={() => toggleTask(item.id)} style={styles.checkButton}>
                                 {item.completed ? (
-                                    <AntDesign name="checksquare" size={24} color="#72B86F" />
+                                    <AntDesign name="checksquare" size={24} color="#826FB8" />
                                 ) : (
-                                    <AntDesign name="checksquareo" size={24} color="#72B86F" />
+                                    <AntDesign name="checksquareo" size={24} color="#826FB8" />
                                 )}
                             </TouchableOpacity>
                         </View>
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         marginBottom: 10,
-        borderColor: '#72B86F',
+        borderColor: '#826FB8',
         borderWidth: 1,
         borderRadius: 5,
         padding: 10,
