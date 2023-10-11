@@ -1,27 +1,24 @@
 import { StyleSheet, View } from "react-native";
-import { Appbar, Text } from 'react-native-paper';
+import { Appbar, Text, Avatar } from 'react-native-paper';
 import React from 'react';
-import Carousel from "../../components/Carousel/carousel";
 
-export default function User({ navigation }) {
-    const navigateToPage = (pageName) => {
-        navigation.navigate(pageName);
-    };
+export default function User({ navigation, route }) {
+    const { firstName, lastName } = route.params;
+
+    const avatarLabel = firstName.charAt(0) + lastName.charAt(0);
 
     return (
         <View style={styles.container}>
             <Appbar.Header style={styles.topBar}>
-                <Appbar.BackAction onPress={() => navigation.navigate('Login')} />
+                <Appbar.BackAction onPress={() => navigation.goBack()} />
                 <Appbar.Action icon="account-cog" onPress={() => navigation.navigate('User')} />
             </Appbar.Header>
 
             <View style={styles.header}>
-                <Text style={styles.greeting}>Olá, Vitor!</Text>
-            </View>
-
-            <View style={styles.grades}>
-                <Text style={styles.gradesTitle}>Minhas Matérias</Text>
-                <Carousel navigation={navigation} navigateToPage={navigateToPage} />
+                <View style={styles.avatar}>
+                    <Avatar.Text size={80} label={avatarLabel} />
+                </View>
+                <Text style={styles.greeting}>Olá, {firstName + " " + lastName}</Text>
             </View>
         </View>
     );
@@ -39,21 +36,20 @@ const styles = StyleSheet.create({
         right: 0,
         top: 0,
         elevation: 0,
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20
     },
     header: {
         marginTop: 80,
         paddingHorizontal: 20,
+    },
+    avatar: {
+        alignItems: 'center',
+        marginVertical: 30
     },
     greeting: {
         fontSize: 30,
         textAlign: 'center',
 
     },
-    grades: {
-        marginTop: 50,
-        paddingHorizontal: 20,
-    },
-    gradesTitle: {
-        fontSize: 30,
-    }
 });

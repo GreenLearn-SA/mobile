@@ -2,7 +2,7 @@ import * as React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Avatar, Button, Card, ProgressBar, Text } from 'react-native-paper';
 
-export default function CardC({ titulo, geralColor, progressPercentage, navigation, onPress }) {
+export default function CardC({ titulo, geralColor, progressPercentage, onPress }) {
   const LeftContent = props => (
     <Avatar.Icon {...props} icon="book" style={{ backgroundColor: geralColor }} />
   );

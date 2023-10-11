@@ -37,6 +37,7 @@ export default function Carousel({ navigation }) {
           progressPercentage={0.6}
           onPress={() => navigation.navigate('Languages')}
         />
+
       </ScrollView>
     </View >
 

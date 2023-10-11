@@ -4,16 +4,18 @@ import React from 'react';
 import Carousel from "../../components/Carousel/carousel";
 
 export default function Main({ navigation }) {
+  const firstName = "Ana";
+  const lastName = "Negri";
 
   return (
     <View style={styles.container}>
       <Appbar.Header style={styles.topBar}>
         <Appbar.BackAction onPress={() => navigation.navigate('Login')} />
-        <Appbar.Action icon="account-cog" onPress={() => navigation.navigate('User')} />
+        <Appbar.Action icon="account-cog" onPress={() => navigation.navigate('User', { firstName, lastName })} />
       </Appbar.Header>
 
       <View style={styles.header}>
-        <Text style={styles.greeting}>Olá, Vitor!</Text>
+        <Text style={styles.greeting}>Olá, {firstName}</Text>
       </View>
 
       <View style={styles.grades}>
@@ -36,6 +38,8 @@ const styles = StyleSheet.create({
     right: 0,
     top: 0,
     elevation: 0,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
   },
   header: {
     marginTop: 80,
