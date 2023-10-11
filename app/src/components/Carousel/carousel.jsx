@@ -35,7 +35,7 @@ export default function Carousel({ navigation }) {
           titulo={'Linguagens'}
           geralColor={'#ffef61'}
           progressPercentage={0.6}
-          onPress={() => navigation.navigate('Login')}
+          onPress={() => navigation.navigate('Languages')}
         />
       </ScrollView>
     </View >
