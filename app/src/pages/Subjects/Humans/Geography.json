@@ -1,0 +1,13 @@
+[
+    { "id": 53, "text": "Geografia Física", "completed": false },
+    { "id": 54, "text": "Geografia Humana", "completed": false },
+    { "id": 55, "text": "Geopolítica", "completed": false },
+    { "id": 56, "text": "Globalização", "completed": false },
+    { "id": 57, "text": "Geografia do Brasil", "completed": false },
+    { "id": 58, "text": "Escala", "completed": false },
+    { "id": 59, "text": "Escala", "completed": false },
+    { "id": 60, "text": "Problemas ambientais", "completed": false },
+    { "id": 61, "text": "Clima e vegetação", "completed": false },
+    { "id": 62, "text": "Urbanização", "completed": false },
+    { "id": 63, "text": "Industrialização", "completed": false }
+]

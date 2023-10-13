@@ -1,0 +1,13 @@
+[
+    { "id": 17, "text": "Química geral", "completed": false },
+    { "id": 18, "text": "Química inorgânica", "completed": false },
+    { "id": 19, "text": "Química orgânica", "completed": false },
+    { "id": 20, "text": "Físico-química", "completed": false },
+    { "id": 21, "text": "Química ambiental", "completed": false },
+    { "id": 22, "text": "Separação de misturas", "completed": false },
+    { "id": 23, "text": "Termoquímica", "completed": false },
+    { "id": 24, "text": "Estequiometria", "completed": false },
+    { "id": 25, "text": "Radioatividade", "completed": false },
+    { "id": 26, "text": "Química ambiental", "completed": false },
+    { "id": 27, "text": "Isomeria", "completed": false }
+]

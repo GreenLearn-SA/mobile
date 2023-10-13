@@ -1,0 +1,7 @@
+[
+    { "id": 21, "text": "Filosofia Antiga", "completed": false },
+    { "id": 22, "text": "Filosofia Medieval", "completed": false },
+    { "id": 23, "text": "Filosofia Moderna", "completed": false },
+    { "id": 24, "text": "Filosofia Contemporânea", "completed": false },
+    { "id": 25, "text": "Iluminismo", "completed": false }
+]

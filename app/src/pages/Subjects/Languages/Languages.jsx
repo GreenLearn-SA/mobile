@@ -1,18 +1,15 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, FlatList } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
+import subjects from './Languages.json'; 
 
 export default function Languages({ navigation }) {
-    const [tasks, setTasks] = useState([
-        { id: 1, text: 'Tarefa 1', completed: false },
-        { id: 2, text: 'Tarefa 2', completed: true },
-        { id: 3, text: 'Tarefa 3', completed: false },
-    ]);
+    const [subjectList, setSubjectList] = useState(subjects);
 
-    const toggleTask = (taskId) => {
-        setTasks((prevTasks) =>
-            prevTasks.map((task) =>
-                task.id === taskId ? { ...task, completed: !task.completed } : task
+    const toggleSubject = (subjectId) => {
+        setSubjectList((prevSubjects) =>
+            prevSubjects.map((subject) =>
+                subject.id === subjectId ? { ...subject, completed: !subject.completed } : subject
             )
         );
     };
@@ -27,7 +24,7 @@ export default function Languages({ navigation }) {
             </View>
             <View style={styles.taskContainer}>
                 <FlatList
-                    data={tasks}
+                    data={subjectList}
                     keyExtractor={(item) => item.id.toString()}
                     renderItem={({ item }) => (
                         <View style={styles.taskItem}>
@@ -36,11 +33,11 @@ export default function Languages({ navigation }) {
                                     {item.text}
                                 </Text>
                             </View>
-                            <TouchableOpacity onPress={() => toggleTask(item.id)} style={styles.checkButton}>
+                            <TouchableOpacity onPress={() => toggleSubject(item.id)} style={styles.checkButton}>
                                 {item.completed ? (
-                                    <AntDesign name="checksquare" size={24} color="#72B86F" />
+                                    <AntDesign name="checksquare" size={24} color="#3AA2CE" />
                                 ) : (
-                                    <AntDesign name="checksquareo" size={24} color="#72B86F" />
+                                    <AntDesign name="checksquareo" size={24} color="#3AA2CE" />
                                 )}
                             </TouchableOpacity>
                         </View>
@@ -58,8 +55,8 @@ const styles = StyleSheet.create({
     },
     card: {
         backgroundColor: '#3AA2CE',
-        paddingTop: '5%',
-        paddingBottom: '5%',
+        paddingTop: '2%',
+        paddingBottom: '2%',
         height: '20%',
         justifyContent: 'center',
         borderBottomLeftRadius: 30,
@@ -86,7 +83,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         marginBottom: 10,
-        borderColor: '#72B86F',
+        borderColor: '#3AA2CE',
         borderWidth: 1,
         borderRadius: 5,
         padding: 10,

@@ -1,21 +1,59 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, FlatList } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, FlatList, ScrollView } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 
+import biologyData from './Biology.json';
+import chemicalData from './Chemical.json';
+import physicsData from './Physics.json';
+
 export default function Nature({ navigation }) {
-    const [tasks, setTasks] = useState([
-        { id: 1, text: 'Tarefa 1', completed: false },
-        { id: 2, text: 'Tarefa 2', completed: true },
-        { id: 3, text: 'Tarefa 3', completed: false },
-    ]);
+    const [subjectList, setSubjectList] = useState([]);
+    const [selectedSubject, setSelectedSubject] = useState(null);
+
+    const loadTasks = (subject) => {
+        if (subject === selectedSubject) {
+            setSelectedSubject(null);
+            setSubjectList([]);
+        } else {
+            setSelectedSubject(subject);
+            switch (subject) {
+                case 'biology':
+                    setSubjectList(biologyData);
+                    break;
+                case 'chemical':
+                    setSubjectList(chemicalData);
+                    break;
+                case 'physics':
+                    setSubjectList(physicsData);
+                    break;
+                default:
+                    setSubjectList([]);
+            }
+        }
+    };
 
     const toggleTask = (taskId) => {
-        setTasks((prevTasks) =>
+        setSubjectList((prevTasks) =>
             prevTasks.map((task) =>
                 task.id === taskId ? { ...task, completed: !task.completed } : task
             )
         );
     };
+
+    const renderTaskItem = ({ item }) => (
+        <View style={styles.subjectItem}>
+            <View style={styles.subjectTextContainer}>
+                <Text style={item.completed ? styles.completedText : styles.text}>{item.text}</Text>
+            </View>
+            <TouchableOpacity onPress={() => toggleTask(item.id)} style={styles.checkButton}>
+                <AntDesign
+                    name={item.completed ? 'checksquare' : 'checksquareo'}
+                    size={24}
+                    color="#826FB8"
+                />
+            </TouchableOpacity>
+        </View>
+    );
 
     return (
         <View style={styles.container}>
@@ -25,27 +63,55 @@ export default function Nature({ navigation }) {
                     <AntDesign name="left" size={24} color="#f5f5f5" />
                 </TouchableOpacity>
             </View>
-            <View style={styles.taskContainer}>
-                <FlatList
-                    data={tasks}
-                    keyExtractor={(item) => item.id.toString()}
-                    renderItem={({ item }) => (
-                        <View style={styles.taskItem}>
-                            <View style={styles.taskTextContainer}>
-                                <Text style={{ textDecorationLine: item.completed ? 'line-through' : 'none' }}>
-                                    {item.text}
-                                </Text>
-                            </View>
-                            <TouchableOpacity onPress={() => toggleTask(item.id)} style={styles.checkButton}>
-                                {item.completed ? (
-                                    <AntDesign name="checksquare" size={24} color="#826FB8" />
-                                ) : (
-                                    <AntDesign name="checksquareo" size={24} color="#826FB8" />
-                                )}
-                            </TouchableOpacity>
-                        </View>
+            <View style={styles.dropdownContainer}>
+                <View style={styles.dropdown}>
+                    <TouchableOpacity
+                        style={styles.dropdownButton}
+                        onPress={() => loadTasks('biology')}
+                    >
+                        <Text style={styles.dropdownText}>Biologia</Text>
+                    </TouchableOpacity>
+                    {selectedSubject === 'biology' && (
+                        <FlatList
+                            data={subjectList}
+                            keyExtractor={(item) => item.id.toString()}
+                            renderItem={renderTaskItem}
+                        />
                     )}
-                />
+                </View>
+
+                <View style={styles.dropdown}>
+                    <TouchableOpacity
+                        style={styles.dropdownButton}
+                        onPress={() => loadTasks('chemical')}
+                    >
+                        <Text style={styles.dropdownText}>Química</Text>
+                    </TouchableOpacity>
+                    {selectedSubject === 'chemical' && (
+                        <FlatList
+                            data={subjectList}
+                            keyExtractor={(item) => item.id.toString()}
+                            renderItem={renderTaskItem}
+                        />
+                    )}
+                </View>
+
+                <View style={styles.dropdown}>
+                    <TouchableOpacity
+                        style={styles.dropdownButton}
+                        onPress={() => loadTasks('physics')}
+                    >
+                        <Text style={styles.dropdownText}>Física</Text>
+                    </TouchableOpacity>
+                    {selectedSubject === 'physics' && (
+                        <FlatList
+                            data={subjectList}
+                            keyExtractor={(item) => item.id.toString()}
+                            renderItem={renderTaskItem}
+                        />
+                    )}
+                </View>
+
             </View>
         </View>
     );
@@ -58,8 +124,8 @@ const styles = StyleSheet.create({
     },
     card: {
         backgroundColor: '#826FB8',
-        paddingTop: '5%',
-        paddingBottom: '5%',
+        paddingTop: '2%',
+        paddingBottom: '2%',
         height: '20%',
         justifyContent: 'center',
         borderBottomLeftRadius: 30,
@@ -76,12 +142,26 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 30,
     },
-    taskContainer: {
+    dropdownContainer: {
         flex: 1,
         paddingHorizontal: 20,
         paddingTop: 20,
     },
-    taskItem: {
+    dropdown: {
+        marginBottom: 20,
+    },
+    dropdownButton: {
+        backgroundColor: '#826FB8',
+        padding: 10,
+        borderRadius: 5,
+        marginBottom: 10,
+    },
+    dropdownText: {
+        color: '#f5f5f5',
+        fontWeight: 'bold',
+        fontSize: 18,
+    },
+    subjectItem: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
@@ -91,8 +171,14 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         padding: 10,
     },
-    taskTextContainer: {
+    subjectTextContainer: {
         flex: 1,
+    },
+    text: {
+        textDecorationLine: 'none',
+    },
+    completedText: {
+        textDecorationLine: 'line-through',
     },
     checkButton: {
         marginLeft: 10,

@@ -1,0 +1,13 @@
+[
+    { "id": 1, "text": "Idade antiga", "completed": false },
+    { "id": 2, "text": "Idade moderna", "completed": false },
+    { "id": 3, "text": "Idade Contemporânea - Séculos XIX", "completed": false },
+    { "id": 4, "text": "Brasil colônia", "completed": false },
+    { "id": 5, "text": "Brasil império", "completed": false },
+    { "id": 6, "text": "Brasil república", "completed": false },
+    { "id": 7, "text": "Segundo reinado", "completed": false },
+    { "id": 8, "text": "Período republicano", "completed": false },
+    { "id": 9, "text": "Ditadura militar", "completed": false },
+    { "id": 10, "text": "Primeira guerra", "completed": false },
+    { "id": 11, "text": "Segunda guerra", "completed": false }
+]
