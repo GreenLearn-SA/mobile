@@ -183,10 +183,12 @@ export default function Nature({ navigation }) {
             borderRadius: 15,
             backgroundColor: '#CDC4E9',
             display: 'flex',
+            
         },
         flatList:{
             width: 350,
             marginLeft: 23,
+        
         },
     });
     

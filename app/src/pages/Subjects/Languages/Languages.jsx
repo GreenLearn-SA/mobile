@@ -87,6 +87,8 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 5,
         padding: 10,
+        height: 55,
+        marginBottom: 20,
     },
     taskTextContainer: {
         flex: 1,

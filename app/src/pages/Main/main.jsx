@@ -3,12 +3,14 @@ import { Appbar, Text } from 'react-native-paper';
 import React from 'react';
 import Carousel from "../../components/Carousel/carousel";
 
+
 export default function Main({ navigation }) {
   const firstName = "Ana";
   const lastName = "Negri";
 
   return (
     <View style={styles.container}>
+    
       <Appbar.Header style={styles.topBar}>
         <Appbar.BackAction onPress={() => navigation.navigate('Login')} />
         <Appbar.Action icon="account-cog" onPress={() => navigation.navigate('User', { firstName, lastName })} />

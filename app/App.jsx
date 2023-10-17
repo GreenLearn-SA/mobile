@@ -7,7 +7,9 @@ const Stack = createNativeStackNavigator();
 
 function App() {
   return (
+   
     <NavigationContainer>
+      
       <Routes />
     </NavigationContainer>
   );

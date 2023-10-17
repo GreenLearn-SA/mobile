@@ -76,7 +76,9 @@ const styles = StyleSheet.create({
     taskContainer: {
         flex: 1,
         paddingHorizontal: 20,
-        paddingTop: 20,
+        paddingTop: 30,
+        paddingBottom: 30,
+       
     },
     taskItem: {
         flexDirection: 'row',
@@ -87,6 +89,8 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 5,
         padding: 10,
+        height: 55,
+        marginBottom: 20,
     },
     taskTextContainer: {
         flex: 1,
