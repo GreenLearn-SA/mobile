@@ -1,36 +1,37 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, FlatList, ScrollView } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, FlatList } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
+import { List } from 'react-native-paper';
 
 import biologyData from './Biology.json';
 import chemicalData from './Chemical.json';
 import physicsData from './Physics.json';
 
 export default function Nature({ navigation }) {
+    const [expanded, setExpanded] = useState(null);
     const [subjectList, setSubjectList] = useState([]);
-    const [selectedSubject, setSelectedSubject] = useState(null);
 
     const loadTasks = (subject) => {
-        if (subject === selectedSubject) {
-            setSelectedSubject(null);
-            setSubjectList([]);
+        if (expanded === subject) {
+          setExpanded(null);
+          setSubjectList([]);
         } else {
-            setSelectedSubject(subject);
-            switch (subject) {
-                case 'biology':
-                    setSubjectList(biologyData);
-                    break;
-                case 'chemical':
-                    setSubjectList(chemicalData);
-                    break;
-                case 'physics':
-                    setSubjectList(physicsData);
-                    break;
-                default:
-                    setSubjectList([]);
-            }
+          setExpanded(subject);
+          switch (subject) {
+            case 'biology':
+              setSubjectList(biologyData);
+              break;
+            case 'chemical':
+              setSubjectList(chemicalData);
+              break;
+            case 'physics':
+              setSubjectList(physicsData);
+              break;
+            default:
+              setSubjectList([]);
+          }
         }
-    };
+      };
 
     const toggleTask = (taskId) => {
         setSubjectList((prevTasks) =>
@@ -43,13 +44,15 @@ export default function Nature({ navigation }) {
     const renderTaskItem = ({ item }) => (
         <View style={styles.subjectItem}>
             <View style={styles.subjectTextContainer}>
-                <Text style={item.completed ? styles.completedText : styles.text}>{item.text}</Text>
+                <Text style={item.completed ? styles.completedText : styles.text}>
+                    {item.text}
+                </Text>
             </View>
             <TouchableOpacity onPress={() => toggleTask(item.id)} style={styles.checkButton}>
                 <AntDesign
                     name={item.completed ? 'checksquare' : 'checksquareo'}
                     size={24}
-                    color="#826FB8"
+                    color="#C28F42"
                 />
             </TouchableOpacity>
         </View>
@@ -63,56 +66,42 @@ export default function Nature({ navigation }) {
                     <AntDesign name="left" size={24} color="#f5f5f5" />
                 </TouchableOpacity>
             </View>
-            <View style={styles.dropdownContainer}>
-                <View style={styles.dropdown}>
-                    <TouchableOpacity
-                        style={styles.dropdownButton}
-                        onPress={() => loadTasks('biology')}
-                    >
-                        <Text style={styles.dropdownText}>Biologia</Text>
-                    </TouchableOpacity>
-                    {selectedSubject === 'biology' && (
-                        <FlatList
-                            data={subjectList}
-                            keyExtractor={(item) => item.id.toString()}
-                            renderItem={renderTaskItem}
-                        />
-                    )}
-                </View>
+            <List.Section>
+                <List.Accordion style={styles.list}
+                    title="Biologia"
+                    expanded={expanded === 'biology'}
+                    onPress={() => loadTasks('biology')}
+                >
+                    <FlatList
+                        data={subjectList}
+                        keyExtractor={(item) => item.id.toString()}
+                        renderItem={renderTaskItem}
+                    />
+                </List.Accordion>
+                <List.Accordion style={styles.list}
+                    title="Química"
+                    expanded={expanded === 'chemical'}
+                    onPress={() => loadTasks('chemical')}
+                >
+                    <FlatList
+                        data={subjectList}
+                        keyExtractor={(item) => item.id.toString()}
+                        renderItem={renderTaskItem}
+                    />
+                </List.Accordion>
+                <List.Accordion style={styles.list}
+                    title="Física"
+                    expanded={expanded === 'physics'}
+                    onPress={() => loadTasks('physics')}
+                >
+                    <FlatList
+                        data={subjectList}
+                        keyExtractor={(item) => item.id.toString()}
+                        renderItem={renderTaskItem}
+                    />
+                </List.Accordion>
 
-                <View style={styles.dropdown}>
-                    <TouchableOpacity
-                        style={styles.dropdownButton}
-                        onPress={() => loadTasks('chemical')}
-                    >
-                        <Text style={styles.dropdownText}>Química</Text>
-                    </TouchableOpacity>
-                    {selectedSubject === 'chemical' && (
-                        <FlatList
-                            data={subjectList}
-                            keyExtractor={(item) => item.id.toString()}
-                            renderItem={renderTaskItem}
-                        />
-                    )}
-                </View>
-
-                <View style={styles.dropdown}>
-                    <TouchableOpacity
-                        style={styles.dropdownButton}
-                        onPress={() => loadTasks('physics')}
-                    >
-                        <Text style={styles.dropdownText}>Física</Text>
-                    </TouchableOpacity>
-                    {selectedSubject === 'physics' && (
-                        <FlatList
-                            data={subjectList}
-                            keyExtractor={(item) => item.id.toString()}
-                            renderItem={renderTaskItem}
-                        />
-                    )}
-                </View>
-
-            </View>
+            </List.Section>
         </View>
     );
 }
@@ -132,6 +121,7 @@ const styles = StyleSheet.create({
         borderBottomRightRadius: 30,
         flexDirection: 'row',
         alignItems: 'center',
+        
     },
     goBackButton: {
         marginLeft: '5%',
@@ -166,7 +156,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         marginBottom: 10,
-        borderColor: '#826FB8',
+        borderColor: '#C28F42',
         borderWidth: 1,
         borderRadius: 5,
         padding: 10,
@@ -183,4 +173,9 @@ const styles = StyleSheet.create({
     checkButton: {
         marginLeft: 10,
     },
+    list:{
+        margin: 15,
+        borderRadius: 15,
+        backgroundColor: '#826FB8',
+    }
 });
