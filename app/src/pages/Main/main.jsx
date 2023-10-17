@@ -31,7 +31,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   topBar: {
-    backgroundColor: '#b3e66c',
+    paddingTop: 40,
+    paddingHorizontal: 15,
+    backgroundColor: '#f5f5f5',
     justifyContent: 'space-between',
     position: 'absolute',
     left: 0,
@@ -44,11 +46,12 @@ const styles = StyleSheet.create({
   header: {
     marginTop: 80,
     paddingHorizontal: 20,
+    
   },
   greeting: {
-    fontSize: 30,
+    fontSize: 32,
     textAlign: 'center',
-
+    fontWeight: 'bold',
   },
   grades: {
     marginTop: 50,
@@ -56,5 +59,6 @@ const styles = StyleSheet.create({
   },
   gradesTitle: {
     fontSize: 30,
+    fontWeight: 'bold',
   }
 });
