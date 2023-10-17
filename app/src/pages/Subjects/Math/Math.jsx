@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, FlatList } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
-import subjects from './Math.json'; 
+import subjects from './Math.json';
 
 export default function Math({ navigation }) {
     const [subjectList, setSubjectList] = useState(subjects);
@@ -35,9 +35,9 @@ export default function Math({ navigation }) {
                             </View>
                             <TouchableOpacity onPress={() => toggleSubject(item.id)} style={styles.checkButton}>
                                 {item.completed ? (
-                                    <AntDesign name="checksquare" size={24} color="#72B86F" />
+                                    <AntDesign name="checksquare" size={24} color="#ff5454" />
                                 ) : (
-                                    <AntDesign name="checksquareo" size={24} color="#72B86F" />
+                                    <AntDesign name="checksquareo" size={24} color="#ff5454" />
                                 )}
                             </TouchableOpacity>
                         </View>
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#f5f5f5',
     },
     card: {
-        backgroundColor: '#72B86F',
+        backgroundColor: '#ff5454',
         paddingTop: '2%',
         paddingBottom: '2%',
         height: '20%',
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         marginBottom: 10,
-        borderColor: '#72B86F',
+        borderColor: '#ff5454',
         borderWidth: 1,
         borderRadius: 5,
         padding: 10,
