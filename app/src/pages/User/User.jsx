@@ -1,6 +1,7 @@
-import { ScrollView, StyleSheet, View, Alert } from "react-native";
-import { Appbar, Text, Avatar, TextInput, Provider as PaperProvider, DefaultTheme, Button } from 'react-native-paper';
+import { ScrollView, StyleSheet, View, Alert, Image } from "react-native";
+import { Appbar, Text, Avatar, TextInput, IconButton, Modal, Provider as PaperProvider, DefaultTheme, Button } from 'react-native-paper';
 import React, { useState } from 'react';
+import mind from './img/mind.png'
 
 const theme = {
     ...DefaultTheme,
@@ -20,6 +21,12 @@ export default function User({ navigation, route }) {
     const [email, setEmail] = useState("ananegri@proflinda.com");
     const [username, setUsername] = useState("AnaNegriDogLover");
     const [password, setPassword] = useState("amoDogs3C");
+
+    //*Modal
+    const [visible, setVisible] = React.useState(false);
+    const showModal = () => setVisible(true);
+    const hideModal = () => setVisible(false);
+    const containerStyle = { backgroundColor: 'white', width: 700, alignSelf: 'center' };
 
     const showAlert = () =>
         Alert.alert(
@@ -149,6 +156,21 @@ export default function User({ navigation, route }) {
                     <Button mode="contained" style={styles.button} onPress={showAlert}>
                         Salvar
                     </Button>
+
+                    <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={containerStyle}>
+                        <Image
+                            style={styles.tinyLogo}
+                            source={mind}
+                        />
+                    </Modal>
+
+                    <Text style={styles.ash2}>Clique no ícone abaixo.</Text>
+                    <IconButton style={styles.ash}
+                        icon="cursor-default-click"
+                        iconColor={"#71a42a"}
+                        size={100}
+                        onPress={showModal}
+                    />
                 </View>
             </ScrollView>
         </PaperProvider>
@@ -195,4 +217,12 @@ const styles = StyleSheet.create({
         marginBottom: 50,
         backgroundColor: '#71a42a'
     },
+    ash2: {
+        alignSelf: 'center',
+        marginTop: 50
+    },
+    ash: {
+        alignSelf: 'center',
+        marginBottom: 50
+    }
 });
