@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, FlatList } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, FlatList, ScrollView } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { List } from 'react-native-paper';
 
@@ -52,7 +52,7 @@ export default function Nature({ navigation }) {
                 <AntDesign
                     name={item.completed ? 'checksquare' : 'checksquareo'}
                     size={24}
-                    color="#C28F42"
+                    color="#AC9BDB"
                 />
             </TouchableOpacity>
         </View>
@@ -60,122 +60,133 @@ export default function Nature({ navigation }) {
 
     return (
         <View style={styles.container}>
-            <View style={styles.card}>
-                <Text style={styles.cardTitle}>Natureza</Text>
-                <TouchableOpacity onPress={() => navigation.goBack()} style={styles.goBackButton}>
-                    <AntDesign name="left" size={24} color="#f5f5f5" />
-                </TouchableOpacity>
-            </View>
-            <List.Section>
-                <List.Accordion style={styles.list}
-                    title="Biologia"
-                    expanded={expanded === 'biology'}
-                    onPress={() => loadTasks('biology')}
-                >
-                    <FlatList
-                        data={subjectList}
-                        keyExtractor={(item) => item.id.toString()}
-                        renderItem={renderTaskItem}
-                    />
-                </List.Accordion>
-                <List.Accordion style={styles.list}
-                    title="Química"
-                    expanded={expanded === 'chemical'}
-                    onPress={() => loadTasks('chemical')}
-                >
-                    <FlatList
-                        data={subjectList}
-                        keyExtractor={(item) => item.id.toString()}
-                        renderItem={renderTaskItem}
-                    />
-                </List.Accordion>
-                <List.Accordion style={styles.list}
-                    title="Física"
-                    expanded={expanded === 'physics'}
-                    onPress={() => loadTasks('physics')}
-                >
-                    <FlatList
-                        data={subjectList}
-                        keyExtractor={(item) => item.id.toString()}
-                        renderItem={renderTaskItem}
-                    />
-                </List.Accordion>
-
-            </List.Section>
+          <View style={styles.card}>
+            <Text style={styles.cardTitle}>Natureza</Text>
+            <TouchableOpacity onPress={() => navigation.goBack()} style={styles.goBackButton}>
+              <AntDesign name="left" size={24} color="#f5f5f5" />
+            </TouchableOpacity>
+          </View>
+          <ScrollView>
+    
+          
+          <List.Section>
+            <List.Accordion style={styles.list}
+              title="Biologia"
+              expanded={expanded === 'biology'}
+              onPress={() => loadTasks('biology')}
+            >
+              <FlatList style={styles.flatList}
+                data={subjectList}
+                keyExtractor={(item) => item.id.toString()}
+                renderItem={renderTaskItem}
+              />
+            </List.Accordion>
+            <List.Accordion style={styles.list}
+              title="Química"
+              expanded={expanded === 'chemical'}
+              onPress={() => loadTasks('chemical')}
+            >
+              <FlatList style={styles.flatList}
+                data={subjectList}
+                keyExtractor={(item) => item.id.toString()}
+                renderItem={renderTaskItem}
+              />
+            </List.Accordion>
+            <List.Accordion style={styles.list}
+              title="Física"
+              expanded={expanded === 'physics'}
+              onPress={() => loadTasks('physics')}
+            >
+              <FlatList  style={styles.flatList}
+                data={subjectList}
+                keyExtractor={(item) => item.id.toString()}
+                renderItem={renderTaskItem}
+              />
+            </List.Accordion>
+           
+          </List.Section>
+          </ScrollView>
         </View>
-    );
-}
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#f5f5f5',
-    },
-    card: {
-        backgroundColor: '#826FB8',
-        paddingTop: '2%',
-        paddingBottom: '2%',
-        height: '20%',
-        justifyContent: 'center',
-        borderBottomLeftRadius: 30,
-        borderBottomRightRadius: 30,
-        flexDirection: 'row',
-        alignItems: 'center',
-        
-    },
-    goBackButton: {
-        marginLeft: '5%',
-    },
-    cardTitle: {
-        padding: '10%',
-        color: '#f5f5f5',
-        fontWeight: 'bold',
-        fontSize: 30,
-    },
-    dropdownContainer: {
-        flex: 1,
-        paddingHorizontal: 20,
-        paddingTop: 20,
-    },
-    dropdown: {
-        marginBottom: 20,
-    },
-    dropdownButton: {
-        backgroundColor: '#826FB8',
-        padding: 10,
-        borderRadius: 5,
-        marginBottom: 10,
-    },
-    dropdownText: {
-        color: '#f5f5f5',
-        fontWeight: 'bold',
-        fontSize: 18,
-    },
-    subjectItem: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        marginBottom: 10,
-        borderColor: '#C28F42',
-        borderWidth: 1,
-        borderRadius: 5,
-        padding: 10,
-    },
-    subjectTextContainer: {
-        flex: 1,
-    },
-    text: {
-        textDecorationLine: 'none',
-    },
-    completedText: {
-        textDecorationLine: 'line-through',
-    },
-    checkButton: {
-        marginLeft: 10,
-    },
-    list:{
-        margin: 15,
-        borderRadius: 15,
-        backgroundColor: '#826FB8',
+      );
     }
-});
+    
+    
+    const styles = StyleSheet.create({
+        container: {
+            flex: 1,
+            backgroundColor: '#f5f5f5',
+        },
+        card: {
+            backgroundColor: '#826FB8',
+            paddingTop: '2%',
+            paddingBottom: '2%',
+            height: '20%',
+            justifyContent: 'center',
+            borderBottomLeftRadius: 30,
+            borderBottomRightRadius: 30,
+            flexDirection: 'row',
+            alignItems: 'center',
+            
+        },
+        goBackButton: {
+            marginLeft: '5%',
+        },
+        cardTitle: {
+            padding: '10%',
+            color: '#f5f5f5',
+            fontWeight: 'bold',
+            fontSize: 30,
+        },
+        dropdownContainer: {
+            flex: 1,
+            paddingHorizontal: 20,
+            paddingTop: 20,
+        },
+        dropdown: {
+            marginBottom: 20,
+        },
+        dropdownButton: {
+            backgroundColor: '#AC9BDB',
+            padding: 10,
+            borderRadius: 5,
+            marginBottom: 10,
+        },
+        dropdownText: {
+            color: '#f5f5f5',
+            fontWeight: 'bold',
+            fontSize: 18,
+        },
+        subjectItem: {
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            marginBottom: 10,
+            borderColor: '#AC9BDB',
+            borderWidth: 1,
+            borderRadius: 5,
+            padding: 10,
+        },
+        subjectTextContainer: {
+            flex: 1,
+        },
+        text: {
+            textDecorationLine: 'none',
+        },
+        completedText: {
+            textDecorationLine: 'line-through',
+        },
+        checkButton: {
+            marginLeft: 10,
+        },
+        list:{
+            margin: 15,
+            borderRadius: 15,
+            backgroundColor: '#CDC4E9',
+            display: 'flex',
+        },
+        flatList:{
+            width: 350,
+            marginLeft: 23,
+        },
+    });
+    

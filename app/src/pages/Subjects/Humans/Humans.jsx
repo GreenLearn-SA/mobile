@@ -79,7 +79,7 @@ export default function Humans({ navigation }) {
           expanded={expanded === 'history'}
           onPress={() => loadTasks('history')}
         >
-          <FlatList
+          <FlatList style={styles.flatList}
             data={subjectList}
             keyExtractor={(item) => item.id.toString()}
             renderItem={renderTaskItem}
@@ -89,8 +89,9 @@ export default function Humans({ navigation }) {
           title="Filosofia"
           expanded={expanded === 'filosofia'}
           onPress={() => loadTasks('filosofia')}
+
         >
-          <FlatList
+          <FlatList style={styles.flatList}
             data={subjectList}
             keyExtractor={(item) => item.id.toString()}
             renderItem={renderTaskItem}
@@ -101,7 +102,7 @@ export default function Humans({ navigation }) {
           expanded={expanded === 'sociologia'}
           onPress={() => loadTasks('sociologia')}
         >
-          <FlatList
+          <FlatList style={styles.flatList}
             data={subjectList}
             keyExtractor={(item) => item.id.toString()}
             renderItem={renderTaskItem}
@@ -112,7 +113,7 @@ export default function Humans({ navigation }) {
           expanded={expanded === 'geography'}
           onPress={() => loadTasks('geography')}
         >
-          <FlatList
+          <FlatList style={styles.flatList}
             data={subjectList}
             keyExtractor={(item) => item.id.toString()}
             renderItem={renderTaskItem}
@@ -193,8 +194,13 @@ const styles = StyleSheet.create({
         marginLeft: 10,
     },
     list:{
-        margin: 15,
-        borderRadius: 15,
-        backgroundColor: '#EBAB4C',
-    }
+      margin: 15,
+      borderRadius: 15,
+      backgroundColor: '#F8E1BF',
+      display: 'flex',
+  },
+  flatList:{
+      width: 350,
+      marginLeft: 23,
+  },
 });
