@@ -8,6 +8,5 @@
     { "id": 7, "text": "Segundo reinado", "completed": false },
     { "id": 8, "text": "Período republicano", "completed": false },
     { "id": 9, "text": "Ditadura militar", "completed": false },
-    { "id": 10, "text": "Primeira guerra", "completed": false },
-    { "id": 11, "text": "Segunda guerra", "completed": false }
+    { "id": 10, "text": "Primeira e segunda guerra", "completed": false }
 ]

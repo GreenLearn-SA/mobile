@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, FlatList } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, FlatList, ScrollView } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { List } from 'react-native-paper';
 
@@ -70,6 +70,9 @@ export default function Humans({ navigation }) {
           <AntDesign name="left" size={24} color="#f5f5f5" />
         </TouchableOpacity>
       </View>
+      <ScrollView>
+
+      
       <List.Section>
         <List.Accordion style={styles.list}
           title="História"
@@ -116,6 +119,7 @@ export default function Humans({ navigation }) {
           />
         </List.Accordion>
       </List.Section>
+      </ScrollView>
     </View>
   );
 }
@@ -191,6 +195,6 @@ const styles = StyleSheet.create({
     list:{
         margin: 15,
         borderRadius: 15,
-        backgroundColor: '#F0BD70',
+        backgroundColor: '#EBAB4C',
     }
 });
