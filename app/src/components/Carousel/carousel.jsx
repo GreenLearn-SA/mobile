@@ -33,7 +33,7 @@ export default function Carousel({ navigation }) {
 
         <CardC
           titulo={'Linguagens'}
-          geralColor={'#ffef61'}
+          geralColor={'#3AA2CE'}
           progressPercentage={0.6}
           onPress={() => navigation.navigate('Languages')}
         />

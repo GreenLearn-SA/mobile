@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, FlatList, ScrollView } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, FlatList } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { List } from 'react-native-paper';
 
@@ -70,9 +70,7 @@ export default function Humans({ navigation }) {
           <AntDesign name="left" size={24} color="#f5f5f5" />
         </TouchableOpacity>
       </View>
-      <ScrollView>
 
-      
       <List.Section>
         <List.Accordion style={styles.list}
           title="História"
@@ -89,7 +87,6 @@ export default function Humans({ navigation }) {
           title="Filosofia"
           expanded={expanded === 'filosofia'}
           onPress={() => loadTasks('filosofia')}
-
         >
           <FlatList style={styles.flatList}
             data={subjectList}
@@ -120,87 +117,65 @@ export default function Humans({ navigation }) {
           />
         </List.Accordion>
       </List.Section>
-      </ScrollView>
     </View>
   );
 }
 
-
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#f5f5f5',
-    },
-    card: {
-        backgroundColor: '#EBAB4C',
-        paddingTop: '2%',
-        paddingBottom: '2%',
-        height: '20%',
-        justifyContent: 'center',
-        borderBottomLeftRadius: 30,
-        borderBottomRightRadius: 30,
-        flexDirection: 'row',
-        alignItems: 'center',
-        
-    },
-    goBackButton: {
-        marginLeft: '5%',
-    },
-    cardTitle: {
-        padding: '10%',
-        color: '#f5f5f5',
-        fontWeight: 'bold',
-        fontSize: 30,
-    },
-    dropdownContainer: {
-        flex: 1,
-        paddingHorizontal: 20,
-        paddingTop: 20,
-    },
-    dropdown: {
-        marginBottom: 20,
-    },
-    dropdownButton: {
-        backgroundColor: '#C28F42',
-        padding: 10,
-        borderRadius: 5,
-        marginBottom: 10,
-    },
-    dropdownText: {
-        color: '#f5f5f5',
-        fontWeight: 'bold',
-        fontSize: 18,
-    },
-    subjectItem: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        marginBottom: 10,
-        borderColor: '#C28F42',
-        borderWidth: 1,
-        borderRadius: 5,
-        padding: 10,
-    },
-    subjectTextContainer: {
-        flex: 1,
-    },
-    text: {
-        textDecorationLine: 'none',
-    },
-    completedText: {
-        textDecorationLine: 'line-through',
-    },
-    checkButton: {
-        marginLeft: 10,
-    },
-    list:{
-      margin: 15,
-      borderRadius: 15,
-      backgroundColor: '#F8E1BF',
-      display: 'flex',
+  container: {
+    flex: 1,
+    backgroundColor: '#f5f5f5',
   },
-  flatList:{
-      width: 350,
-      marginLeft: 23,
+  card: {
+    backgroundColor: '#EBAB4C',
+    paddingTop: '2%',
+    paddingBottom: '2%',
+    height: '20%',
+    justifyContent: 'center',
+    borderBottomLeftRadius: 30,
+    borderBottomRightRadius: 30,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  goBackButton: {
+    marginLeft: '5%',
+  },
+  cardTitle: {
+    padding: '10%',
+    color: '#f5f5f5',
+    fontWeight: 'bold',
+    fontSize: 30,
+  },
+  subjectItem: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 10,
+    borderColor: '#C28F42',
+    borderWidth: 1,
+    borderRadius: 5,
+    padding: 10,
+  },
+  subjectTextContainer: {
+    flex: 1,
+  },
+  text: {
+    textDecorationLine: 'none',
+  },
+  completedText: {
+    textDecorationLine: 'line-through',
+  },
+  checkButton: {
+    marginLeft: 10,
+  },
+  list: {
+    margin: 15,
+    borderRadius: 15,
+    backgroundColor: '#F8E1BF',
+    display: 'flex',
+  },
+  flatList: {
+    width: 350,
+    marginLeft: 23,
   },
 });
