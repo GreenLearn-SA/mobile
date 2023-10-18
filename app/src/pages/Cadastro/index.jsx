@@ -1,6 +1,7 @@
 import { ScrollView, StyleSheet, View, ToastAndroid } from 'react-native';
 import { TextInput, Button, Text, Provider as PaperProvider, DefaultTheme } from 'react-native-paper';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from "axios";
 
 const theme = {
   ...DefaultTheme,
@@ -12,9 +13,52 @@ const theme = {
 
 export default function Cadastro({ navigation }) {
   const [passwordVisible, setPasswordVisible] = useState(true);
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [errorInfo, setErrorInfo] = useState('');
 
-  const showToast = () => {
-    ToastAndroid.show('Cadastro realizado!', ToastAndroid.SHORT);
+  const showToast = (message) => {
+    ToastAndroid.show(message, ToastAndroid.SHORT);
+  };
+
+  const singUpUser = () => {
+    const userSignUpData = {
+      firstName: firstName,
+      lastName: lastName,
+      username: username,
+      email: email,
+      password: password,
+      isManager: false
+    };
+
+    axios.post('http://10.3.116.228:3000/user/create', userSignUpData)
+      .then((singUpSuccessResponse) => {
+        showToast('Cadastro realizado!');
+      })
+      .catch((singUpErrorResponse) => {
+        setErrorInfo(singUpErrorResponse.response.data.message);
+      });
+  }
+
+  useEffect(() => {
+    if (errorInfo) {
+      showErrorToast();
+    }
+  }, [errorInfo]);
+
+  const showErrorToast = () => {
+    if (errorInfo === `Usuário com o e-mail ${email} já existe`) {
+      showToast(errorInfo);
+    } else if (errorInfo === `Usuário com o username ${username} já existe`) {
+      showToast(errorInfo);
+    } else if (errorInfo[0] == "password is not strong enough") {
+      showToast("Senha não é forte o suficiente");
+    } else {
+      showToast(errorInfo);
+    }
   };
 
   return (
@@ -35,6 +79,8 @@ export default function Cadastro({ navigation }) {
                 icon={'account'}
               />
             }
+            value={firstName}
+            onChangeText={text => setFirstName(text)}
           />
 
           <TextInput
@@ -49,6 +95,8 @@ export default function Cadastro({ navigation }) {
                 icon={'account'}
               />
             }
+            value={lastName}
+            onChangeText={text => setLastName(text)}
           />
 
           <TextInput
@@ -63,6 +111,8 @@ export default function Cadastro({ navigation }) {
                 icon={'account'}
               />
             }
+            value={username}
+            onChangeText={text => setUsername(text)}
           />
 
           <TextInput
@@ -77,6 +127,8 @@ export default function Cadastro({ navigation }) {
                 icon={'email'}
               />
             }
+            value={email}
+            onChangeText={text => setEmail(text)}
           />
 
           <TextInput
@@ -86,6 +138,8 @@ export default function Cadastro({ navigation }) {
             label="Senha"
             secureTextEntry={passwordVisible}
             outlineColor='#71a42a'
+            value={password}
+            onChangeText={text => setPassword(text)}
             right={
               <TextInput.Icon
                 icon={passwordVisible ? 'eye-off' : 'eye'}
@@ -109,7 +163,7 @@ export default function Cadastro({ navigation }) {
             dark='true'
             icon="login"
             mode="contained-tonal"
-            onPress={() => showToast()}>
+            onPress={singUpUser}>
             Cadastrar
           </Button>
         </ScrollView>

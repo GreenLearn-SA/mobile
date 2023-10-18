@@ -10,7 +10,7 @@ export default function Main({ navigation }) {
 
   return (
     <View style={styles.container}>
-    
+
       <Appbar.Header style={styles.topBar}>
         <Appbar.BackAction onPress={() => navigation.navigate('Login')} />
         <Appbar.Action icon="account-cog" onPress={() => navigation.navigate('User', { firstName, lastName })} />
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   topBar: {
     paddingTop: 40,
     paddingHorizontal: 15,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#71a42a',
     justifyContent: 'space-between',
     position: 'absolute',
     left: 0,
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
   header: {
     marginTop: 80,
     paddingHorizontal: 20,
-    
+
   },
   greeting: {
     fontSize: 32,
