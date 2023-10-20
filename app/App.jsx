@@ -1,16 +1,17 @@
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { ProgressProvider } from "./ProgressContext";
 
-import Routes from './src/routes';
+import Routes from "./src/routes";
 
 const Stack = createNativeStackNavigator();
 
 function App() {
   return (
-   
     <NavigationContainer>
-      
-      <Routes />
+      <ProgressProvider>
+        <Routes />
+      </ProgressProvider>
     </NavigationContainer>
   );
 }
