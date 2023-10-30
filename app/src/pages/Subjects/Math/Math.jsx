@@ -88,10 +88,6 @@ export default function Math({ navigation }) {
               </View>
             )}
           />
-          <Button onPress={() => updateProgress()}>Atualizar Progresso</Button>
-
-
-
         </View>
       </View>
     );

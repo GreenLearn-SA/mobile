@@ -33,8 +33,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   topBar: {
+    height: 75,
     paddingTop: 40,
     paddingHorizontal: 15,
+    paddingVertical: 10,
     backgroundColor: '#71a42a',
     justifyContent: 'space-between',
     position: 'absolute',
