@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     top: 0,
     elevation: 0,
     borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
+    borderBottomRightRadius: 20
   },
   header: {
     marginTop: 80,

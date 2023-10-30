@@ -1,7 +1,6 @@
 import * as React from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { Avatar, Button, Card, ProgressBar, Text } from "react-native-paper";
-import { useProgress } from "../../../../ProgressContext";
 
 export default function CardC({ titulo, geralColor, progressPercentage, onPress }) {
   const progress = Math.round(progressPercentage * 100);
@@ -22,7 +21,7 @@ export default function CardC({ titulo, geralColor, progressPercentage, onPress 
         </Card.Content>
 
         <Card.Actions style={styles.progressView}>
-          <Text>Progresso: {progress}%</Text>
+          <Text style={styles.progressText}>Progresso: {progress}%</Text>
           <ProgressBar
             progress={0.67}
             color={geralColor}
@@ -41,12 +40,12 @@ const styles = StyleSheet.create({
   },
   progressView: {
     flexDirection: "column",
-    ali: "flex-end",
+    alignItems: "flex-end",
   },
   progressText: {
     width: 150,
     marginLeft: 20,
-    marginTop: 50,
+    marginTop: 40,
   },
   progressBar: {
     marginLeft: 26,
