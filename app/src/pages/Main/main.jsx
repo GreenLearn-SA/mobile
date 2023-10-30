@@ -33,8 +33,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   topBar: {
-    paddingTop: 40,
-    paddingHorizontal: 15,
+    paddingTop: 10,
     backgroundColor: '#71a42a',
     justifyContent: 'space-between',
     position: 'absolute',
@@ -43,7 +42,7 @@ const styles = StyleSheet.create({
     top: 0,
     elevation: 0,
     borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
+    borderBottomRightRadius: 20
   },
   header: {
     marginTop: 80,

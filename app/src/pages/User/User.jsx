@@ -182,7 +182,8 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     topBar: {
-        backgroundColor: '#b3e66c',
+        paddingTop: 10,
+        backgroundColor: '#71a42a',
         justifyContent: 'space-between',
         position: 'absolute',
         left: 0,
