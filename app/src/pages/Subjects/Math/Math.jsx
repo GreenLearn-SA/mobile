@@ -9,7 +9,6 @@ import {
 import { useProgress } from "../../../../ProgressContext";
 import { AntDesign } from "@expo/vector-icons";
 import subjects from "./Math.json";
-import { Button } from "react-native-paper";
 
 export default function Math({ navigation }) {
     const [subjectList, setSubjectList] = useState(subjects);
