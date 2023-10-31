@@ -4,6 +4,7 @@ import React from 'react';
 import Carousel from "../../components/Carousel/carousel";
 import ChartScreen from "../../components/ChartScreen";
 import ChartLine from "../../components/ChartLine";
+import EnemDate from "../../components/EnemDate/EnemDate";
 
 export default function Main({ navigation }) {
   const firstName = "Ana";
@@ -22,6 +23,7 @@ export default function Main({ navigation }) {
 
         <View style={styles.header}>
           <Text style={styles.greeting}>Olá, {firstName}</Text>
+          <EnemDate/>
         </View>
 
         <View style={styles.grades}>
@@ -56,7 +58,7 @@ const styles = StyleSheet.create({
     paddingTop: 40,
     paddingHorizontal: 15,
     paddingVertical: 10,
-    backgroundColor: '#71a42a',
+    backgroundColor: '#8DC53D',
     justifyContent: 'space-between',
     position: 'absolute',
     left: 0,
