@@ -24,6 +24,10 @@ export default function Main({ navigation }) {
         <Text style={styles.gradesTitle}>Minhas Matérias</Text>
         <Carousel navigation={navigation} />
       </View>
+
+      <View style={styles.grades}>
+        <Text style={styles.gradesTitle}>Metas</Text>
+      </View>
     </View>
   );
 }
