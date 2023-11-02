@@ -5,6 +5,7 @@ import Carousel from "../../components/Carousel/carousel";
 import ChartScreen from "../../components/ChartScreen";
 import ChartLine from "../../components/ChartLine";
 import EnemDate from "../../components/EnemDate/EnemDate";
+import FabButton from "../../components/Button/FabButton";
 
 export default function Main({ navigation }) {
   const firstName = "Ana";
@@ -45,6 +46,7 @@ export default function Main({ navigation }) {
           </ScrollView>
         </View>
       </ScrollView>
+      <FabButton/>
     </View>
   );
 }
