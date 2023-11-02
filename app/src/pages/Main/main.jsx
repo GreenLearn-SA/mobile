@@ -46,7 +46,9 @@ export default function Main({ navigation }) {
           </ScrollView>
         </View>
       </ScrollView>
-      <FabButton/>
+      <FabButton 
+        navigation={navigation}
+      />
     </View>
   );
 }

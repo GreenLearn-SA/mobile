@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { View, TouchableOpacity, StyleSheet, Animated } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
+import User from "../../pages/User/User";
 
-export default function FabButton() {
+
+export default function FabButton({navigation}) {
+
 	const [primeiroIcon] = useState(new Animated.Value(40));
 	const [segundoIcon] = useState(new Animated.Value(40));
 	const [terceiroIcon] = useState(new Animated.Value(40));
@@ -51,7 +54,9 @@ export default function FabButton() {
 			flex: 1,
 		}}>
 			<Animated.View style={[styles.btn, {bottom: primeiroIcon}]}>
-				<TouchableOpacity>
+				<TouchableOpacity 
+					onPress={() => navigation.navigate(User)}
+				>
 					<Icon name="user" size={25} color="#fff" />
 				</TouchableOpacity>
 			</Animated.View>
