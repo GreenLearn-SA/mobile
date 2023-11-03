@@ -49,12 +49,7 @@ export default function Main({ navigation }) {
       <FabButton 
         navigation={navigation}
       />
-      <View style={styles.buttonContainer}>
-        <Button
-          title="Página Cronograma"
-          onPress={() => navigation.navigate('CalendarPage')}
-        />
-      </View>
+      
     </View>
   );
 }
