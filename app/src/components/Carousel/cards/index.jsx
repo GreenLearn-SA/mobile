@@ -35,6 +35,7 @@ export default function CardC({ titulo, geralColor, progressPercentage, onPress 
 
 const styles = StyleSheet.create({
   containerCard: {
+    
     width: "20%",
     height: 200,
   },

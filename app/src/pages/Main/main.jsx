@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, View } from "react-native";
+import { ScrollView, StyleSheet, View, Button } from 'react-native'; 
 import { Appbar, Text } from 'react-native-paper';
 import React from 'react';
 import Carousel from "../../components/Carousel/carousel";
@@ -49,6 +49,12 @@ export default function Main({ navigation }) {
       <FabButton 
         navigation={navigation}
       />
+      <View style={styles.buttonContainer}>
+        <Button
+          title="Página Cronograma"
+          onPress={() => navigation.navigate('CalendarPage')}
+        />
+      </View>
     </View>
   );
 }
