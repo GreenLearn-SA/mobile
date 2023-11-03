@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   FlatList,
 } from "react-native";
-import { useProgress } from "../../../../ProgressContext";
+import { useProgress } from "../../../../contexts/ProgressContext";
 import { AntDesign } from "@expo/vector-icons";
 import subjects from "./Math.json";
 
