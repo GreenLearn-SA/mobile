@@ -1,6 +1,8 @@
 import { StyleSheet, View, ToastAndroid } from 'react-native';
 import { TextInput, Button, Text, Provider as PaperProvider, DefaultTheme } from 'react-native-paper';
 import React, { useState } from 'react';
+import axios from "axios";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const theme = {
   ...DefaultTheme,
@@ -25,15 +27,14 @@ export default function Login({ navigation }) {
       password: password,
     }
 
-    axios.post('http://10.3.116.228:3000/auth/login', userSignInData)
+    axios.post('http://10.0.0.103:3000/auth/login', userSignInData)
       .then((signInSuccessResponse) => {
-        localStorage.setItem('accessToken', 'Bearer ' + signInSuccessResponse.data)
-        showToast('Login realizado!')
+        AsyncStorage.setItem('accessToken', signInSuccessResponse.data);
         navigation.navigate('Main');
       })
-      .catch((signInErrorResponse) => {
-        console.error(signInErrorResponse);
-      });
+      .catch((error) => {
+        console.error("Erro ao fazer login:", error);
+      })
   }
 
   return (
@@ -46,14 +47,14 @@ export default function Login({ navigation }) {
           cancelable='true'
           style={styles.input}
           keyboardType='default'
-          label="E-mail"
+          label="Username"
           outlineColor='#71a42a'
           selectionColor='#71a42a'
           value={username}
           onChangeText={text => setUsername(text)}
           left={
             <TextInput.Icon
-              icon={'email'}
+              icon={'account'}
             />
           }
         />

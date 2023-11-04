@@ -1,32 +1,57 @@
 import { ScrollView, StyleSheet, View, Button } from 'react-native';
 import { Appbar, Text } from 'react-native-paper';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Carousel from "../../components/Carousel/carousel";
 import ChartScreen from "../../components/ChartScreen";
 import ChartLine from "../../components/ChartLine";
 import EnemDate from "../../components/EnemDate/EnemDate";
 import FabButton from "../../components/Button/FabButton";
+import axios from "axios";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Main({ navigation }) {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
 
-  const config = {
-    headers: {
-      Authorization: sessionStorage.getItem('accessToken')
-    }
-  }
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const accessToken = await AsyncStorage.getItem('accessToken');
+        if (!accessToken) {
+          console.error('Access token is missing.');
+          return;
+        }
 
-  axios.post('http://10.3.116.228:3000/auth/profile', null, config)
-    .then((profileInfo) => {
-      setLastName(profileInfo.firstName);
-      // setLastName(profileInfo.data.firstName);
-      setFirstName(profileInfo.lastName);
-      // setFirstName(profileInfo.data.lastName);
-    })
-    .catch((signInErrorResponse) => {
-      console.error(signInErrorResponse);
-    });
+        const config = {
+          headers: {
+            Authorization: `Bearer ${accessToken}`
+          },
+        };
+
+        axios.get('http://10.0.0.103:3000/auth/profile', config)
+          .then((response) => {
+            setFirstName(response.data.firstName);
+            setLastName(response.data.lastName);
+          })
+          .catch((error) => {
+            console.error("Erro ao puxar dados", error);
+          });
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    fetchData();
+  }, []);
+
+
+  // axios.post('http://10.0.0.103:3000/auth/profile', null, config)
+  //   .then((profileInfo) => {
+
+  //   })
+  //   .catch((signInErrorResponse) => {
+  //     console.error(signInErrorResponse);
+  //   });
 
   const subjects = ["Matemática", "Humanas", "Linguagens", "Natureza"];
   const percentages = [30, 25, 20, 25];

@@ -2,6 +2,7 @@ import { ScrollView, StyleSheet, View, ToastAndroid } from 'react-native';
 import { TextInput, Button, Text, Provider as PaperProvider, DefaultTheme } from 'react-native-paper';
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const theme = {
   ...DefaultTheme,
@@ -39,25 +40,23 @@ export default function Cadastro({ navigation }) {
       password: password,
     }
 
-    axios.post('http://10.3.116.228:3000/user/create', userSignUpData)
+    axios.post('http://10.0.0.103:3000/user/create', userSignUpData)
       .then((signUpSuccessResponse) => {
         showToast('Cadastro realizado!');
-        console.info(signUpSuccessResponse);
 
-        axios.post('http://10.3.116.228:3000/auth/login', userSignInData)
+        axios.post('http://10.0.0.103:3000/auth/login', userSignInData)
           .then((signInSuccessResponse) => {
-            localStorage.setItem('accessToken', 'Bearer ' + signInSuccessResponse.data)
+            AsyncStorage.setItem('accessToken', signInSuccessResponse.data);
             navigation.navigate('Main');
           })
-          .catch((signInErrorResponse) => {
-            console.error(signInErrorResponse)
-          });
+          .catch((error) => {
+            console.error("Erro ao fazer login:", error);
+          })
       })
       .catch((signUpErrorResponse) => {
         setErrorInfo(signUpErrorResponse.response.data.message);
-      });
+      })
   }
-
   useEffect(() => {
     if (errorInfo) {
       showErrorToast();
