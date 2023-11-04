@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, ToastAndroid } from 'react-native';
 import { TextInput, Button, Text, Provider as PaperProvider, DefaultTheme } from 'react-native-paper';
 import React, { useState } from 'react';
 
@@ -12,12 +12,35 @@ const theme = {
 
 export default function Login({ navigation }) {
   const [passwordVisible, setPasswordVisible] = useState(true);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const showToast = (message) => {
+    ToastAndroid.show(message, ToastAndroid.SHORT);
+  };
+
+  const signInUser = () => {
+    const userSignInData = {
+      username: username,
+      password: password,
+    }
+
+    axios.post('http://10.3.116.228:3000/auth/login', userSignInData)
+      .then((signInSuccessResponse) => {
+        localStorage.setItem('accessToken', 'Bearer ' + signInSuccessResponse.data)
+        showToast('Login realizado!')
+        navigation.navigate('Main');
+      })
+      .catch((signInErrorResponse) => {
+        console.error(signInErrorResponse);
+      });
+  }
 
   return (
     <PaperProvider theme={theme}>
       <View style={styles.container}>
         <Text style={styles.title}>Login</Text>
-    
+
         <TextInput
           mode='outlined'
           cancelable='true'
@@ -26,6 +49,8 @@ export default function Login({ navigation }) {
           label="E-mail"
           outlineColor='#71a42a'
           selectionColor='#71a42a'
+          value={username}
+          onChangeText={text => setUsername(text)}
           left={
             <TextInput.Icon
               icon={'email'}
@@ -41,6 +66,8 @@ export default function Login({ navigation }) {
           secureTextEntry={passwordVisible}
           outlineColor='#71a42a'
           selectionColor='#71a42a'
+          value={password}
+          onChangeText={text => setPassword(text)}
           right={
             <TextInput.Icon
               icon={passwordVisible ? 'eye-off' : 'eye'}
@@ -65,7 +92,7 @@ export default function Login({ navigation }) {
           dark='true'
           icon="login"
           mode="contained-tonal"
-          onPress={() => navigation.navigate('Main')}>
+          onPress={signInUser}>
           Entrar
         </Button>
       </View >

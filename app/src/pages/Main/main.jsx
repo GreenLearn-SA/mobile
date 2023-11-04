@@ -1,6 +1,6 @@
-import { ScrollView, StyleSheet, View, Button } from 'react-native'; 
+import { ScrollView, StyleSheet, View, Button } from 'react-native';
 import { Appbar, Text } from 'react-native-paper';
-import React from 'react';
+import React, { useState } from 'react';
 import Carousel from "../../components/Carousel/carousel";
 import ChartScreen from "../../components/ChartScreen";
 import ChartLine from "../../components/ChartLine";
@@ -8,8 +8,25 @@ import EnemDate from "../../components/EnemDate/EnemDate";
 import FabButton from "../../components/Button/FabButton";
 
 export default function Main({ navigation }) {
-  const firstName = "Ana";
-  const lastName = "Negri";
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+
+  const config = {
+    headers: {
+      Authorization: sessionStorage.getItem('accessToken')
+    }
+  }
+
+  axios.post('http://10.3.116.228:3000/auth/profile', null, config)
+    .then((profileInfo) => {
+      setLastName(profileInfo.firstName);
+      // setLastName(profileInfo.data.firstName);
+      setFirstName(profileInfo.lastName);
+      // setFirstName(profileInfo.data.lastName);
+    })
+    .catch((signInErrorResponse) => {
+      console.error(signInErrorResponse);
+    });
 
   const subjects = ["Matemática", "Humanas", "Linguagens", "Natureza"];
   const percentages = [30, 25, 20, 25];
@@ -23,8 +40,8 @@ export default function Main({ navigation }) {
         </Appbar.Header>
 
         <View style={styles.header}>
-          <Text style={styles.greeting}>Olá, {firstName}</Text>
-          <EnemDate/>
+          <Text style={styles.greeting}>Olá, {firstName} {lastName}!</Text>
+          <EnemDate />
         </View>
 
         <View style={styles.grades}>
@@ -46,10 +63,10 @@ export default function Main({ navigation }) {
           </ScrollView>
         </View>
       </ScrollView>
-      <FabButton 
+      <FabButton
         navigation={navigation}
       />
-      
+
     </View>
   );
 }

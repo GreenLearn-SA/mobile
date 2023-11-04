@@ -24,7 +24,7 @@ export default function Cadastro({ navigation }) {
     ToastAndroid.show(message, ToastAndroid.SHORT);
   };
 
-  const singUpUser = () => {
+  const signUpUser = () => {
     const userSignUpData = {
       firstName: firstName,
       lastName: lastName,
@@ -34,12 +34,27 @@ export default function Cadastro({ navigation }) {
       isManager: false
     };
 
+    const userSignInData = {
+      username: username,
+      password: password,
+    }
+
     axios.post('http://10.3.116.228:3000/user/create', userSignUpData)
-      .then((singUpSuccessResponse) => {
+      .then((signUpSuccessResponse) => {
         showToast('Cadastro realizado!');
+        console.info(signUpSuccessResponse);
+
+        axios.post('http://10.3.116.228:3000/auth/login', userSignInData)
+          .then((signInSuccessResponse) => {
+            localStorage.setItem('accessToken', 'Bearer ' + signInSuccessResponse.data)
+            navigation.navigate('Main');
+          })
+          .catch((signInErrorResponse) => {
+            console.error(signInErrorResponse)
+          });
       })
-      .catch((singUpErrorResponse) => {
-        setErrorInfo(singUpErrorResponse.response.data.message);
+      .catch((signUpErrorResponse) => {
+        setErrorInfo(signUpErrorResponse.response.data.message);
       });
   }
 
@@ -163,7 +178,7 @@ export default function Cadastro({ navigation }) {
             dark='true'
             icon="login"
             mode="contained-tonal"
-            onPress={singUpUser}>
+            onPress={signUpUser}>
             Cadastrar
           </Button>
         </ScrollView>
