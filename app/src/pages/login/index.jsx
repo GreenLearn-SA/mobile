@@ -1,6 +1,6 @@
 import { StyleSheet, View, ToastAndroid } from 'react-native';
 import { TextInput, Button, Text, Provider as PaperProvider, DefaultTheme } from 'react-native-paper';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -16,6 +16,21 @@ export default function Login({ navigation }) {
   const [passwordVisible, setPasswordVisible] = useState(true);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [errorInfo, setErrorInfo] = useState('');
+
+  const handleSave = () => {
+    if (username.trim() === '') {
+      showToast('Preencha o campo "Username"');
+      return;
+    }
+
+    if (password.trim() === '') {
+      showToast('Preencha o campo "Senha"');
+      return;
+    }
+
+    signInUser();
+  };
 
   const showToast = (message) => {
     ToastAndroid.show(message, ToastAndroid.SHORT);
@@ -27,15 +42,34 @@ export default function Login({ navigation }) {
       password: password,
     }
 
-    axios.post('http://10.3.117.18:3000/auth/login', userSignInData)
+    axios.post('http://10.3.116.148:3000/auth/login', userSignInData)
       .then((signInSuccessResponse) => {
         AsyncStorage.setItem('accessToken', signInSuccessResponse.data);
         navigation.navigate('Main');
       })
-      .catch((error) => {
-        console.error("Erro ao fazer login:", error);
+      .catch((signInErrorResponse) => {
+        console.info(signInErrorResponse.response.data.message);
+        setErrorInfo(signInErrorResponse.response.data.message);
       })
   }
+
+  useEffect(() => {
+    if (errorInfo) {
+      showErrorToast();
+    }
+  }, [errorInfo]);
+
+  const showErrorToast = () => {
+    if (errorInfo === `Usuário não existente`) {
+      showToast(errorInfo);
+    } else if (errorInfo == "Senha incorreta") {
+      showToast(errorInfo);
+    } else if (errorInfo[0] == "password is not strong enough") {
+      showToast("Senha não é forte o suficiente");
+    } else {
+      showToast(errorInfo);
+    }
+  };
 
   return (
     <PaperProvider theme={theme}>
@@ -93,7 +127,7 @@ export default function Login({ navigation }) {
           dark='true'
           icon="login"
           mode="contained-tonal"
-          onPress={signInUser}>
+          onPress={handleSave}>
           Entrar
         </Button>
       </View >

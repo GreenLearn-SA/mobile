@@ -28,13 +28,13 @@ export default function Main({ navigation }) {
           },
         };
 
-        axios.get('http://10.3.117.18:3000/auth/profile', config)
+        axios.get('http://10.3.116.148:3000/auth/profile', config)
           .then((response) => {
             setFirstName(response.data.firstName);
             setLastName(response.data.lastName);
           })
           .catch((error) => {
-            console.error("Erro ao puxar dados", error);
+            console.error("Erro ao puxar dados", error.response.data);
           });
       } catch (error) {
         console.error(error);
@@ -44,8 +44,7 @@ export default function Main({ navigation }) {
     fetchData();
   }, []);
 
-
-  // axios.post('http://10.0.0.103:3000/auth/profile', null, config)
+  // axios.post('http://10.3.116.148:3000/auth/profile', null, config)
   //   .then((profileInfo) => {
 
   //   })
@@ -101,10 +100,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   topBar: {
-    height: 75,
-    paddingTop: 40,
-    paddingHorizontal: 15,
-    paddingVertical: 10,
+    paddingTop: 10,
     backgroundColor: '#8DC53D',
     justifyContent: 'space-between',
     position: 'absolute',
