@@ -3,6 +3,7 @@ import { View, Text, ScrollView, StyleSheet, TouchableOpacity } from 'react-nati
 import { Calendar } from 'react-native-calendars';
 import { TextInput, Provider as PaperProvider, DefaultTheme } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { Appbar } from 'react-native-paper';
 
 const theme = {
   ...DefaultTheme,
@@ -12,7 +13,9 @@ const theme = {
   },
 };
 
-const CalendarPage = () => {
+
+
+const CalendarPage = ({ navigation }) => {
   const [selectedDate, setSelectedDate] = useState('');
   const [events, setEvents] = useState({});
   const [editMode, setEditMode] = useState(false);
@@ -88,6 +91,10 @@ const CalendarPage = () => {
 
   return (
     <PaperProvider theme={theme}>
+      <Appbar.Header style={styles.topBar}>
+          <Appbar.BackAction onPress={() => navigation.navigate('Main')} />
+          <Appbar.Action icon="account-cog" onPress={() => navigation.navigate('User', { firstName, lastName })} />
+        </Appbar.Header>
       <ScrollView contentContainerStyle={styles.container}>
         <Text style={styles.heading}>Cronograma</Text>
         <Calendar
@@ -148,6 +155,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#f5f5f5',
+  },
+  topBar: {
+    height: 50,
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+    backgroundColor: '#8DC53D',
+    justifyContent: 'space-between',
+    left: 0,
+    right: 0,
+    top: 0,
+    elevation: 0,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20
   },
   heading: {
     textAlign: 'center',

@@ -34,7 +34,7 @@ export default function Main({ navigation }) {
             setLastName(response.data.lastName);
           })
           .catch((error) => {
-            console.error("Erro ao puxar dados", error.response.data);
+            console.error("Erro ao puxar dados", error);
           });
       } catch (error) {
         console.error(error);
@@ -44,7 +44,8 @@ export default function Main({ navigation }) {
     fetchData();
   }, []);
 
-  // axios.post('http://10.3.116.148:3000/auth/profile', null, config)
+
+  // axios.post('http://10.0.0.103:3000/auth/profile', null, config)
   //   .then((profileInfo) => {
 
   //   })
@@ -82,6 +83,7 @@ export default function Main({ navigation }) {
             contentContainerStyle={styles.scrollH}
             showsHorizontalScrollIndicator={false}
           >
+            <ChartScreen />
             <ChartLine subjects={subjects} percentages={percentages} />
           </ScrollView>
         </View>
@@ -89,7 +91,6 @@ export default function Main({ navigation }) {
       <FabButton
         navigation={navigation}
       />
-
 
     </View>
   );
@@ -100,7 +101,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   topBar: {
-    paddingTop: 10,
+    height: 75,
+    paddingTop: 40,
+    paddingHorizontal: 15,
+    paddingVertical: 10,
     backgroundColor: '#8DC53D',
     justifyContent: 'space-between',
     position: 'absolute',
