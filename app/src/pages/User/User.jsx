@@ -62,6 +62,8 @@ export default function User({ navigation }) {
     const [newPassword, setNewPassword] = useState('');
     const avatarLabel = firstName.charAt(0) + lastName.charAt(0);
 
+    const [errorInfo, setErrorInfo] = useState('');
+
     async function saveChanges() {
         try {
             const accessToken = await AsyncStorage.getItem('accessToken');
@@ -93,15 +95,28 @@ export default function User({ navigation }) {
                     setPassword(newPassword);
                 })
                 .catch((error) => {
-                    console.error("Erro ao atualizar informações do usuário", error);
-                    console.info(username);
-                    console.info(newUsername);
+                    console.error(error.response.data);
+                    setErrorInfo(error.response.data.message);
                 });
         } catch (error) {
             console.error(error);
         }
+    };
 
+    useEffect(() => {
+        if (errorInfo) {
+            showErrorToast();
+        }
+    }, [errorInfo]);
 
+    const showErrorToast = () => {
+        if (errorInfo == "Senha incorreta") {
+            showToast(errorInfo);
+        } else if (errorInfo[0] == "password is not strong enough") {
+            showToast("Senha não é forte o suficiente");
+        } else {
+            showToast(errorInfo);
+        }
     };
 
     const [visible, setVisible] = React.useState(false);
