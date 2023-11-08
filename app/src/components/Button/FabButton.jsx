@@ -5,7 +5,6 @@ import { SvgXml } from 'react-native-svg';
 import User from "../../pages/User/User";
 import CalendarPage from "../../pages/Calendar/CalendarPage";
 import Main from "../../pages/Main/main";
-import Logo from '../../../assets/logo.svg'
 
 
 export default function FabButton({ navigation }) {
