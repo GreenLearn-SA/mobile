@@ -40,11 +40,11 @@ export default function Cadastro({ navigation }) {
       password: password,
     }
 
-    axios.post('http://10.0.0.103:3000/user/create', userSignUpData)
+    axios.post('http://10.3.116.148:3000/user/create', userSignUpData)
       .then((signUpSuccessResponse) => {
         showToast('Cadastro realizado!');
 
-        axios.post('http://10.0.0.103:3000/auth/login', userSignInData)
+        axios.post('http://10.3.116.148:3000/auth/login', userSignInData)
           .then((signInSuccessResponse) => {
             AsyncStorage.setItem('accessToken', signInSuccessResponse.data);
             navigation.navigate('Main');
@@ -73,6 +73,35 @@ export default function Cadastro({ navigation }) {
     } else {
       showToast(errorInfo);
     }
+  };
+
+  const handleSave = () => {
+    if (firstName.trim() === '') {
+      showToast('Preencha o campo "Primeiro nome"');
+      return;
+    }
+
+    if (lastName.trim() === '') {
+      showToast('Preencha o campo "Último nome"');
+      return;
+    }
+
+    if (username.trim() === '') {
+      showToast('Preencha o campo "Username"');
+      return;
+    }
+
+    if (email.trim() === '') {
+      showToast('Preencha o campo "E-mail"');
+      return;
+    }
+
+    if (password.trim() === '') {
+      showToast('Preencha o campo "Senha"');
+      return;
+    }
+
+    signUpUser();
   };
 
   return (
@@ -177,7 +206,7 @@ export default function Cadastro({ navigation }) {
             dark='true'
             icon="login"
             mode="contained-tonal"
-            onPress={signUpUser}>
+            onPress={handleSave}>
             Cadastrar
           </Button>
         </ScrollView>
