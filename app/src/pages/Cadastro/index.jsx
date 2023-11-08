@@ -40,11 +40,19 @@ export default function Cadastro({ navigation }) {
       password: password,
     }
 
+<<<<<<< HEAD
     axios.post('http://10.3.116.148:3000/user/create', userSignUpData)
       .then((signUpSuccessResponse) => {
         showToast('Cadastro realizado!');
 
         axios.post('http://10.3.116.148:3000/auth/login', userSignInData)
+=======
+    axios.post('http://10.3.117.18:3000/user/create', userSignUpData)
+      .then((signUpSuccessResponse) => {
+        showToast('Cadastro realizado!');
+
+        axios.post('http://10.3.117.18:3000/auth/login', userSignInData)
+>>>>>>> 476d417cec011f3ff9a6838153a8992cb8d83e50
           .then((signInSuccessResponse) => {
             AsyncStorage.setItem('accessToken', signInSuccessResponse.data);
             navigation.navigate('Main');

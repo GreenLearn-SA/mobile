@@ -28,7 +28,11 @@ export default function Main({ navigation }) {
           },
         };
 
+<<<<<<< HEAD
         axios.get('http://10.3.116.148:3000/auth/profile', config)
+=======
+        axios.get('http://10.3.117.18:3000/auth/profile', config)
+>>>>>>> 476d417cec011f3ff9a6838153a8992cb8d83e50
           .then((response) => {
             setFirstName(response.data.firstName);
             setLastName(response.data.lastName);
@@ -90,6 +94,7 @@ export default function Main({ navigation }) {
       <FabButton
         navigation={navigation}
       />
+
 
     </View>
   );
