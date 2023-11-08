@@ -123,13 +123,13 @@ export default function User({ navigation }) {
                 },
                 {
                     text: 'Cancelar',
-                    onPress: () => Alert.alert('Alterações não salvas'),
+                    onPress: () => showToast("Alterações canceladas"),
                     style: 'cancel',
                 },
             ],
             {
                 cancelable: true,
-                onDismiss: () => Alert.alert('Alterações não salvas'),
+                onDismiss: () => showToast("Alterações canceladas"),
             },
         );
 
@@ -157,7 +157,7 @@ export default function User({ navigation }) {
 
                 <View style={styles.header}>
                     <View style={styles.avatar}>
-                        <Avatar.Text size={80} label={avatarLabel} color="#FFF" backgroundColor="#71a42a" />
+                        <Avatar.Text size={80} label={avatarLabel} color="#FFF" backgroundColor="#8DC53D" />
                     </View>
                     <Text style={styles.greeting}>Olá, {firstName + " " + lastName}</Text>
                     <Text style={styles.greeting2}>{username}</Text>
@@ -235,7 +235,7 @@ const styles = StyleSheet.create({
     },
     topBar: {
         paddingTop: 10,
-        backgroundColor: '#71a42a',
+        backgroundColor: '#8DC53D',
         justifyContent: 'space-between',
         position: 'absolute',
         left: 0,
