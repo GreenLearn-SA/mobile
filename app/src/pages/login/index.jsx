@@ -42,18 +42,14 @@ export default function Login({ navigation }) {
       password: password,
     }
 
-<<<<<<< HEAD
     axios.post('http://10.3.116.148:3000/auth/login', userSignInData)
-=======
-    axios.post('http://10.3.117.18:3000/auth/login', userSignInData)
->>>>>>> 476d417cec011f3ff9a6838153a8992cb8d83e50
       .then((signInSuccessResponse) => {
         AsyncStorage.setItem('accessToken', signInSuccessResponse.data);
         navigation.navigate('Main');
       })
       .catch((signInErrorResponse) => {
-        console.info("Erro ao fazer login:", signInErrorResponse);
-        setErrorInfo("Erro ao fazer login:", signInErrorResponse.response.data.message);
+        console.info(signInErrorResponse.response.data.message);
+        setErrorInfo(signInErrorResponse.response.data.message);
       })
   }
 
@@ -65,6 +61,8 @@ export default function Login({ navigation }) {
 
   const showErrorToast = () => {
     if (errorInfo === `Usuário não existente`) {
+      showToast(errorInfo);
+    } else if (errorInfo == "Senha incorreta") {
       showToast(errorInfo);
     } else if (errorInfo[0] == "password is not strong enough") {
       showToast("Senha não é forte o suficiente");

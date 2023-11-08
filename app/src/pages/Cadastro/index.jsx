@@ -40,19 +40,11 @@ export default function Cadastro({ navigation }) {
       password: password,
     }
 
-<<<<<<< HEAD
     axios.post('http://10.3.116.148:3000/user/create', userSignUpData)
       .then((signUpSuccessResponse) => {
         showToast('Cadastro realizado!');
 
         axios.post('http://10.3.116.148:3000/auth/login', userSignInData)
-=======
-    axios.post('http://10.3.117.18:3000/user/create', userSignUpData)
-      .then((signUpSuccessResponse) => {
-        showToast('Cadastro realizado!');
-
-        axios.post('http://10.3.117.18:3000/auth/login', userSignInData)
->>>>>>> 476d417cec011f3ff9a6838153a8992cb8d83e50
           .then((signInSuccessResponse) => {
             AsyncStorage.setItem('accessToken', signInSuccessResponse.data);
             navigation.navigate('Main');
@@ -62,9 +54,11 @@ export default function Cadastro({ navigation }) {
           })
       })
       .catch((signUpErrorResponse) => {
+        // console.error(signUpErrorResponse.response.data.message);
         setErrorInfo(signUpErrorResponse.response.data.message);
       })
   }
+
   useEffect(() => {
     if (errorInfo) {
       showErrorToast();
@@ -72,10 +66,16 @@ export default function Cadastro({ navigation }) {
   }, [errorInfo]);
 
   const showErrorToast = () => {
-    if (errorInfo === `Usuário com o e-mail ${email} já existe`) {
+    if (errorInfo === "E-mail já cadastrado") {
       showToast(errorInfo);
-    } else if (errorInfo === `Usuário com o username ${username} já existe`) {
+    } else if (errorInfo === "Username já cadastrado") {
       showToast(errorInfo);
+    } else if (errorInfo === "Username já cadastrado") {
+      showToast(errorInfo);
+    } else if (errorInfo === "Username já cadastrado") {
+      showToast(errorInfo);
+    } else if (errorInfo[0] === "email must be an email") {
+      showToast("E-mail inválido");
     } else if (errorInfo[0] == "password is not strong enough") {
       showToast("Senha não é forte o suficiente");
     } else {
