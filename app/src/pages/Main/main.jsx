@@ -83,7 +83,6 @@ export default function Main({ navigation }) {
             contentContainerStyle={styles.scrollH}
             showsHorizontalScrollIndicator={false}
           >
-            <ChartScreen />
             <ChartLine subjects={subjects} percentages={percentages} />
           </ScrollView>
         </View>
