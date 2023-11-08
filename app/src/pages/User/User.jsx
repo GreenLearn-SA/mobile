@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, View, Alert, Image } from "react-native";
+import { ScrollView, StyleSheet, View, Alert, Image, ToastAndroid } from "react-native";
 import { Appbar, Text, Avatar, TextInput, IconButton, Modal, Provider as PaperProvider, DefaultTheme, Button } from 'react-native-paper';
 import React, { useState, useEffect } from 'react';
 import mind from './img/mind.png'
@@ -14,11 +14,13 @@ const theme = {
 };
 
 export default function User({ navigation }) {
-    const [passwordVisible, setPasswordVisible] = useState(true);
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [username, setUsername] = useState("");
-    
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [passwordVisible, setPasswordVisible] = useState(true);
+
     useEffect(() => {
         async function fetchData() {
             try {
@@ -34,11 +36,13 @@ export default function User({ navigation }) {
                     },
                 };
 
-                axios.get('http://10.0.0.103:3000/auth/profile', config)
+                axios.get('http://10.3.116.148:3000/auth/profile', config)
                     .then((response) => {
                         setFirstName(response.data.firstName);
                         setLastName(response.data.lastName);
                         setUsername(response.data.username);
+                        setEmail(response.data.email);
+                        setPassword(response.data.password);
                     })
                     .catch((error) => {
                         console.error("Erro ao puxar dados", error);
@@ -50,10 +54,11 @@ export default function User({ navigation }) {
         fetchData();
     }, []);
 
-    const [newFirstName, setNewFirstName] = useState('');
-    const [newLastName, setNewLastName] = useState('');
+    const showToast = (message) => {
+        ToastAndroid.show(message, ToastAndroid.SHORT);
+    }
+
     const [newUsername, setNewUsername] = useState('');
-    const [newEmail, setNewEmail] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const avatarLabel = firstName.charAt(0) + lastName.charAt(0);
 
@@ -72,17 +77,20 @@ export default function User({ navigation }) {
             };
 
             const updatedData = {
-                firstName: newFirstName,
-                lastName: newLastName,
+                firstName: firstName,
+                lastName: lastName,
                 username: newUsername,
-                email: newEmail,
+                email: email,
                 password: newPassword,
                 isManager: false
             };
 
-            axios.patch(`http://10.0.0.103:3000/user/update/${username}`, updatedData, config)
+            axios.patch(`http://10.3.116.148:3000/user/update/${username}`, updatedData, config)
                 .then((response) => {
-                    console.warn(response);
+                    console.info(response);
+                    showToast("Alterações salvas!")
+                    setUsername(newUsername);
+                    setPassword(newPassword);
                 })
                 .catch((error) => {
                     console.error("Erro ao atualizar informações do usuário", error);
@@ -109,8 +117,6 @@ export default function User({ navigation }) {
                 {
                     text: 'Sim',
                     onPress: () => {
-                        setFirstName(newFirstName);
-                        setLastName(newLastName);
                         saveChanges();
                     },
                     style: 'default',
@@ -127,6 +133,20 @@ export default function User({ navigation }) {
             },
         );
 
+    const handleSave = () => {
+        if (newUsername.trim() === '') {
+            showToast('Preencha o campo "Username"');
+            return;
+        }
+
+        if (newPassword.trim() === '') {
+            showToast('Preencha o campo "Senha"');
+            return;
+        }
+
+        showAlert();
+    };
+
     return (
         <PaperProvider theme={theme}>
             <ScrollView style={styles.container}>
@@ -140,41 +160,11 @@ export default function User({ navigation }) {
                         <Avatar.Text size={80} label={avatarLabel} color="#FFF" backgroundColor="#71a42a" />
                     </View>
                     <Text style={styles.greeting}>Olá, {firstName + " " + lastName}</Text>
+                    <Text style={styles.greeting2}>{username}</Text>
                 </View>
 
                 <View>
                     <Text style={styles.editInfos}>Altere suas informações abaixo</Text>
-                    <TextInput
-                        mode='outlined'
-                        cancelable='true'
-                        style={styles.input}
-                        label={"Primeiro nome"}
-                        value={newFirstName}
-                        outlineColor='#71a42a'
-                        selectionColor='#71a42a'
-                        onChangeText={text => setNewFirstName(text)}
-                        left={
-                            <TextInput.Icon
-                                icon={'account'}
-                            />
-                        }
-                    />
-
-                    <TextInput
-                        mode='outlined'
-                        cancelable='true'
-                        style={styles.input}
-                        label={"Último nome"}
-                        value={newLastName}
-                        outlineColor='#71a42a'
-                        selectionColor='#71a42a'
-                        onChangeText={text => setNewLastName(text)}
-                        left={
-                            <TextInput.Icon
-                                icon={'account'}
-                            />
-                        }
-                    />
 
                     <TextInput
                         mode='outlined'
@@ -196,27 +186,11 @@ export default function User({ navigation }) {
                         mode='outlined'
                         cancelable='true'
                         style={styles.input}
-                        label={"E-mail"}
-                        value={newEmail}
-                        outlineColor='#71a42a'
-                        selectionColor='#71a42a'
-                        onChangeText={text => setNewEmail(text)}
-                        left={
-                            <TextInput.Icon
-                                icon={'email'}
-                            />
-                        }
-                    />
-
-                    <TextInput
-                        mode='outlined'
-                        cancelable='true'
-                        style={styles.input}
                         label={"Senha"}
                         value={newPassword}
-                        secureTextEntry={passwordVisible}
                         outlineColor='#71a42a'
                         selectionColor='#71a42a'
+                        secureTextEntry={passwordVisible}
                         onChangeText={text => setNewPassword(text)}
                         right={
                             <TextInput.Icon
@@ -231,7 +205,7 @@ export default function User({ navigation }) {
                         }
                     />
 
-                    <Button mode="contained" style={styles.button} onPress={showAlert}>
+                    <Button mode="contained" style={styles.button} onPress={handleSave}>
                         Salvar
                     </Button>
 
@@ -283,9 +257,13 @@ const styles = StyleSheet.create({
         fontSize: 30,
         textAlign: 'center',
     },
+    greeting2: {
+        fontSize: 15,
+        textAlign: 'center',
+    },
     editInfos: {
         marginTop: 20,
-        marginBottom: -10,
+        marginBottom: 81,
         fontSize: 15,
         textAlign: 'center',
     },
