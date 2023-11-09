@@ -45,16 +45,6 @@ export default function Main({ navigation }) {
   }, []);
 
 
-  // axios.post('http://10.0.0.103:3000/auth/profile', null, config)
-  //   .then((profileInfo) => {
-
-  //   })
-  //   .catch((signInErrorResponse) => {
-  //     console.error(signInErrorResponse);
-  //   });
-
-  const subjects = ["Matemática", "Humanas", "Linguagens", "Natureza"];
-  const percentages = [30, 25, 20, 25];
 
   return (
     <View style={styles.container}>
@@ -75,18 +65,6 @@ export default function Main({ navigation }) {
         </View>
 
         <View style={styles.space} />
-
-        <View style={styles.chart}>
-          <Text style={styles.gradesTitle}>Seu progresso</Text>
-          <ScrollView
-            horizontal={true}
-            contentContainerStyle={styles.scrollH}
-            showsHorizontalScrollIndicator={false}
-          >
-            <ChartScreen />
-            <ChartLine subjects={subjects} percentages={percentages} />
-          </ScrollView>
-        </View>
       </ScrollView>
       <FabButton
         navigation={navigation}

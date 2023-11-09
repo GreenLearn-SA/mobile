@@ -25,14 +25,11 @@ export default function Math({ navigation }) {
     const toggleSubject = (subjectId) => {
       setSubjectList((prevSubjects) =>
         prevSubjects.map((subject) =>
-          subject.id === subjectId
-            ? { ...subject, completed: !subject.completed }
-            : subject
+          subject.id === subjectId ? { ...subject, completed: !subject.completed } : subject
         )
       );
     };
-    
-  
+
     return (
       <View style={styles.container}>
         <View style={styles.card}>
