@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
 import CardC from './cards';
-import { useProgress } from '../../../contexts/ProgressContext';
+import { useProgress } from "../../../contexts/ProgressContext";
 
 export default function Carousel({ navigation }) {
-  const { progress, updateProgress } = useProgress();
+  const { progress } = useProgress();
   return (
     <View style={styles.flexContainer}>
       <ScrollView
@@ -29,14 +29,14 @@ export default function Carousel({ navigation }) {
         <CardC
           titulo={'Natureza'}
           geralColor={'#9370DB'}
-          progressPercentage={0.29}
+          progressPercentage={50}
           onPress={() => navigation.navigate('Nature')}
         />
 
         <CardC
           titulo={'Linguagens'}
           geralColor={'#3AA2CE'}
-          progressPercentage={0.6}
+          progressPercentage={50}
           onPress={() => navigation.navigate('Languages')}
         />
 

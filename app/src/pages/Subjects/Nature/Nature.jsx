@@ -99,6 +99,7 @@ export default function Nature({ navigation }) {
         return 0;
     }
   };
+  
   return (
     <View style={styles.container}>
       <View style={styles.card}>
