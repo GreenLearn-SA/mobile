@@ -6,9 +6,10 @@ const ChartLine = ({ subjects, percentages }) => {
     const screenWidth = Dimensions.get('window').width;
 
     const chartConfig = {
-        backgroundGradientFrom: '#1E2923',
-        backgroundGradientTo: '#08130D',
+        backgroundGradientFrom: '#fff',
+        backgroundGradientTo: '#8dc53d',
         color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+        labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
     };
 
     const chartData = {
@@ -16,8 +17,8 @@ const ChartLine = ({ subjects, percentages }) => {
         datasets: [
             {
                 data: percentages,
-                color: (opacity = 1) => `rgba(255, 69, 0, ${opacity})`,
-                strokeWidth: 2,
+                color: (opacity = 1) => `rgba(79, 129, 8, ${opacity})`,
+                strokeWidth: 1,
             },
         ],
     };

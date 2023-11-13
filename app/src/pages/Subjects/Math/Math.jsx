@@ -6,10 +6,9 @@ import {
   TouchableOpacity,
   FlatList,
 } from "react-native";
-import { useProgress } from "../../../../ProgressContext";
+import { useProgress } from "../../../../contexts/ProgressContext";
 import { AntDesign } from "@expo/vector-icons";
 import subjects from "./Math.json";
-import { Button } from "react-native-paper";
 
 export default function Math({ navigation }) {
     const [subjectList, setSubjectList] = useState(subjects);
@@ -26,14 +25,11 @@ export default function Math({ navigation }) {
     const toggleSubject = (subjectId) => {
       setSubjectList((prevSubjects) =>
         prevSubjects.map((subject) =>
-          subject.id === subjectId
-            ? { ...subject, completed: !subject.completed }
-            : subject
+          subject.id === subjectId ? { ...subject, completed: !subject.completed } : subject
         )
       );
     };
-    
-  
+
     return (
       <View style={styles.container}>
         <View style={styles.card}>

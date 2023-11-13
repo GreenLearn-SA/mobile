@@ -1,33 +1,70 @@
-import { ScrollView, StyleSheet, View } from "react-native";
+import { ScrollView, StyleSheet, View, Button } from 'react-native';
 import { Appbar, Text } from 'react-native-paper';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Carousel from "../../components/Carousel/carousel";
 import ChartScreen from "../../components/ChartScreen";
 import ChartLine from "../../components/ChartLine";
+import EnemDate from "../../components/EnemDate/EnemDate";
+import FabButton from "../../components/Button/FabButton";
+import axios from "axios";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Main({ navigation }) {
-  const firstName = "Ana";
-  const lastName = "Negri";
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
 
-  const subjects = ["Matemática", "Humanas", "Linguagens", "Natureza"];
-  const percentages = [30, 25, 20, 25];
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const accessToken = await AsyncStorage.getItem('accessToken');
+        if (!accessToken) {
+          console.error('Access token is missing.');
+          return;
+        }
+
+        const config = {
+          headers: {
+            Authorization: `Bearer ${accessToken}`
+          },
+        };
+
+        axios.get('http://10.3.116.69:3000/auth/profile', config)
+          .then((response) => {
+            setFirstName(response.data.firstName);
+            setLastName(response.data.lastName);
+          })
+          .catch((error) => {
+            console.error("Erro ao puxar dados", error);
+          });
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    fetchData();
+  }, []);
+
+
 
   return (
     <View style={styles.container}>
-      <ScrollView>
         <Appbar.Header style={styles.topBar}>
           <Appbar.BackAction onPress={() => navigation.navigate('Login')} />
           <Appbar.Action icon="account-cog" onPress={() => navigation.navigate('User', { firstName, lastName })} />
         </Appbar.Header>
 
         <View style={styles.header}>
-          <Text style={styles.greeting}>Olá, {firstName}</Text>
+          <Text style={styles.greeting}>Olá, {firstName} {lastName}!</Text>
+          <EnemDate />
         </View>
 
       <View style={styles.grades}>
         <Text style={styles.gradesTitle}>Minhas Matérias</Text>
         <Carousel navigation={navigation} />
       </View>
+      <FabButton
+        navigation={navigation}
+      />
     </View>
   );
 }
@@ -41,7 +78,7 @@ const styles = StyleSheet.create({
     paddingTop: 40,
     paddingHorizontal: 15,
     paddingVertical: 10,
-    backgroundColor: '#71a42a',
+    backgroundColor: '#8DC53D',
     justifyContent: 'space-between',
     position: 'absolute',
     left: 0,

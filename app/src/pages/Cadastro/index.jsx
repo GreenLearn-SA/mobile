@@ -2,6 +2,7 @@ import { ScrollView, StyleSheet, View, ToastAndroid } from 'react-native';
 import { TextInput, Button, Text, Provider as PaperProvider, DefaultTheme } from 'react-native-paper';
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const theme = {
   ...DefaultTheme,
@@ -24,7 +25,7 @@ export default function Cadastro({ navigation }) {
     ToastAndroid.show(message, ToastAndroid.SHORT);
   };
 
-  const singUpUser = () => {
+  const signUpUser = () => {
     const userSignUpData = {
       firstName: firstName,
       lastName: lastName,
@@ -34,13 +35,28 @@ export default function Cadastro({ navigation }) {
       isManager: false
     };
 
-    axios.post('http://10.3.116.228:3000/user/create', userSignUpData)
-      .then((singUpSuccessResponse) => {
+    const userSignInData = {
+      username: username,
+      password: password,
+    }
+
+    axios.post('http://10.3.116.69:3000/user/create', userSignUpData)
+      .then((signUpSuccessResponse) => {
         showToast('Cadastro realizado!');
+
+        axios.post('http://10.3.116.69:3000/auth/login', userSignInData)
+          .then((signInSuccessResponse) => {
+            AsyncStorage.setItem('accessToken', signInSuccessResponse.data);
+            navigation.navigate('Main');
+          })
+          .catch((error) => {
+            console.error("Erro ao fazer login:", error);
+          })
       })
-      .catch((singUpErrorResponse) => {
-        setErrorInfo(singUpErrorResponse.response.data.message);
-      });
+      .catch((signUpErrorResponse) => {
+        // console.error(signUpErrorResponse.response.data.message);
+        setErrorInfo(signUpErrorResponse.response.data.message);
+      })
   }
 
   useEffect(() => {
@@ -50,15 +66,50 @@ export default function Cadastro({ navigation }) {
   }, [errorInfo]);
 
   const showErrorToast = () => {
-    if (errorInfo === `Usuário com o e-mail ${email} já existe`) {
+    if (errorInfo === "E-mail já cadastrado") {
       showToast(errorInfo);
-    } else if (errorInfo === `Usuário com o username ${username} já existe`) {
+    } else if (errorInfo === "Username já cadastrado") {
       showToast(errorInfo);
+    } else if (errorInfo === "Username já cadastrado") {
+      showToast(errorInfo);
+    } else if (errorInfo === "Username já cadastrado") {
+      showToast(errorInfo);
+    } else if (errorInfo[0] === "email must be an email") {
+      showToast("E-mail inválido");
     } else if (errorInfo[0] == "password is not strong enough") {
       showToast("Senha não é forte o suficiente");
     } else {
       showToast(errorInfo);
     }
+  };
+
+  const handleSave = () => {
+    if (firstName.trim() === '') {
+      showToast('Preencha o campo "Primeiro nome"');
+      return;
+    }
+
+    if (lastName.trim() === '') {
+      showToast('Preencha o campo "Último nome"');
+      return;
+    }
+
+    if (username.trim() === '') {
+      showToast('Preencha o campo "Username"');
+      return;
+    }
+
+    if (email.trim() === '') {
+      showToast('Preencha o campo "E-mail"');
+      return;
+    }
+
+    if (password.trim() === '') {
+      showToast('Preencha o campo "Senha"');
+      return;
+    }
+
+    signUpUser();
   };
 
   return (
@@ -163,7 +214,7 @@ export default function Cadastro({ navigation }) {
             dark='true'
             icon="login"
             mode="contained-tonal"
-            onPress={singUpUser}>
+            onPress={handleSave}>
             Cadastrar
           </Button>
         </ScrollView>

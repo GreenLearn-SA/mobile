@@ -1,7 +1,9 @@
-import { ScrollView, StyleSheet, View, Alert, Image } from "react-native";
+import { ScrollView, StyleSheet, View, Alert, Image, ToastAndroid } from "react-native";
 import { Appbar, Text, Avatar, TextInput, IconButton, Modal, Provider as PaperProvider, DefaultTheme, Button } from 'react-native-paper';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import mind from './img/mind.png'
+import axios from "axios";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const theme = {
     ...DefaultTheme,
@@ -11,18 +13,112 @@ const theme = {
     },
 };
 
-export default function User({ navigation, route }) {
-    const { firstName, lastName } = route.params;
+export default function User({ navigation }) {
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [passwordVisible, setPasswordVisible] = useState(true);
+
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const accessToken = await AsyncStorage.getItem('accessToken');
+                if (!accessToken) {
+                    console.error('Access token is missing.');
+                    return;
+                }
+
+                const config = {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`
+                    },
+                };
+
+                axios.get('http://10.3.116.69:3000/auth/profile', config)
+                    .then((response) => {
+                        setFirstName(response.data.firstName);
+                        setLastName(response.data.lastName);
+                        setUsername(response.data.username);
+                        setEmail(response.data.email);
+                        setPassword(response.data.password);
+                    })
+                    .catch((error) => {
+                        console.error("Erro ao puxar dados", error);
+                    });
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        fetchData();
+    }, []);
+
+    const showToast = (message) => {
+        ToastAndroid.show(message, ToastAndroid.SHORT);
+    }
+
+    const [newUsername, setNewUsername] = useState('');
+    const [newPassword, setNewPassword] = useState('');
     const avatarLabel = firstName.charAt(0) + lastName.charAt(0);
 
-    const [passwordVisible, setPasswordVisible] = useState(true);
-    const [newFirstName, setNewFirstName] = useState(firstName);
-    const [newLastName, setNewLastName] = useState(lastName);
-    const [email, setEmail] = useState("ananegri@proflinda.com");
-    const [username, setUsername] = useState("AnaNegriDogLover");
-    const [password, setPassword] = useState("amoDogs3C");
+    const [errorInfo, setErrorInfo] = useState('');
 
-    //*Modal
+    async function saveChanges() {
+        try {
+            const accessToken = await AsyncStorage.getItem('accessToken');
+            if (!accessToken) {
+                console.error('Access token is missing.');
+                return;
+            }
+
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`
+                },
+            };
+
+            const updatedData = {
+                firstName: firstName,
+                lastName: lastName,
+                username: newUsername,
+                email: email,
+                password: newPassword,
+                isManager: false
+            };
+
+            axios.patch(`http://10.3.116.69:3000/user/update/${username}`, updatedData, config)
+                .then((response) => {
+                    console.info(response);
+                    showToast("Alterações salvas!")
+                    setUsername(newUsername);
+                    setPassword(newPassword);
+                })
+                .catch((error) => {
+                    console.error(error.response.data);
+                    setErrorInfo(error.response.data.message);
+                });
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    useEffect(() => {
+        if (errorInfo) {
+            showErrorToast();
+        }
+    }, [errorInfo]);
+
+    const showErrorToast = () => {
+        if (errorInfo == "Senha incorreta") {
+            showToast(errorInfo);
+        } else if (errorInfo[0] == "password is not strong enough") {
+            showToast("Senha não é forte o suficiente");
+        } else {
+            showToast(errorInfo);
+        }
+    };
+
     const [visible, setVisible] = React.useState(false);
     const showModal = () => setVisible(true);
     const hideModal = () => setVisible(false);
@@ -35,20 +131,36 @@ export default function User({ navigation, route }) {
             [
                 {
                     text: 'Sim',
-                    onPress: () => Alert.alert('Informações atualizadas com sucesso'),
+                    onPress: () => {
+                        saveChanges();
+                    },
                     style: 'default',
                 },
                 {
                     text: 'Cancelar',
-                    onPress: () => Alert.alert('Alterações não salvas'),
+                    onPress: () => showToast("Alterações canceladas"),
                     style: 'cancel',
                 },
             ],
             {
                 cancelable: true,
-                onDismiss: () => Alert.alert('Alterações não salvas'),
+                onDismiss: () => showToast("Alterações canceladas"),
             },
         );
+
+    const handleSave = () => {
+        if (newUsername.trim() === '') {
+            showToast('Preencha o campo "Username"');
+            return;
+        }
+
+        if (newPassword.trim() === '') {
+            showToast('Preencha o campo "Senha"');
+            return;
+        }
+
+        showAlert();
+    };
 
     return (
         <PaperProvider theme={theme}>
@@ -60,72 +172,27 @@ export default function User({ navigation, route }) {
 
                 <View style={styles.header}>
                     <View style={styles.avatar}>
-                        <Avatar.Text size={80} label={avatarLabel} color="#FFF" backgroundColor="#71a42a" />
+                        <Avatar.Text size={80} label={avatarLabel} color="#FFF" backgroundColor="#8DC53D" />
                     </View>
                     <Text style={styles.greeting}>Olá, {firstName + " " + lastName}</Text>
+                    <Text style={styles.greeting2}>{username}</Text>
                 </View>
 
                 <View>
-                    <TextInput
-                        mode='outlined'
-                        cancelable='true'
-                        style={styles.input}
-                        label={"Primeiro nome"}
-                        value={newFirstName}
-                        outlineColor='#71a42a'
-                        selectionColor='#71a42a'
-                        onChangeText={text => setUsername(text)}
-                        left={
-                            <TextInput.Icon
-                                icon={'account'}
-                            />
-                        }
-                    />
-
-                    <TextInput
-                        mode='outlined'
-                        cancelable='true'
-                        style={styles.input}
-                        label={"Último nome"}
-                        value={newLastName}
-                        outlineColor='#71a42a'
-                        selectionColor='#71a42a'
-                        onChangeText={text => setUsername(text)}
-                        left={
-                            <TextInput.Icon
-                                icon={'account'}
-                            />
-                        }
-                    />
+                    <Text style={styles.editInfos}>Altere suas informações abaixo</Text>
 
                     <TextInput
                         mode='outlined'
                         cancelable='true'
                         style={styles.input}
                         label={"Username"}
-                        value={username}
+                        value={newUsername}
                         outlineColor='#71a42a'
                         selectionColor='#71a42a'
-                        onChangeText={text => setUsername(text)}
+                        onChangeText={text => setNewUsername(text)}
                         left={
                             <TextInput.Icon
                                 icon={'account'}
-                            />
-                        }
-                    />
-
-                    <TextInput
-                        mode='outlined'
-                        cancelable='true'
-                        style={styles.input}
-                        label={"E-mail"}
-                        value={email}
-                        outlineColor='#71a42a'
-                        selectionColor='#71a42a'
-                        onChangeText={text => setUsername(text)}
-                        left={
-                            <TextInput.Icon
-                                icon={'email'}
                             />
                         }
                     />
@@ -135,11 +202,11 @@ export default function User({ navigation, route }) {
                         cancelable='true'
                         style={styles.input}
                         label={"Senha"}
-                        value={password}
-                        secureTextEntry={passwordVisible}
+                        value={newPassword}
                         outlineColor='#71a42a'
                         selectionColor='#71a42a'
-                        onChangeText={text => setPassword(text)}
+                        secureTextEntry={passwordVisible}
+                        onChangeText={text => setNewPassword(text)}
                         right={
                             <TextInput.Icon
                                 icon={passwordVisible ? 'eye-off' : 'eye'}
@@ -153,7 +220,7 @@ export default function User({ navigation, route }) {
                         }
                     />
 
-                    <Button mode="contained" style={styles.button} onPress={showAlert}>
+                    <Button mode="contained" style={styles.button} onPress={handleSave}>
                         Salvar
                     </Button>
 
@@ -183,7 +250,7 @@ const styles = StyleSheet.create({
     },
     topBar: {
         paddingTop: 10,
-        backgroundColor: '#71a42a',
+        backgroundColor: '#8DC53D',
         justifyContent: 'space-between',
         position: 'absolute',
         left: 0,
@@ -204,7 +271,16 @@ const styles = StyleSheet.create({
     greeting: {
         fontSize: 30,
         textAlign: 'center',
-
+    },
+    greeting2: {
+        fontSize: 15,
+        textAlign: 'center',
+    },
+    editInfos: {
+        marginTop: 20,
+        marginBottom: 81,
+        fontSize: 15,
+        textAlign: 'center',
     },
     input: {
         marginHorizontal: 50,

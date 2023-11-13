@@ -1,6 +1,6 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { ProgressProvider } from "./ProgressContext";
+import { ProgressProvider } from "./contexts/ProgressContext";
 
 import Routes from "./src/routes";
 

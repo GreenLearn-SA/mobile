@@ -1,5 +1,5 @@
 [
-    { "id": 1, "text": "Porcentagem", "completed": false },
+    { "id": 1, "text": "Porcentagem", "completed": true },
     { "id": 2, "text": "Razão e proporção", "completed": false },
     { "id": 3, "text": "Leitura e interpretação de gráficos", "completed": false },
     { "id": 4, "text": "Estatística", "completed": false },
@@ -10,7 +10,7 @@
     { "id": 9, "text": "Função de segundo grau", "completed": false },
     { "id": 10, "text": "Geometria plana", "completed": false },
     { "id": 11, "text": "Geometria espacial", "completed": false },
-    { "id": 12, "text": "Média aritmética", "completed": false },
+    { "id": 12, "text": "Média aritmética", "completed": true },
     { "id": 13, "text": "Média ponderada", "completed": false },
     { "id": 14, "text": "Volumes e áreas de sólidos geométricos", "completed": false },
     { "id": 15, "text": "Propriedades de prismas e pirâmides", "completed": false },
