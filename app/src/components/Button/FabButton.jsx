@@ -1,14 +1,52 @@
 import { useState } from "react";
-import { View, TouchableOpacity, StyleSheet, Animated, Image } from "react-native";
+import { View, TouchableOpacity, StyleSheet, Animated } from "react-native";
+import { SvgXml } from "react-native-svg";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { SvgXml } from 'react-native-svg';
-import User from "../../pages/User/User";
-import CalendarPage from "../../pages/Calendar/CalendarPage";
-import Main from "../../pages/Main/main";
 
+export default function FabButton({navigation , icon1 , icon2 , icon3 , iconNav1 , iconNav2 , iconNav3}) {
+	const [primeiroIcon] = useState(new Animated.Value(40));
+	const [segundoIcon] = useState(new Animated.Value(40));
+	const [terceiroIcon] = useState(new Animated.Value(40));
 
-export default function FabButton({ navigation }) {
+	const [pop , setPop] = useState(false)
 
+	const popIn = () =>{
+		setPop(true);
+		Animated.timing(primeiroIcon, {
+			toValue: 130,
+			duration: 500,
+			useNativeDriver: false,
+		}).start();
+		Animated.timing(segundoIcon, {
+			toValue: 110,
+			duration: 500,
+			useNativeDriver: false,
+		}).start();
+		Animated.timing(terceiroIcon, {
+			toValue: 130,
+			duration: 500,
+			useNativeDriver: false,
+		}).start();
+	}
+
+	const popDut = ()=> {
+		setPop(false);
+		Animated.timing(primeiroIcon, {
+			toValue: 40,
+			duration: 500,
+			useNativeDriver: false,
+		}).start();
+		Animated.timing(segundoIcon, {
+			toValue: 40,
+			duration: 500,
+			useNativeDriver: false,
+		}).start();
+		Animated.timing(terceiroIcon, {
+			toValue: 40,
+			duration: 500,
+			useNativeDriver: false,
+		}).start();
+	}
 	const svgCode = `
 	<svg width="22" height="35" viewBox="0 0 22 35" fill="none" xmlns="http://www.w3.org/2000/svg">
 	<mask id="mask0_351_617" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="22" height="35">
@@ -36,96 +74,33 @@ export default function FabButton({ navigation }) {
 	<path d="M9.53281 23.3391V24.6545" stroke="white"/>
 	<path d="M9.49576 24.2838H12.6266" stroke="white"/>
 	</g>
-	</svg>
-	
-`;
-
-	const [primeiroIcon] = useState(new Animated.Value(40));
-	const [segundoIcon] = useState(new Animated.Value(40));
-	const [terceiroIcon] = useState(new Animated.Value(40));
-
-	const [pop, setPop] = useState(false)
-
-	const popIn = () => {
-		setPop(true);
-		Animated.timing(primeiroIcon, {
-			toValue: 130,
-			duration: 500,
-			useNativeDriver: false,
-		}).start();
-		Animated.timing(segundoIcon, {
-			toValue: 110,
-			duration: 500,
-			useNativeDriver: false,
-		}).start();
-		Animated.timing(terceiroIcon, {
-			toValue: 130,
-			duration: 500,
-			useNativeDriver: false,
-		}).start();
-	}
-
-	const popDut = () => {
-		setPop(false);
-		Animated.timing(primeiroIcon, {
-			toValue: 40,
-			duration: 500,
-			useNativeDriver: false,
-		}).start();
-		Animated.timing(segundoIcon, {
-			toValue: 40,
-			duration: 500,
-			useNativeDriver: false,
-		}).start();
-		Animated.timing(terceiroIcon, {
-			toValue: 40,
-			duration: 500,
-			useNativeDriver: false,
-		}).start();
-	}
+	</svg>`;
 	return (
 		<View style={{
 			flex: 1,
 		}}>
-			<TouchableOpacity
-				onPress={() => navigation.navigate(User)}
-			>
-				<Animated.View style={[styles.btn, { bottom: primeiroIcon }]}>
-
-					<Icon name="user" size={25} color="#fff" />
-
-				</Animated.View>
-
-			</TouchableOpacity>
-
-			<TouchableOpacity
-
-				onPress={() => navigation.navigate(CalendarPage)}
-			>
-				<Animated.View style={[styles.btn, { bottom: segundoIcon, right: segundoIcon }]}>
-
-					<Icon name="calendar" size={25} color="#fff" />
-
-				</Animated.View>
-			</TouchableOpacity>
-
-			<TouchableOpacity
-				onPress={() => navigation.navigate(Main)}
-
-			>
-				<Animated.View style={[styles.btn, { right: terceiroIcon }]}>
-
-					<Icon name="home" size={25} color="#fff" />
-
-				</Animated.View>
-			</TouchableOpacity>
+			<Animated.View style={[styles.btn, {bottom: primeiroIcon}]}>
+				<TouchableOpacity onPress={()=> navigation.navigate(iconNav1)}>
+					<Icon name={icon1} size={25} color="#fff" />
+				</TouchableOpacity>
+			</Animated.View>
+			<Animated.View style={[styles.btn, {bottom: segundoIcon , right: segundoIcon}]}>
+				<TouchableOpacity onPress={()=> navigation.navigate(iconNav2)}>
+					<Icon name={icon2} size={25} color="#fff" />
+				</TouchableOpacity>
+			</Animated.View>
+			<Animated.View style={[styles.btn, { right: terceiroIcon}]}>
+				<TouchableOpacity onPress={()=> navigation.navigate(iconNav3)}>
+					<Icon name={icon3} size={25} color="#fff" />
+				</TouchableOpacity>
+			</Animated.View>
 			<TouchableOpacity
 				style={styles.btn}
 				onPress={() => {
 					pop === false ? popIn() : popDut()
 				}}
 			>
-				 <SvgXml xml={svgCode} width="40" height="40" />
+				<SvgXml xml={svgCode} width="40" height="40" />
 			</TouchableOpacity>
 		</View>
 	)

@@ -23,7 +23,7 @@ export default function CardC({ titulo, geralColor, progressPercentage, onPress 
         <Card.Actions style={styles.progressView}>
           <Text style={styles.progressText}>Progresso: {progressPercentage}%</Text>
           <ProgressBar
-            progress={progressPercentage}
+            progress={progress / 100}
             color={geralColor}
             style={styles.progressBar}
           />

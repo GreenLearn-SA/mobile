@@ -1,9 +1,9 @@
-import { ScrollView, StyleSheet, View, Button } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Appbar, Text } from 'react-native-paper';
 import React, { useState, useEffect } from 'react';
+import CalendarPage from '../Calendar/CalendarPage'
+import Graphs from '../Graphs/index';
 import Carousel from "../../components/Carousel/carousel";
-import ChartScreen from "../../components/ChartScreen";
-import ChartLine from "../../components/ChartLine";
 import EnemDate from "../../components/EnemDate/EnemDate";
 import FabButton from "../../components/Button/FabButton";
 import axios from "axios";
@@ -48,7 +48,6 @@ export default function Main({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <ScrollView>
         <Appbar.Header style={styles.topBar}>
           <Appbar.BackAction onPress={() => navigation.navigate('Login')} />
           <Appbar.Action icon="account-cog" onPress={() => navigation.navigate('User', { firstName, lastName })} />
@@ -56,20 +55,22 @@ export default function Main({ navigation }) {
 
         <View style={styles.header}>
           <Text style={styles.greeting}>Olá, {firstName} {lastName}!</Text>
-          <EnemDate />
+          <EnemDate/>
         </View>
 
-        <View style={styles.grades}>
-          <Text style={styles.gradesTitle}>Minhas Matérias</Text>
-          <Carousel navigation={navigation} />
-        </View>
-
-        <View style={styles.space} />
-      </ScrollView>
+      <View style={styles.grades}>
+        <Text style={styles.gradesTitle}>Minhas Matérias</Text>
+        <Carousel navigation={navigation} />
+      </View>
       <FabButton
         navigation={navigation}
+        icon1={'user'}
+        iconNav1={'User'}
+        icon2={'calendar-o'}
+        iconNav2={CalendarPage}
+        icon3={'bar-chart'}
+        iconNav3={Graphs}
       />
-
     </View>
   );
 }
