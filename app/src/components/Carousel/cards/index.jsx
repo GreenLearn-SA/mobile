@@ -3,7 +3,7 @@ import { StyleSheet, TouchableOpacity } from "react-native";
 import { Avatar, Button, Card, ProgressBar, Text } from "react-native-paper";
 
 export default function CardC({ titulo, geralColor, progressPercentage, onPress }) {
-  const progress = Math.round(progressPercentage * 100);
+  const progress = Math.round(progressPercentage);
 
   const LeftContent = (props) => (
     <Avatar.Icon

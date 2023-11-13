@@ -42,8 +42,8 @@ export default function Login({ navigation }) {
       password: password,
     }
 
-    axios.post('http://10.3.116.69:3000/auth/login', userSignInData)
-    axios.post('http://10.3.116.148:3000/auth/login', userSignInData)
+    axios.post('http://192.168.15.9:3000/auth/login', userSignInData)
+    axios.post('http://192.168.15.9:3000/auth/login', userSignInData)
       .then((signInSuccessResponse) => {
         AsyncStorage.setItem('accessToken', signInSuccessResponse.data);
         navigation.navigate('Main');
