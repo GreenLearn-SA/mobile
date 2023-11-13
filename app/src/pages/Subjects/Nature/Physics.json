@@ -1,9 +1,9 @@
 [
-    { "id": 28, "text": "Mecânica", "completed": false },
+    { "id": 28, "text": "Mecânica", "completed": true },
     { "id": 29, "text": "Eletricidade e energia", "completed": false },
     { "id": 30, "text": "Ondulatória", "completed": false },
     { "id": 31, "text": "Termodinâmica", "completed": false },
-    { "id": 32, "text": "Óptica", "completed": false },
+    { "id": 32, "text": "Óptica", "completed": true },
     { "id": 33, "text": "Termologia", "completed": false },
     { "id": 34, "text": "Cinemática", "completed": false },
     { "id": 35, "text": "Velocidade média", "completed": false },

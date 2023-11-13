@@ -17,38 +17,40 @@ import physicsData from "./Physics.json";
 
 export default function Nature({ navigation }) {
   const [expanded, setExpanded] = useState(null);
+  const [biologyProgress, setBiologyProgress] = useState(0);
+  const [chemicalProgress, setChemicalProgress] = useState(0);
+  const [physicsProgress, setPhysicsProgress] = useState(0);
   const [subjectList, setSubjectList] = useState([]);
-  const { progress, updateProgress } = useProgress();
+  const { updateProgress } = useProgress();
 
   const loadTasks = (subject) => {
-    if (expanded === subject) {
-      setExpanded(null);
-      setSubjectList([]);
-    } else {
-      setExpanded(subject);
-      switch (subject) {
-        case "biology":
-          setSubjectList(biologyData);
-          break;
-        case "chemical":
-          setSubjectList(chemicalData);
-          break;
-        case "physics":
-          setSubjectList(physicsData);
-          break;
-        default:
-          setSubjectList([]);
-      }
+    switch (subject) {
+      case "biology":
+        setExpanded(subject === expanded ? null : subject);
+        setSubjectList(biologyData);
+        setBiologyProgress(calculateProgress(biologyData));
+        break;
+      case "chemical":
+        setExpanded(subject === expanded ? null : subject);
+        setSubjectList(chemicalData);
+        setChemicalProgress(calculateProgress(chemicalData));
+        break;
+      case "physics":
+        setExpanded(subject === expanded ? null : subject);
+        setSubjectList(physicsData);
+        setPhysicsProgress(calculateProgress(physicsData));
+        break;
+      default:
+        setExpanded(null);
+        setSubjectList([]);
     }
   };
 
-  useEffect(() => {
-    // Calcula o progresso total
-    const completedTasks = subjectList.filter((subject) => subject.completed);
-    const totalTasks = subjectList.length;
-    const totalProgress = (completedTasks.length / totalTasks) * 100;
-    updateProgress(subjectList); // Atualize o progresso no contexto
-  }, [subjectList]);
+  const calculateProgress = (data) => {
+    const completedTasks = data.filter((subject) => subject.completed);
+    const totalTasks = data.length;
+    return (completedTasks.length / totalTasks) * 100;
+  };
 
   const toggleTask = (taskId) => {
     setSubjectList((prevTasks) =>
@@ -56,6 +58,13 @@ export default function Nature({ navigation }) {
         task.id === taskId ? { ...task, completed: !task.completed } : task
       )
     );
+    if (expanded === "biology") {
+      setBiologyProgress(calculateProgress(biologyData));
+    } else if (expanded === "chemical") {
+      setChemicalProgress(calculateProgress(chemicalData));
+    } else if (expanded === "physics") {
+      setPhysicsProgress(calculateProgress(physicsData));
+    }
   };
 
   const renderTaskItem = ({ item }) => (
@@ -78,6 +87,18 @@ export default function Nature({ navigation }) {
     </View>
   );
 
+  const subjectProgress = () => {
+    switch (expanded) {
+      case "biology":
+        return biologyProgress;
+      case "chemical":
+        return chemicalProgress;
+      case "physics":
+        return physicsProgress;
+      default:
+        return 0;
+    }
+  };
   return (
     <View style={styles.container}>
       <View style={styles.card}>
@@ -101,12 +122,12 @@ export default function Nature({ navigation }) {
               style={{ display: "flex", alignItems: "center", width: "100%" }}
             >
               <Text style={styles.progressText}>
-                Progresso: {progress.toFixed(2)}%
+                Progresso: {biologyProgress.toFixed(2)}%
               </Text>
               <View style={styles.progressBar}>
                 <View
                   style={{
-                    width: `${progress}%`,
+                    width: `${biologyProgress}%`,
                     backgroundColor: "#826FB8",
                     height: 10,
                   }}
@@ -132,12 +153,12 @@ export default function Nature({ navigation }) {
               style={{ display: "flex", alignItems: "center", width: "100%" }}
             >
               <Text style={styles.progressText}>
-                Progresso: {progress.toFixed(2)}%
+                Progresso: {chemicalProgress.toFixed(2)}%
               </Text>
               <View style={styles.progressBar}>
                 <View
                   style={{
-                    width: `${progress}%`,
+                    width: `${chemicalProgress}%`,
                     backgroundColor: "#826FB8",
                     height: 10,
                   }}
@@ -163,12 +184,12 @@ export default function Nature({ navigation }) {
               style={{ display: "flex", alignItems: "center", width: "100%" }}
             >
               <Text style={styles.progressText}>
-                Progresso: {progress.toFixed(2)}%
+                Progresso: {physicsProgress.toFixed(2)}%
               </Text>
               <View style={styles.progressBar}>
                 <View
                   style={{
-                    width: `${progress}%`,
+                    width: `${physicsProgress}%`,
                     backgroundColor: "#826FB8",
                     height: 10,
                   }}

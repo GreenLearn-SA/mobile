@@ -22,7 +22,7 @@ export default function Carousel({ navigation }) {
         <CardC
           titulo={'Humanas'}
           geralColor={'#FF8C00'}
-          progressPercentage={0.32}
+          progressPercentage={50}
           onPress={() => navigation.navigate('Humans')}
         />
 

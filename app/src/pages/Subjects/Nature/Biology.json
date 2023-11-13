@@ -1,8 +1,8 @@
 [
-    { "id": 1, "text": "Primeira lei de Mendel", "completed": false },
+    { "id": 1, "text": "Primeira lei de Mendel", "completed": true },
     { "id": 2, "text": "Segunda lei de Mendel", "completed": false },
     { "id": 3, "text": "Fenótipo e genótipo", "completed": false },
-    { "id": 4, "text": "DNA", "completed": false },
+    { "id": 4, "text": "DNA", "completed": true },
     { "id": 5, "text": "Clonagem", "completed": false },
     { "id": 6, "text": "Biotecnologia", "completed": false },
     { "id": 7, "text": "Doenças genéticas", "completed": false },
