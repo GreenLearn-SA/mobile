@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, TouchableOpacity, Linking } from 'react-native';
 
 const EnemDate = () => {
-    const enemDate = new Date('2023-11-12');
+    const enemDate = new Date('2023-12-07');
     const currentDate = new Date();
 
     const diferencaMili = enemDate - currentDate;

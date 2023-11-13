@@ -2,11 +2,8 @@ import { useState } from "react";
 import { View, TouchableOpacity, StyleSheet, Animated } from "react-native";
 import { SvgXml } from "react-native-svg";
 import Icon from "react-native-vector-icons/FontAwesome";
-import Main from "../../pages/Main/main";
-import User from "../../pages/User/User";
-import CalendarPage from "../../pages/Calendar/CalendarPage";
 
-export default function FabButton({navigation}) {
+export default function FabButton({navigation , icon1 , icon2 , icon3 , iconNav1 , iconNav2 , iconNav3}) {
 	const [primeiroIcon] = useState(new Animated.Value(40));
 	const [segundoIcon] = useState(new Animated.Value(40));
 	const [terceiroIcon] = useState(new Animated.Value(40));
@@ -83,18 +80,18 @@ export default function FabButton({navigation}) {
 			flex: 1,
 		}}>
 			<Animated.View style={[styles.btn, {bottom: primeiroIcon}]}>
-				<TouchableOpacity onPress={()=> navigation.navigate(Main)}>
-					<Icon name="user" size={25} color="#fff" />
+				<TouchableOpacity onPress={()=> navigation.navigate(iconNav1)}>
+					<Icon name={icon1} size={25} color="#fff" />
 				</TouchableOpacity>
 			</Animated.View>
 			<Animated.View style={[styles.btn, {bottom: segundoIcon , right: segundoIcon}]}>
-				<TouchableOpacity onPress={()=> navigation.navigate(User)}>
-					<Icon name="book" size={25} color="#fff" />
+				<TouchableOpacity onPress={()=> navigation.navigate(iconNav2)}>
+					<Icon name={icon2} size={25} color="#fff" />
 				</TouchableOpacity>
 			</Animated.View>
 			<Animated.View style={[styles.btn, { right: terceiroIcon}]}>
-				<TouchableOpacity onPress={()=> navigation.navigate(CalendarPage)}>
-					<Icon name="user" size={25} color="#fff" />
+				<TouchableOpacity onPress={()=> navigation.navigate(iconNav3)}>
+					<Icon name={icon3} size={25} color="#fff" />
 				</TouchableOpacity>
 			</Animated.View>
 			<TouchableOpacity
