@@ -1,7 +1,7 @@
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, ToastAndroid } from 'react-native';
 import { TextInput, Button, Text, Provider as PaperProvider, DefaultTheme } from 'react-native-paper';
-import React, { useState, useEffect } from 'react';
-import axios from "axios";
+import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const theme = {
@@ -17,6 +17,21 @@ export default function Login({ navigation }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorInfo, setErrorInfo] = useState('');
+
+  useEffect(() => {
+    const checkAccessToken = async () => {
+      try {
+        const accessToken = await AsyncStorage.getItem('accessToken');
+        if (accessToken) {
+          showToast("Olá novamente");
+          navigation.navigate('Main');
+        }
+      } catch (error) {
+        console.error('Error checking accessToken:', error);
+      }
+    };
+    checkAccessToken();
+  }, []);
 
   const handleSave = () => {
     if (username.trim() === '') {
@@ -40,19 +55,20 @@ export default function Login({ navigation }) {
     const userSignInData = {
       username: username,
       password: password,
-    }
+    };
 
-    axios.post('http://192.168.15.9:3000/auth/login', userSignInData)
-    axios.post('http://192.168.15.9:3000/auth/login', userSignInData)
+    axios.post('http://10.3.116.89:3000/auth/login', userSignInData)
       .then((signInSuccessResponse) => {
+        setUsername('');
+        setPassword('');
         AsyncStorage.setItem('accessToken', signInSuccessResponse.data);
         navigation.navigate('Main');
       })
       .catch((signInErrorResponse) => {
         console.info(signInErrorResponse.response.data.message);
         setErrorInfo(signInErrorResponse.response.data.message);
-      })
-  }
+      });
+  };
 
   useEffect(() => {
     if (errorInfo) {
@@ -61,12 +77,12 @@ export default function Login({ navigation }) {
   }, [errorInfo]);
 
   const showErrorToast = () => {
-    if (errorInfo === `Usuário não existente`) {
+    if (errorInfo === 'Usuário não existente') {
       showToast(errorInfo);
-    } else if (errorInfo == "Senha incorreta") {
+    } else if (errorInfo === 'Senha incorreta') {
       showToast(errorInfo);
-    } else if (errorInfo[0] == "password is not strong enough") {
-      showToast("Senha não é forte o suficiente");
+    } else if (errorInfo[0] === 'password is not strong enough') {
+      showToast('Senha não é forte o suficiente');
     } else {
       showToast(errorInfo);
     }
@@ -167,11 +183,3 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   }
 });
-
-
-
-
-
-
-
-

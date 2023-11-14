@@ -36,7 +36,7 @@ export default function User({ navigation }) {
                     },
                 };
 
-                axios.get('http://192.168.15.9:3000/auth/profile', config)
+                axios.get('http://10.3.116.89:3000/auth/profile', config)
                     .then((response) => {
                         setFirstName(response.data.firstName);
                         setLastName(response.data.lastName);
@@ -87,7 +87,7 @@ export default function User({ navigation }) {
                 isManager: false
             };
 
-            axios.patch(`http://192.168.15.9:3000/user/update/${username}`, updatedData, config)
+            axios.patch(`http://10.3.116.89:3000/user/update/${username}`, updatedData, config)
                 .then((response) => {
                     console.info(response);
                     showToast("Alterações salvas!")
@@ -162,6 +162,16 @@ export default function User({ navigation }) {
         showAlert();
     };
 
+    const logout = async () => {
+        try {
+            await AsyncStorage.removeItem('accessToken');
+            showToast("Saindo...");
+            navigation.navigate('Login');
+        } catch (error) {
+            console.error('Erro ao fazer logout:', error);
+        }
+    }
+
     return (
         <PaperProvider theme={theme}>
             <ScrollView style={styles.container}>
@@ -173,14 +183,13 @@ export default function User({ navigation }) {
                 <View style={styles.header}>
                     <View style={styles.avatar}>
                         <Avatar.Text size={80} label={avatarLabel} color="#FFF" backgroundColor="#8DC53D" />
+                        <Text style={styles.greeting2}>@{username}</Text>
                     </View>
                     <Text style={styles.greeting}>Olá, {firstName + " " + lastName}</Text>
-                    <Text style={styles.greeting2}>{username}</Text>
                 </View>
 
                 <View>
                     <Text style={styles.editInfos}>Altere suas informações abaixo</Text>
-
                     <TextInput
                         mode='outlined'
                         cancelable='true'
@@ -222,6 +231,9 @@ export default function User({ navigation }) {
 
                     <Button mode="contained" style={styles.button} onPress={handleSave}>
                         Salvar
+                    </Button>
+                    <Button mode="contained" style={styles.buttonLogout} onPress={logout}>
+                        Sair da conta
                     </Button>
 
                     <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={containerStyle}>
@@ -273,12 +285,13 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     greeting2: {
-        fontSize: 15,
+        marginTop: 15,
+        fontSize: 20,
         textAlign: 'center',
     },
     editInfos: {
         marginTop: 20,
-        marginBottom: 81,
+        marginBottom: 41,
         fontSize: 15,
         textAlign: 'center',
     },
@@ -291,6 +304,12 @@ const styles = StyleSheet.create({
     button: {
         marginHorizontal: 50,
         marginVertical: 20,
+        marginBottom: 50,
+        backgroundColor: '#71a42a'
+    },
+    buttonLogout: {
+        marginHorizontal: 50,
+        marginTop: -20,
         marginBottom: 50,
         backgroundColor: '#71a42a'
     },

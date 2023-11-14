@@ -28,7 +28,7 @@ export default function Main({ navigation }) {
           },
         };
 
-        axios.get('http://192.168.15.9:3000/auth/profile', config)
+        axios.get('http://10.3.116.89:3000/auth/profile', config)
           .then((response) => {
             setFirstName(response.data.firstName);
             setLastName(response.data.lastName);
