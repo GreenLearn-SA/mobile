@@ -17,7 +17,7 @@ const EnemDate = () => {
         <View style={styles.container}>
             <TouchableOpacity onPress={redirectToGovPage} style={styles.button}>
                 <Text style={styles.buttonText}>
-                    Faltam {diferencaEmDias} dias para o ENEM
+                    Faltam {diferencaEmDias} dias para o fim das aulas
                 </Text>
             </TouchableOpacity>
         </View>
