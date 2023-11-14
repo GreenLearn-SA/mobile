@@ -17,7 +17,7 @@ const EnemDate = () => {
         <View style={styles.container}>
             <TouchableOpacity onPress={redirectToGovPage} style={styles.button}>
                 <Text style={styles.buttonText}>
-                Faltam {diferencaEmDias} dias para o ENEM
+                    Faltam {diferencaEmDias} dias para o ENEM
                 </Text>
             </TouchableOpacity>
         </View>
@@ -31,7 +31,7 @@ const styles = {
         alignItems: 'center',
     },
     button: {
-        marginTop: 20,
+        marginTop: -50,
         backgroundColor: '#8DC53D',
         padding: 10,
         borderRadius: 5,
