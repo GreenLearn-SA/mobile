@@ -48,15 +48,15 @@ export default function Main({ navigation }) {
 
   return (
     <View style={styles.container}>
-        <Appbar.Header style={styles.topBar}>
-          <Appbar.BackAction onPress={() => navigation.navigate('Login')} />
-          <Appbar.Action icon="account-cog" onPress={() => navigation.navigate('User', { firstName, lastName })} />
-        </Appbar.Header>
+      <Appbar.Header style={styles.topBar}>
+        <Appbar.BackAction onPress={() => navigation.navigate('Login')} />
+        <Appbar.Action icon="account-cog" onPress={() => navigation.navigate('User', { firstName, lastName })} />
+      </Appbar.Header>
 
-        <View style={styles.header}>
-          <Text style={styles.greeting}>Olá, {firstName} {lastName}!</Text>
-          <EnemDate/>
-        </View>
+      <View style={styles.header}>
+        <Text style={styles.greeting}>Olá, {firstName} {lastName}!</Text>
+      </View>
+      <EnemDate />
 
       <View style={styles.grades}>
         <Text style={styles.gradesTitle}>Minhas Matérias</Text>
