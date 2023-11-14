@@ -31,7 +31,7 @@ const styles = {
         alignItems: 'center',
     },
     button: {
-        marginTop: -50,
+        marginTop: 20,
         backgroundColor: '#8DC53D',
         padding: 10,
         borderRadius: 5,

@@ -3,14 +3,14 @@ import { View, TouchableOpacity, StyleSheet, Animated } from "react-native";
 import { SvgXml } from "react-native-svg";
 import Icon from "react-native-vector-icons/FontAwesome";
 
-export default function FabButton({navigation , icon1 , icon2 , icon3 , iconNav1 , iconNav2 , iconNav3}) {
+export default function FabButton({ navigation, icon1, icon2, icon3, iconNav1, iconNav2, iconNav3 }) {
 	const [primeiroIcon] = useState(new Animated.Value(40));
 	const [segundoIcon] = useState(new Animated.Value(40));
 	const [terceiroIcon] = useState(new Animated.Value(40));
 
-	const [pop , setPop] = useState(false)
+	const [pop, setPop] = useState(false)
 
-	const popIn = () =>{
+	const popIn = () => {
 		setPop(true);
 		Animated.timing(primeiroIcon, {
 			toValue: 130,
@@ -29,7 +29,7 @@ export default function FabButton({navigation , icon1 , icon2 , icon3 , iconNav1
 		}).start();
 	}
 
-	const popDut = ()=> {
+	const popDut = () => {
 		setPop(false);
 		Animated.timing(primeiroIcon, {
 			toValue: 40,
@@ -79,18 +79,18 @@ export default function FabButton({navigation , icon1 , icon2 , icon3 , iconNav1
 		<View style={{
 			flex: 1,
 		}}>
-			<Animated.View style={[styles.btn, {bottom: primeiroIcon}]}>
-				<TouchableOpacity onPress={()=> navigation.navigate(iconNav1)}>
+			<Animated.View style={[styles.btn, { bottom: primeiroIcon }]}>
+				<TouchableOpacity onPress={() => navigation.navigate(iconNav1)}>
 					<Icon name={icon1} size={25} color="#fff" />
 				</TouchableOpacity>
 			</Animated.View>
-			<Animated.View style={[styles.btn, {bottom: segundoIcon , right: segundoIcon}]}>
-				<TouchableOpacity onPress={()=> navigation.navigate(iconNav2)}>
+			<Animated.View style={[styles.btn, { bottom: segundoIcon, right: segundoIcon }]}>
+				<TouchableOpacity onPress={() => navigation.navigate(iconNav2)}>
 					<Icon name={icon2} size={25} color="#fff" />
 				</TouchableOpacity>
 			</Animated.View>
-			<Animated.View style={[styles.btn, { right: terceiroIcon}]}>
-				<TouchableOpacity onPress={()=> navigation.navigate(iconNav3)}>
+			<Animated.View style={[styles.btn, { right: terceiroIcon }]}>
+				<TouchableOpacity onPress={() => navigation.navigate(iconNav3)}>
 					<Icon name={icon3} size={25} color="#fff" />
 				</TouchableOpacity>
 			</Animated.View>
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
 		backgroundColor: '#8DC53D',
 		width: 60,
 		height: 60,
-		position: 'absolute',
+		position: "absolute",
 		bottom: 40,
 		right: 40,
 		borderRadius: 50,

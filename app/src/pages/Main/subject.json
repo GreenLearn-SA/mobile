@@ -1,0 +1,6 @@
+[
+    { "id": 1, "text": "Estudar Matemática", "completed": true },
+    { "id": 2, "text": "Simulado de Natureza", "completed": false },
+    { "id": 3, "text": "Razão e proporção - MTM", "completed": false },
+    { "id": 4, "text": "Ecologia - Natureza", "completed": false }
+]
