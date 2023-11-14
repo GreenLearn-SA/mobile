@@ -80,10 +80,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   topBar: {
-    height: 75,
-    paddingTop: 40,
-    paddingHorizontal: 15,
-    paddingVertical: 10,
+    paddingTop: 10,
     backgroundColor: '#8DC53D',
     justifyContent: 'space-between',
     position: 'absolute',
