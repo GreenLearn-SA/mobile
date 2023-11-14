@@ -10,6 +10,7 @@ import Humans from "../pages/Subjects/Humans/Humans";
 import Languages from "../pages/Subjects/Languages/Languages";
 import Nature from "../pages/Subjects/Nature/Nature";
 import CalendarPage from "../pages/Calendar/CalendarPage";
+import Graphs from "../pages/Graphs";
 
 const Stack = createNativeStackNavigator();
 
@@ -31,6 +32,7 @@ export default function Routes() {
       <Stack.Screen name="Languages" component={Languages} />
       <Stack.Screen name="Nature" component={Nature} />
       <Stack.Screen name="CalendarPage" component={CalendarPage} />
+      <Stack.Screen name="Graphs" component={Graphs} />
     </Stack.Navigator>
   );
 }
