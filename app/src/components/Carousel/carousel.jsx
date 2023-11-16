@@ -5,7 +5,6 @@ import { useProgress } from "../../../contexts/MathContext";
 
 export default function Carousel({ navigation }) {
   const { progress } = useProgress();
-
   return (
     <View style={styles.flexContainer}>
       <ScrollView
@@ -25,7 +24,7 @@ export default function Carousel({ navigation }) {
           icon={'compass'}
           titulo={'Humanas'}
           geralColor={'#FF8C00'}
-          progressPercentage={32}
+          progressPercentage={progress}
           onPress={() => navigation.navigate('Humans')}
         />
 
@@ -33,12 +32,12 @@ export default function Carousel({ navigation }) {
           icon={'atom'}
           titulo={'Natureza'}
           geralColor={'#9370DB'}
-          progressPercentage={77}
+          progressPercentage={50}
           onPress={() => navigation.navigate('Nature')}
         />
 
         <CardC
-          icon={'book-education-outline'}
+          icon={'book'}
           titulo={'Linguagens'}
           geralColor={'#3AA2CE'}
           progressPercentage={50}
@@ -49,13 +48,8 @@ export default function Carousel({ navigation }) {
           icon={'progress-pencil'}
           titulo={'Redação'}
           geralColor={'#89CFFB'}
-<<<<<<< HEAD
           progressPercentage={50}
           onPress={() => navigation.navigate('Wording')}
-=======
-          progressPercentage={97}
-          onPress={() => navigation.navigate('Languages')}
->>>>>>> ddf5677c6976bc046cd522f859c4809b42f03746
         />
 
       </ScrollView>
