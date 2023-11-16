@@ -1,14 +1,14 @@
 import * as React from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
-import { Avatar, Button, Card, ProgressBar, Text } from "react-native-paper";
+import { Avatar, Card, ProgressBar, Text } from "react-native-paper";
 
-export default function CardC({ titulo, geralColor, progressPercentage, onPress }) {
+export default function CardC({ icon, titulo, geralColor, progressPercentage, onPress }) {
   const progress = Math.round(progressPercentage);
 
   const LeftContent = (props) => (
     <Avatar.Icon
       {...props}
-      icon="book"
+      icon={icon}
       style={{ backgroundColor: geralColor }}
     />
   )
@@ -35,7 +35,7 @@ export default function CardC({ titulo, geralColor, progressPercentage, onPress 
 
 const styles = StyleSheet.create({
   containerCard: {
-    
+
     width: "20%",
     height: 200,
   },

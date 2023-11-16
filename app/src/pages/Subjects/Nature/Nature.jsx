@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { List } from "react-native-paper";
-import { useProgress } from "../../../../contexts/ProgressContext";
+import { useProgress } from "../../../../contexts/NatureContext";
 
 import biologyData from "./Biology.json";
 import chemicalData from "./Chemical.json";
@@ -99,7 +99,7 @@ export default function Nature({ navigation }) {
         return 0;
     }
   };
-  
+
   return (
     <View style={styles.container}>
       <View style={styles.card}>

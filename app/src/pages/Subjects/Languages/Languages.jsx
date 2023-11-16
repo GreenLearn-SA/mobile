@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import subjects from "./Languages.json";
-import { useProgress } from "../../../../contexts/ProgressContext";
+import { useProgress } from "../../../../contexts/LanguagesContext";
 
 export default function Languages({ navigation }) {
   const [subjectList, setSubjectList] = useState(subjects);

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
 import CardC from './cards';
-import { useProgress } from "../../../contexts/ProgressContext";
+import { useProgress } from "../../../contexts/MathContext";
 
 export default function Carousel({ navigation }) {
   const { progress } = useProgress();
@@ -13,6 +13,7 @@ export default function Carousel({ navigation }) {
         showsHorizontalScrollIndicator={false}
       >
         <CardC
+          icon={'pencil-ruler'}
           titulo={'Matemática'}
           geralColor={'#ff5454'}
           progressPercentage={progress}
@@ -20,6 +21,7 @@ export default function Carousel({ navigation }) {
         />
 
         <CardC
+          icon={'compass'}
           titulo={'Humanas'}
           geralColor={'#FF8C00'}
           progressPercentage={progress}
@@ -27,6 +29,7 @@ export default function Carousel({ navigation }) {
         />
 
         <CardC
+          icon={'atom'}
           titulo={'Natureza'}
           geralColor={'#9370DB'}
           progressPercentage={50}
@@ -34,6 +37,7 @@ export default function Carousel({ navigation }) {
         />
 
         <CardC
+          icon={'book'}
           titulo={'Linguagens'}
           geralColor={'#3AA2CE'}
           progressPercentage={50}

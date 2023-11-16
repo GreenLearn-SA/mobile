@@ -6,88 +6,88 @@ import {
   TouchableOpacity,
   FlatList,
 } from "react-native";
-import { useProgress } from "../../../../contexts/ProgressContext";
+import { useProgress } from "../../../../contexts/HumansContext";
 import { AntDesign } from "@expo/vector-icons";
 import subjects from "./Geography.json";
 
 export default function Humans({ navigation }) {
-    const [subjectList, setSubjectList] = useState(subjects);
-    const { progress, updateProgress } = useProgress(); // Obtenha progress e updateProgress do contexto
-  
-    useEffect(() => {
-      // Calcula o progresso total
-      const completedTasks = subjectList.filter((subject) => subject.completed);
-      const totalTasks = subjectList.length;
-      const totalProgress = (completedTasks.length / totalTasks) * 100;
-      updateProgress(subjectList); // Atualize o progresso no contexto
-    }, [subjectList]);
-  
-    const toggleSubject = (subjectId) => {
-      setSubjectList((prevSubjects) =>
-        prevSubjects.map((subject) =>
-          subject.id === subjectId ? { ...subject, completed: !subject.completed } : subject
-        )
-      );
-    };
+  const [subjectList, setSubjectList] = useState(subjects);
+  const { progress, updateProgress } = useProgress(); // Obtenha progress e updateProgress do contexto
 
-    return (
-      <View style={styles.container}>
-        <View style={styles.card}>
-          <Text style={styles.cardTitle}>Humanas</Text>
-          <TouchableOpacity
-            onPress={() => navigation.goBack()}
-            style={styles.goBackButton}
-          >
-            <AntDesign name="left" size={24} color="#f5f5f5" />
-          </TouchableOpacity>
-        </View>
-  
-        <View style={styles.taskContainer}>
-          <Text style={styles.progressText}>
-            Progresso: {progress.toFixed(2)}%
-          </Text>
-          <View style={styles.progressBar}>
-            <View
-              style={{
-                width: `${progress}%`,
-                backgroundColor: "#ff5454",
-                height: 10,
-              }}
-            />
-          </View>
-          <FlatList
-            data={subjectList}
-            keyExtractor={(item) => item.id.toString()}
-            renderItem={({ item }) => (
-              <View style={styles.taskItem}>
-                <View style={styles.taskTextContainer}>
-                  <Text
-                    style={{
-                      textDecorationLine: item.completed
-                        ? "line-through"
-                        : "none",
-                    }}
-                  >
-                    {item.text}
-                  </Text>
-                </View>
-                <TouchableOpacity
-                  onPress={() => toggleSubject(item.id)}
-                  style={styles.checkButton}
-                >
-                  {item.completed ? (
-                    <AntDesign name="checksquare" size={24} color="#ff5454" />
-                  ) : (
-                    <AntDesign name="checksquareo" size={24} color="#ff5454" />
-                  )}
-                </TouchableOpacity>
-              </View>
-            )}
+  useEffect(() => {
+    // Calcula o progresso total
+    const completedTasks = subjectList.filter((subject) => subject.completed);
+    const totalTasks = subjectList.length;
+    const totalProgress = (completedTasks.length / totalTasks) * 100;
+    updateProgress(subjectList); // Atualize o progresso no contexto
+  }, [subjectList]);
+
+  const toggleSubject = (subjectId) => {
+    setSubjectList((prevSubjects) =>
+      prevSubjects.map((subject) =>
+        subject.id === subjectId ? { ...subject, completed: !subject.completed } : subject
+      )
+    );
+  };
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.card}>
+        <Text style={styles.cardTitle}>Humanas</Text>
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          style={styles.goBackButton}
+        >
+          <AntDesign name="left" size={24} color="#f5f5f5" />
+        </TouchableOpacity>
+      </View>
+
+      <View style={styles.taskContainer}>
+        <Text style={styles.progressText}>
+          Progresso: {progress.toFixed(2)}%
+        </Text>
+        <View style={styles.progressBar}>
+          <View
+            style={{
+              width: `${progress}%`,
+              backgroundColor: "#FF8C00",
+              height: 10,
+            }}
           />
         </View>
+        <FlatList
+          data={subjectList}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => (
+            <View style={styles.taskItem}>
+              <View style={styles.taskTextContainer}>
+                <Text
+                  style={{
+                    textDecorationLine: item.completed
+                      ? "line-through"
+                      : "none",
+                  }}
+                >
+                  {item.text}
+                </Text>
+              </View>
+              <TouchableOpacity
+                onPress={() => toggleSubject(item.id)}
+                style={styles.checkButton}
+              >
+                {item.completed ? (
+                  <AntDesign name="checksquare" size={24} color="#FF8C00" />
+                ) : (
+                  <AntDesign name="checksquareo" size={24} color="#FF8C00" />
+                )}
+              </TouchableOpacity>
+            </View>
+          )}
+        />
       </View>
-    );
-  }
+    </View>
+  );
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#f5f5f5",
   },
   card: {
-    backgroundColor: "#ff5454",
+    backgroundColor: "#FF8C00",
     paddingTop: "2%",
     paddingBottom: "2%",
     height: "20%",
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     marginBottom: 10,
-    borderColor: "#ff5454",
+    borderColor: "#FF8C00",
     borderWidth: 1,
     borderRadius: 5,
     padding: 10,
