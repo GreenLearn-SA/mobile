@@ -78,7 +78,6 @@ export default function Main({ navigation }) {
           Olá, {firstName} {lastName}!
         </Text>
       </View>
-      <EnemDate />
 
       <View style={styles.grades}>
         <Text style={styles.gradesTitle}>Minhas Matérias</Text>
