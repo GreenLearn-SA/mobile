@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     marginTop: 40,
   },
   progressBar: {
-    marginLeft: 26,
+    marginLeft: 0,
     marginTop: 5,
     textAlign: "center",
     width: 150,
