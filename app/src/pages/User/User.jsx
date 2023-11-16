@@ -174,84 +174,67 @@ export default function User({ navigation }) {
 
     return (
         <PaperProvider theme={theme}>
-            <ScrollView style={styles.container}>
-                <Appbar.Header style={styles.topBar}>
-                    <Appbar.BackAction onPress={() => navigation.goBack()} />
-                    <Appbar.Action icon="account-cog" onPress={() => navigation.navigate('User')} />
-                </Appbar.Header>
+            <Appbar.Header style={styles.topBar}>
+                <Appbar.BackAction onPress={() => navigation.goBack()} />
+                <Appbar.Action icon="account-cog" onPress={() => navigation.navigate('User')} />
+            </Appbar.Header>
 
-                <View style={styles.header}>
-                    <View style={styles.avatar}>
-                        <Avatar.Text size={80} label={avatarLabel} color="#FFF" backgroundColor="#8DC53D" />
-                        <Text style={styles.greeting2}>@{username}</Text>
-                    </View>
-                    <Text style={styles.greeting}>Olá, {firstName + " " + lastName}</Text>
+            <View style={styles.header}>
+                <View style={styles.avatar}>
+                    <Avatar.Text size={80} label={avatarLabel} color="#FFF" backgroundColor="#8DC53D" />
+                    <Text style={styles.greeting2}>@{username}</Text>
                 </View>
+                <Text style={styles.greeting}>Olá, {firstName + " " + lastName}</Text>
+            </View>
 
-                <View>
-                    <Text style={styles.editInfos}>Altere suas informações abaixo</Text>
-                    <TextInput
-                        mode='outlined'
-                        cancelable='true'
-                        style={styles.input}
-                        label={"Username"}
-                        value={newUsername}
-                        outlineColor='#71a42a'
-                        selectionColor='#71a42a'
-                        onChangeText={text => setNewUsername(text)}
-                        left={
-                            <TextInput.Icon
-                                icon={'account'}
-                            />
-                        }
-                    />
-
-                    <TextInput
-                        mode='outlined'
-                        cancelable='true'
-                        style={styles.input}
-                        label={"Senha"}
-                        value={newPassword}
-                        outlineColor='#71a42a'
-                        selectionColor='#71a42a'
-                        secureTextEntry={passwordVisible}
-                        onChangeText={text => setNewPassword(text)}
-                        right={
-                            <TextInput.Icon
-                                icon={passwordVisible ? 'eye-off' : 'eye'}
-                                onPress={() => setPasswordVisible(!passwordVisible)}
-                            />
-                        }
-                        left={
-                            <TextInput.Icon
-                                icon={'lock'}
-                            />
-                        }
-                    />
-
-                    <Button mode="contained" style={styles.button} onPress={handleSave}>
-                        Salvar
-                    </Button>
-                    <Button mode="contained" style={styles.buttonLogout} onPress={logout}>
-                        Sair da conta
-                    </Button>
-
-                    <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={containerStyle}>
-                        <Image
-                            style={styles.tinyLogo}
-                            source={mind}
+            <View>
+                <Text style={styles.editInfos}>Altere suas informações abaixo</Text>
+                <TextInput
+                    mode='outlined'
+                    cancelable='true'
+                    style={styles.input}
+                    label={"Username"}
+                    value={newUsername}
+                    outlineColor='#71a42a'
+                    selectionColor='#71a42a'
+                    onChangeText={text => setNewUsername(text)}
+                    left={
+                        <TextInput.Icon
+                            icon={'account'}
                         />
-                    </Modal>
+                    }
+                />
 
-                    <Text style={styles.ash2}>Clique no ícone abaixo.</Text>
-                    <IconButton style={styles.ash}
-                        icon="cursor-default-click"
-                        iconColor={"#71a42a"}
-                        size={100}
-                        onPress={showModal}
-                    />
-                </View>
-            </ScrollView>
+                <TextInput
+                    mode='outlined'
+                    cancelable='true'
+                    style={styles.input}
+                    label={"Senha"}
+                    value={newPassword}
+                    outlineColor='#71a42a'
+                    selectionColor='#71a42a'
+                    secureTextEntry={passwordVisible}
+                    onChangeText={text => setNewPassword(text)}
+                    right={
+                        <TextInput.Icon
+                            icon={passwordVisible ? 'eye-off' : 'eye'}
+                            onPress={() => setPasswordVisible(!passwordVisible)}
+                        />
+                    }
+                    left={
+                        <TextInput.Icon
+                            icon={'lock'}
+                        />
+                    }
+                />
+
+                <Button mode="contained" style={styles.button} onPress={handleSave}>
+                    Salvar
+                </Button>
+                <Button mode="contained" style={styles.buttonLogout} onPress={logout}>
+                    Sair da conta
+                </Button>
+            </View>
         </PaperProvider>
     );
 }
@@ -291,7 +274,7 @@ const styles = StyleSheet.create({
     },
     editInfos: {
         marginTop: 20,
-        marginBottom: 41,
+        marginBottom: 20,
         fontSize: 15,
         textAlign: 'center',
     },
