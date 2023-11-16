@@ -1,36 +1,43 @@
-import { StyleSheet, View, ScrollView, TouchableOpacity, FlatList } from 'react-native';
-import { Appbar, Text, Checkbox } from 'react-native-paper';
-import React, { useState, useEffect } from 'react';
-import CalendarPage from '../Calendar/CalendarPage'
-import Graphs from '../Graphs/index';
+import {
+  StyleSheet,
+  View,
+  ScrollView,
+  TouchableOpacity,
+  FlatList,
+} from "react-native";
+import { Appbar, Text, Checkbox } from "react-native-paper";
+import React, { useState, useEffect } from "react";
+import CalendarPage from "../Calendar/CalendarPage";
+import Graphs from "../Graphs/index";
 import Carousel from "../../components/Carousel/carousel";
 import EnemDate from "../../components/EnemDate/EnemDate";
 import FabButton from "../../components/Button/FabButton";
 import axios from "axios";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import subjects from "./subject.json";
 
 export default function Main({ navigation }) {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [subjectList, setSubjectList] = useState(subjects);
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const accessToken = await AsyncStorage.getItem('accessToken');
+        const accessToken = await AsyncStorage.getItem("accessToken");
         if (!accessToken) {
-          console.error('Access token is missing.');
+          console.error("Access token is missing.");
           return;
         }
 
         const config = {
           headers: {
-            Authorization: `Bearer ${accessToken}`
+            Authorization: `Bearer ${accessToken}`,
           },
         };
 
-        axios.get('http://10.3.118.49:3000/auth/profile', config)
+        axios
+          .get("http://10.3.118.49:3000/auth/profile", config)
           .then((response) => {
             setFirstName(response.data.firstName);
             setLastName(response.data.lastName);
@@ -49,7 +56,9 @@ export default function Main({ navigation }) {
   const toggleSubject = (subjectId) => {
     setSubjectList((prevSubjects) =>
       prevSubjects.map((subject) =>
-        subject.id === subjectId ? { ...subject, completed: !subject.completed } : subject
+        subject.id === subjectId
+          ? { ...subject, completed: !subject.completed }
+          : subject
       )
     );
   };
@@ -57,12 +66,17 @@ export default function Main({ navigation }) {
   return (
     <View style={styles.container}>
       <Appbar.Header style={styles.topBar}>
-        <Appbar.BackAction onPress={() => navigation.navigate('Login')} />
-        <Appbar.Action icon="account-cog" onPress={() => navigation.navigate('User', { firstName, lastName })} />
+        <Appbar.BackAction onPress={() => navigation.navigate("Login")} />
+        <Appbar.Action
+          icon="account-cog"
+          onPress={() => navigation.navigate("User", { firstName, lastName })}
+        />
       </Appbar.Header>
 
       <View style={styles.header}>
-        <Text style={styles.greeting}>Olá, {firstName} {lastName}!</Text>
+        <Text style={styles.greeting}>
+          Olá, {firstName} {lastName}!
+        </Text>
       </View>
       <EnemDate />
 
@@ -72,43 +86,41 @@ export default function Main({ navigation }) {
       </View>
 
       <Text style={styles.objectivesTitle}>Metas</Text>
-      <ScrollView style={styles.objectives}>
-        <FlatList
-          data={subjectList}
-          keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item }) => (
-            <View style={styles.taskItem}>
-              <View style={styles.objectivesComponent}>
-                <Checkbox
-                  style={styles.checkbox}
-                  status={item.completed ? 'checked' : 'unchecked'}
-                  onPress={() => toggleSubject(item.id)}
-                  color="#4CAF50"
-                />
-                <Text
-                  style={{
-                    textDecorationLine: item.completed ? 'line-through' : 'none',
-                    flex: 1,
-                    fontSize: 17,
-                    color: item.completed ? '#999' : '#000',
-                  }}
-                >
-                  {item.text}
-                </Text>
-              </View>
+      <FlatList
+        data={subjectList}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => (
+          <View style={styles.taskItem}>
+            <View style={styles.objectivesComponent}>
+              <Checkbox
+                style={styles.checkbox}
+                status={item.completed ? "checked" : "unchecked"}
+                onPress={() => toggleSubject(item.id)}
+                color="#4CAF50"
+              />
+              <Text
+                style={{
+                  textDecorationLine: item.completed ? "line-through" : "none",
+                  flex: 1,
+                  fontSize: 17,
+                  color: item.completed ? "#999" : "#000",
+                }}
+              >
+                {item.text}
+              </Text>
             </View>
-          )}
-        />
-      </ScrollView>
+          </View>
+        )}
+      />
 
       <FabButton
         style={styles.mainBtn}
         navigation={navigation}
-        icon1={'user'}
-        iconNav1={'User'}
-        icon2={'calendar-o'}
+        icon1={"user"}
+        iconNav1={"User"}
+        icon2={"calendar-o"}
         iconNav2={CalendarPage}
-        icon3={'bar-chart'}
+        icon3={"bar-chart"}
         iconNav3={Graphs}
       />
     </View>
@@ -121,15 +133,15 @@ const styles = StyleSheet.create({
   },
   topBar: {
     paddingTop: 10,
-    backgroundColor: '#8DC53D',
-    justifyContent: 'space-between',
-    position: 'absolute',
+    backgroundColor: "#8DC53D",
+    justifyContent: "space-between",
+    position: "absolute",
     left: 0,
     right: 0,
     top: 0,
     elevation: 0,
     borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20
+    borderBottomRightRadius: 20,
   },
   header: {
     marginTop: 80,
@@ -137,8 +149,8 @@ const styles = StyleSheet.create({
   },
   greeting: {
     fontSize: 32,
-    textAlign: 'center',
-    fontWeight: 'bold',
+    textAlign: "center",
+    fontWeight: "bold",
   },
   grades: {
     marginTop: 50,
@@ -146,7 +158,7 @@ const styles = StyleSheet.create({
   },
   gradesTitle: {
     fontSize: 30,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   space: {
     marginVertical: 100,
@@ -155,7 +167,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   scrollH: {
-    gap: 50
+    gap: 50,
   },
   objectives: {
     paddingHorizontal: 20,
@@ -164,21 +176,22 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginBottom: 20,
     fontSize: 30,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   objectivesComponent: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   checkbox: {
     marginRight: 8,
     height: 30,
-    width: 30
+    width: 30,
   },
   checkboxText: {
     fontSize: 16,
   },
   taskItem: {
+    alignSelf: "center",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
@@ -189,6 +202,7 @@ const styles = StyleSheet.create({
     padding: 10,
     height: 55,
     marginBottom: 20,
+    width: "90%"
   },
   taskTextContainer: {
     flex: 1,
