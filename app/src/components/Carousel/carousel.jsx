@@ -44,6 +44,14 @@ export default function Carousel({ navigation }) {
           onPress={() => navigation.navigate('Languages')}
         />
 
+        <CardC
+          icon={'progress-pencil'}
+          titulo={'Redação'}
+          geralColor={'#89CFFB'}
+          progressPercentage={50}
+          onPress={() => navigation.navigate('Languages')}
+        />
+
       </ScrollView>
     </View >
 

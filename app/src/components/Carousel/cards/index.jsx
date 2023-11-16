@@ -35,8 +35,7 @@ export default function CardC({ icon, titulo, geralColor, progressPercentage, on
 
 const styles = StyleSheet.create({
   containerCard: {
-
-    width: "20%",
+    width: 170,
     height: 200,
   },
   progressView: {
