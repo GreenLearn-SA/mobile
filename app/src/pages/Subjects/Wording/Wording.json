@@ -1,0 +1,7 @@
+[
+    { "id": 1, "text": "Mobilidade urbana sustentável", "completed": false },
+    { "id": 2, "text": "Educação a distância", "completed": false },
+    { "id": 3, "text": "Analfabetismo total e funcional", "completed": false },
+    { "id": 4, "text": "O combate às epidemias no Brasil", "completed": false },
+    { "id": 5, "text": "Obesidade no Brasil", "completed": false }
+]

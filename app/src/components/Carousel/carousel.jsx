@@ -49,7 +49,7 @@ export default function Carousel({ navigation }) {
           titulo={'Redação'}
           geralColor={'#89CFFB'}
           progressPercentage={50}
-          onPress={() => navigation.navigate('Languages')}
+          onPress={() => navigation.navigate('Wording')}
         />
 
       </ScrollView>

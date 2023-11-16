@@ -9,6 +9,7 @@ import Math from "../pages/Subjects/Math/Math";
 import Humans from "../pages/Subjects/Humans/Humans";
 import Languages from "../pages/Subjects/Languages/Languages";
 import Nature from "../pages/Subjects/Nature/Nature";
+import Wording from '../pages/Subjects/Wording/Wording'
 import CalendarPage from "../pages/Calendar/CalendarPage";
 import Graphs from "../pages/Graphs";
 
@@ -31,6 +32,7 @@ export default function Routes() {
       <Stack.Screen name="Humans" component={Humans} />
       <Stack.Screen name="Languages" component={Languages} />
       <Stack.Screen name="Nature" component={Nature} />
+      <Stack.Screen name="Wording" component={Wording} />
       <Stack.Screen name="CalendarPage" component={CalendarPage} />
       <Stack.Screen name="Graphs" component={Graphs} />
     </Stack.Navigator>
