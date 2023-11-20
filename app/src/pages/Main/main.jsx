@@ -6,7 +6,7 @@ import {
   FlatList,
 } from "react-native";
 import { Appbar, Text, Checkbox } from "react-native-paper";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import CalendarPage from "../Calendar/CalendarPage";
 import Graphs from "../Graphs/index";
 import Carousel from "../../components/Carousel/carousel";
@@ -14,11 +14,15 @@ import FabButton from "../../components/Button/FabButton";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import subjects from "./subject.json";
+import ChartLine from "../../components/ChartLine";
+import { useProgress } from "../../../contexts/MathContext";
+
 
 export default function Main({ navigation }) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [subjectList, setSubjectList] = useState(subjects);
+  const { progress } = useProgress();
 
   useEffect(() => {
     async function fetchData() {
@@ -36,7 +40,7 @@ export default function Main({ navigation }) {
         };
 
         axios
-          .get("http://10.3.116.89:3000/auth/profile", config)
+          .get("http://192.168.15.9:3000/auth/profile", config)
           .then((response) => {
             setFirstName(response.data.firstName);
             setLastName(response.data.lastName);
@@ -62,6 +66,9 @@ export default function Main({ navigation }) {
     );
   };
 
+  const subjectsChart = ["Matemática", "Humanas", "Linguagens", "Natureza"];
+  const percentages = [progress, 20, 22, 28];
+
   return (
     <View style={styles.container}>
       <Appbar.Header style={styles.topBar}>
@@ -75,6 +82,11 @@ export default function Main({ navigation }) {
         <Text style={styles.greeting}>
           Olá, {firstName} {lastName}!
         </Text>
+      </View>
+
+      <View style={styles.semProgress}>
+        <Text style={styles.progress}>Progresso Semanal</Text>
+        <ChartLine percentages={percentages} subjects={subjectsChart}/>
       </View>
 
       <View style={styles.grades}>
@@ -148,6 +160,16 @@ const styles = StyleSheet.create({
     fontSize: 32,
     textAlign: "center",
     fontWeight: "bold",
+    color: "#8DC53D",
+  },
+  progress: {
+    fontSize: 32,
+    textAlign: "center",
+    fontWeight: "bold",
+    marginTop: 20,
+  },
+  semProgress:{
+    width: "90%",
   },
   grades: {
     marginTop: 50,

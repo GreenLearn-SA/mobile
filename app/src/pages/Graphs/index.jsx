@@ -5,8 +5,6 @@ import ChartScreen from "../../components/ChartScreen";
 import ChartLine from "../../components/ChartLine";
 
 export default function Graphs() {
-  const subjects = ["Matemática", "Humanas", "Linguagens", "Natureza"];
-  const percentages = [30, 25, 20, 25];
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>

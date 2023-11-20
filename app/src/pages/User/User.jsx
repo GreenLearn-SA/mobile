@@ -36,7 +36,7 @@ export default function User({ navigation }) {
                     },
                 };
 
-                axios.get('http://10.3.116.89:3000/auth/profile', config)
+                axios.get('http://192.168.15.9:3000/auth/profile', config)
                     .then((response) => {
                         setFirstName(response.data.firstName);
                         setLastName(response.data.lastName);
@@ -87,7 +87,7 @@ export default function User({ navigation }) {
                 isManager: false
             };
 
-            axios.patch(`http://10.3.116.89:3000/user/update/${username}`, updatedData, config)
+            axios.patch(`http://192.168.15.9:3000/user/update/${username}`, updatedData, config)
                 .then((response) => {
                     console.info(response);
                     showToast("Alterações salvas!")

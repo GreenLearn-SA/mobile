@@ -7,7 +7,7 @@ const ChartLine = ({ subjects, percentages }) => {
 
     const chartConfig = {
         backgroundGradientFrom: '#fff',
-        backgroundGradientTo: '#8dc53d',
+        backgroundGradientTo: '#fff',
         color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
         labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
     };
