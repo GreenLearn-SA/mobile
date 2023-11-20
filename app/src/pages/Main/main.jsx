@@ -66,8 +66,8 @@ export default function Main({ navigation }) {
     );
   };
 
-  const subjectsChart = ["Matemática", "Humanas", "Linguagens", "Natureza"];
-  const percentages = [progress, 20, 22, 28];
+  const subjectsChart = ["Matemática", "Humanas", "Linguagens", "Natureza", "Redação"];
+  const percentages = [progress, 20, 22, 18, 10];
 
   return (
     <View style={styles.container}>
