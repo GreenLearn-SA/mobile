@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { List } from "react-native-paper";
-import { useProgress } from "../../../../contexts/NatureContext";
+import { useProgress } from "../../../../contexts/MathContext";
 
 import biologyData from "./Biology.json";
 import chemicalData from "./Chemical.json";
