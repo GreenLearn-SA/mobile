@@ -84,8 +84,8 @@ export default function Main({ navigation }) {
         </Text>
       </View>
 
-      <View style={styles.semProgress}>
-        <Text style={styles.progress}>Progresso Semanal</Text>
+      <View style={styles.grades}>
+        <Text style={styles.gradesTitle}>Progresso Semanal</Text>
         <ChartLine percentages={percentages} subjects={subjectsChart}/>
       </View>
 
@@ -161,15 +161,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontWeight: "bold",
     color: "#8DC53D",
-  },
-  progress: {
-    fontSize: 32,
-    textAlign: "center",
-    fontWeight: "bold",
-    marginTop: 20,
-  },
-  semProgress:{
-    width: "90%",
   },
   grades: {
     marginTop: 50,
