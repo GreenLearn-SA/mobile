@@ -24,7 +24,7 @@ export default function Carousel({ navigation }) {
           icon={'compass'}
           titulo={'Humanas'}
           geralColor={'#FF8C00'}
-          progressPercentage={progress}
+          progressPercentage={20}
           onPress={() => navigation.navigate('Humans')}
         />
 
@@ -32,7 +32,7 @@ export default function Carousel({ navigation }) {
           icon={'atom'}
           titulo={'Natureza'}
           geralColor={'#9370DB'}
-          progressPercentage={50}
+          progressPercentage={22}
           onPress={() => navigation.navigate('Nature')}
         />
 
@@ -40,7 +40,7 @@ export default function Carousel({ navigation }) {
           icon={'book'}
           titulo={'Linguagens'}
           geralColor={'#3AA2CE'}
-          progressPercentage={50}
+          progressPercentage={18}
           onPress={() => navigation.navigate('Languages')}
         />
 
@@ -48,7 +48,7 @@ export default function Carousel({ navigation }) {
           icon={'progress-pencil'}
           titulo={'Redação'}
           geralColor={'#89CFFB'}
-          progressPercentage={50}
+          progressPercentage={10}
           onPress={() => navigation.navigate('Wording')}
         />
 
