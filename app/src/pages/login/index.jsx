@@ -57,7 +57,7 @@ export default function Login({ navigation }) {
       password: password,
     };
 
-    axios.post('http://192.168.15.9:3000/auth/login', userSignInData)
+    axios.post('http://10.3.118.49:3000/auth/login', userSignInData)
       .then((signInSuccessResponse) => {
         setUsername('');
         setPassword('');

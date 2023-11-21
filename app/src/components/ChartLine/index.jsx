@@ -6,7 +6,8 @@ const ChartLine = ({ subjects, percentages }) => {
     const screenWidth = Dimensions.get('window').width;
 
     const chartConfig = {
-        backgroundColor: "#fff",
+        backgroundGradientFrom: "#fff",
+        backgroundGradientTo: "#fff",
         color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
         labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
     };
@@ -30,6 +31,8 @@ const ChartLine = ({ subjects, percentages }) => {
                 height={220}
                 yAxisSuffix="%"
                 chartConfig={chartConfig}
+                fromZero={true}
+                transparent={true}
             />
         </View>
     );

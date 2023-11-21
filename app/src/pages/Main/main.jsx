@@ -17,7 +17,6 @@ import subjects from "./subject.json";
 import ChartLine from "../../components/ChartLine";
 import { useProgress } from "../../../contexts/MathContext";
 
-
 export default function Main({ navigation }) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -40,7 +39,7 @@ export default function Main({ navigation }) {
         };
 
         axios
-          .get("http://192.168.15.9:3000/auth/profile", config)
+          .get("http://10.3.118.49:3000/auth/profile", config)
           .then((response) => {
             setFirstName(response.data.firstName);
             setLastName(response.data.lastName);
@@ -66,27 +65,34 @@ export default function Main({ navigation }) {
     );
   };
 
-  const subjectsChart = ["Matemática", "Humanas", "Linguagens", "Natureza", "Redação"];
+  const subjectsChart = [
+    "Matemática",
+    "Humanas",
+    "Linguagens",
+    "Natureza",
+    "Redação",
+  ];
   const percentages = [progress, 20, 22, 18, 10];
 
   return (
     <View style={styles.container}>
+      <ScrollView>
       <Appbar.Header style={styles.topBar}>
         <Appbar.Action
           icon="account-cog"
           onPress={() => navigation.navigate("User", { firstName, lastName })}
         />
       </Appbar.Header>
-
       <View style={styles.header}>
         <Text style={styles.greeting}>
           Olá, {firstName} {lastName}!
         </Text>
+        <Text style={styles.wlcm}>Seja bem vindo!</Text>
       </View>
 
       <View style={styles.grades}>
         <Text style={styles.gradesTitle}>Progresso Semanal</Text>
-        <ChartLine percentages={percentages} subjects={subjectsChart}/>
+        <ChartLine percentages={percentages} subjects={subjectsChart} />
       </View>
 
       <View style={styles.grades}>
@@ -99,26 +105,30 @@ export default function Main({ navigation }) {
         data={subjectList}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
-          <View style={styles.taskItem}>
-            <View style={styles.objectivesComponent}>
-              <Checkbox
-                style={styles.checkbox}
-                status={item.completed ? "checked" : "unchecked"}
-                onPress={() => toggleSubject(item.id)}
-                color="#4CAF50"
-              />
-              <Text
-                style={{
-                  textDecorationLine: item.completed ? "line-through" : "none",
-                  flex: 1,
-                  fontSize: 17,
-                  color: item.completed ? "#999" : "#000",
-                }}
-              >
-                {item.text}
-              </Text>
+          <ScrollView >
+            <View style={styles.taskItem}>
+              <View style={styles.objectivesComponent}>
+                <Checkbox
+                  style={styles.checkbox}
+                  status={item.completed ? "checked" : "unchecked"}
+                  onPress={() => toggleSubject(item.id)}
+                  color="#4CAF50"
+                />
+                <Text
+                  style={{
+                    textDecorationLine: item.completed
+                      ? "line-through"
+                      : "none",
+                    flex: 1,
+                    fontSize: 17,
+                    color: item.completed ? "#999" : "#000",
+                  }}
+                >
+                  {item.text}
+                </Text>
+              </View>
             </View>
-          </View>
+          </ScrollView>
         )}
       />
 
@@ -132,6 +142,7 @@ export default function Main({ navigation }) {
         icon3={"bar-chart"}
         iconNav3={Graphs}
       />
+      </ScrollView>
     </View>
   );
 }
@@ -139,6 +150,7 @@ export default function Main({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#fff",
   },
   topBar: {
     paddingTop: 10,
@@ -155,12 +167,16 @@ const styles = StyleSheet.create({
   header: {
     marginTop: 80,
     paddingHorizontal: 20,
+    alignItems: "center",
   },
   greeting: {
-    fontSize: 32,
+    fontSize: 34,
     textAlign: "center",
     fontWeight: "bold",
     color: "#8DC53D",
+  },
+  wlcm: {
+    fontSize: 22,
   },
   grades: {
     marginTop: 50,
@@ -212,7 +228,7 @@ const styles = StyleSheet.create({
     padding: 10,
     height: 55,
     marginBottom: 20,
-    width: "90%"
+    width: "90%",
   },
   taskTextContainer: {
     flex: 1,
