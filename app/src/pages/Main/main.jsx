@@ -17,7 +17,6 @@ import subjects from "./subject.json";
 import ChartLine from "../../components/ChartLine";
 import { useProgress } from "../../../contexts/MathContext";
 
-
 export default function Main({ navigation }) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -70,58 +69,67 @@ export default function Main({ navigation }) {
   const percentages = [progress, 20, 22, 28];
 
   return (
-    <View style={styles.container}>
-      <Appbar.Header style={styles.topBar}>
-        <Appbar.Action
-          icon="account-cog"
-          onPress={() => navigation.navigate("User", { firstName, lastName })}
-        />
-      </Appbar.Header>
+    <ScrollView horizontal={false}>
+      <View style={styles.container}>
+        <Appbar.Header style={styles.topBar}>
+          <Appbar.Action
+            icon="account-cog"
+            onPress={() => navigation.navigate("User", { firstName, lastName })}
+          />
+        </Appbar.Header>
 
-      <View style={styles.header}>
-        <Text style={styles.greeting}>
-          Olá, {firstName} {lastName}!
-        </Text>
+        <View style={styles.header}>
+          <Text style={styles.greeting}>
+            Olá, {firstName} {lastName}!
+          </Text>
+        </View>
+
+        <View style={styles.semProgress}>
+          <Text style={styles.progress}>Progresso Semanal</Text>
+          <ChartLine percentages={percentages} subjects={subjectsChart} />
+        </View>
+
+        <View style={styles.grades}>
+          <Text style={styles.gradesTitle}>Minhas Matérias</Text>
+          <Carousel navigation={navigation} />
+        </View>
+
+        <Text style={styles.objectivesTitle}>Metas</Text>
+        <ScrollView
+          horizontal={true}
+          contentContainerStyle={styles.listaDoKcete}
+          showsHorizontalScrollIndicator={false}
+        >
+          <FlatList
+            data={subjectList}
+            keyExtractor={(item) => item.id.toString()}
+            renderItem={({ item }) => (
+              <View style={styles.taskItem}>
+                <View style={styles.objectivesComponent}>
+                  <Checkbox
+                    style={styles.checkbox}
+                    status={item.completed ? "checked" : "unchecked"}
+                    onPress={() => toggleSubject(item.id)}
+                    color="#4CAF50"
+                  />
+                  <Text
+                    style={{
+                      textDecorationLine: item.completed
+                        ? "line-through"
+                        : "none",
+                      flex: 1,
+                      fontSize: 17,
+                      color: item.completed ? "#999" : "#000",
+                    }}
+                  >
+                    {item.text}
+                  </Text>
+                </View>
+              </View>
+            )}
+          />
+        </ScrollView>
       </View>
-
-      <View style={styles.semProgress}>
-        <Text style={styles.progress}>Progresso Semanal</Text>
-        <ChartLine percentages={percentages} subjects={subjectsChart}/>
-      </View>
-
-      <View style={styles.grades}>
-        <Text style={styles.gradesTitle}>Minhas Matérias</Text>
-        <Carousel navigation={navigation} />
-      </View>
-
-      <Text style={styles.objectivesTitle}>Metas</Text>
-      <FlatList
-        data={subjectList}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => (
-          <View style={styles.taskItem}>
-            <View style={styles.objectivesComponent}>
-              <Checkbox
-                style={styles.checkbox}
-                status={item.completed ? "checked" : "unchecked"}
-                onPress={() => toggleSubject(item.id)}
-                color="#4CAF50"
-              />
-              <Text
-                style={{
-                  textDecorationLine: item.completed ? "line-through" : "none",
-                  flex: 1,
-                  fontSize: 17,
-                  color: item.completed ? "#999" : "#000",
-                }}
-              >
-                {item.text}
-              </Text>
-            </View>
-          </View>
-        )}
-      />
-
       <FabButton
         style={styles.mainBtn}
         navigation={navigation}
@@ -132,7 +140,7 @@ export default function Main({ navigation }) {
         icon3={"bar-chart"}
         iconNav3={Graphs}
       />
-    </View>
+    </ScrollView>
   );
 }
 
@@ -152,6 +160,9 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
   },
+  listaDoKcete: {
+    width: "100%",
+  },
   header: {
     marginTop: 80,
     paddingHorizontal: 20,
@@ -168,7 +179,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginTop: 20,
   },
-  semProgress:{
+  semProgress: {
     width: "90%",
   },
   grades: {
@@ -221,12 +232,15 @@ const styles = StyleSheet.create({
     padding: 10,
     height: 55,
     marginBottom: 20,
-    width: "90%"
+    width: "90%",
   },
   taskTextContainer: {
     flex: 1,
   },
   checkButton: {
     marginLeft: 10,
+  },
+  mainBtn: {
+    position: "absolute",
   },
 });
